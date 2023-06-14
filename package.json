@@ -14,9 +14,13 @@
     "@types/react-dom": "18.2.5",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
+    "firebase": "^9.22.2",
+    "framer-motion": "^10.12.16",
+    "material-icons": "^1.13.8",
     "next": "13.4.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sass": "^1.63.4",
     "typescript": "5.1.3"
   }
 }
