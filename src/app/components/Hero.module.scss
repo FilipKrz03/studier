@@ -1,0 +1,31 @@
+@import '../variables.scss';
+.hero{
+    
+    height: 80vh;
+    width: 100vw;
+    margin-top: 5.5%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    &-info{
+        margin-top: 12%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        h2{
+            font-size: $font-xl;
+            color:$dark-blue;
+        }
+        p{
+            font-size: $font-ml;
+        }
+        a{
+            background-color: $dark-blue;
+            color: #fff;
+            max-width: 150px;
+            height: 50px;
+            @include flexbox(row , center , center);
+            padding: 0.4em 0.8em;
+            border-radius: $border-radius;
+        }
+    }
+}
