@@ -10,14 +10,12 @@ const Hero = () => {
             </div>
             <div className={classes['hero-image']}
             style={{
-                width:'100%' ,
+                marginRight:'10px',
                 background:  'url(/img/undraw_design_notes_re_eklr.svg)' , 
                 backgroundSize:'contain',
                 backgroundRepeat:'no-repeat' , 
                 }}/>
         </section>
     )
-
 }
-
 export default Hero;
