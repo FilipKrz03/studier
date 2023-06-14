@@ -1,19 +1,19 @@
-@import'./variables.scss';
+@import "./variables.scss";
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    background-color: $primary-background;
-    overflow-x: hidden;
-    width: 85vw;
-    margin: 0 auto;
+body {
+  background-color: $primary-background;
+  overflow-x: hidden;
+  width: 85vw;
+  margin: 0 auto;
+  color: $light-gray;
+  a {
+    text-decoration: none;
     color: $light-gray;
-    a{
-        text-decoration: none;
-        color:$light-gray
-    }
+  }
 }

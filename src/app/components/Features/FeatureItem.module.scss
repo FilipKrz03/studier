@@ -1,20 +1,19 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
-.item{
-    width: 260px;
-    height: 250px;
-    padding:2em;
-    @include flexbox(column , space-between , start);
-    background-color: $primary-background-second;
-    border-radius: $border-radius;
-    h2{
-        color: $dark-blue;
-    }
-    a{
-       background:$linear-gradient;
-       background-clip: text;
-       -webkit-text-fill-color: transparent;
-       font-size: $font-ml;
-    }
-    
+.item {
+  width: 260px;
+  height: 250px;
+  padding: 2em;
+  @include flexbox(column, space-between, start);
+  background-color: $primary-background-second;
+  border-radius: $border-radius;
+  h2 {
+    color: $dark-blue;
+  }
+  a {
+    background: $linear-gradient;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: $font-ml;
+  }
 }

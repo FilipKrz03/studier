@@ -1,25 +1,25 @@
-@import '../variables.scss';
+@import "../variables.scss";
 
-.header{
-    height: 70px;
-    width: 100%;
-    @include flexbox(row , space-between , center);
-    h3{
-        font-size:$font-l;
-        color:$dark-blue;
+.header {
+  height: 70px;
+  width: 100%;
+  @include flexbox(row, space-between, center);
+  h3 {
+    font-size: $font-l;
+    color: $dark-blue;
+  }
+  .login-options {
+    @include flexbox(row, space-between, center);
+    gap: 40px;
+    a {
+      font-size: $font-ml;
+      padding: 0.4em 1em;
+      border-radius: $border-radius;
+      transition: 250ms ease-in-out;
+      &:hover {
+        background: $dark-blue;
+        color: #ffff;
+      }
     }
-    .login-options{
-        @include flexbox(row , space-between ,center);
-        gap: 40px;
-        a{
-            font-size: $font-ml;
-            padding: 0.4em 1em;
-            border-radius:$border-radius;
-            transition: 250ms ease-in-out;
-            &:hover{
-                background: $dark-blue;
-                color: #ffff;
-            }
-        }
-    }
+  }
 }

@@ -1,33 +1,33 @@
-@import '../variables.scss';
-.hero{
-    height: 100vh;
-    display: grid;
-    width: 100vw;
-    grid-template-columns: 55% 45%;
-    place-content: center;
-    justify-items: stretch;
-    margin-top: -65px;
-    &-info{
-        margin-top: 12%;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        max-width: 85%;
-        h2{
-            font-size: $font-xl;
-            color:$dark-blue;
-        }
-        p{
-            font-size: $font-ml;
-        }
-        a{
-            background-color: $dark-blue;
-            color: #fff;
-            max-width: 200px;
-            height: 50px;
-            font-size: $font-ml;
-            @include flexbox(row , center , center);
-            border-radius: $border-radius;
-        }
+@import "../variables.scss";
+.hero {
+  height: 100vh;
+  display: grid;
+  width: 100vw;
+  grid-template-columns: 55% 45%;
+  place-content: center;
+  justify-items: stretch;
+  margin-top: -65px;
+  &-info {
+    margin-top: 12%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 85%;
+    h2 {
+      font-size: $font-xl;
+      color: $dark-blue;
     }
+    p {
+      font-size: $font-ml;
+    }
+    a {
+      background-color: $dark-blue;
+      color: #fff;
+      max-width: 200px;
+      height: 50px;
+      font-size: $font-ml;
+      @include flexbox(row, center, center);
+      border-radius: $border-radius;
+    }
+  }
 }
