@@ -1,0 +1,11 @@
+@import '../variables.scss';
+
+.header{
+    padding: 1em 0rem;
+    width: 100%;
+    @include flexbox(row , space-between , center);
+    .login-options{
+        @include flexbox(row , space-between ,center);
+        gap: 40px;
+    }
+}

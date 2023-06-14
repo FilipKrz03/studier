@@ -1,0 +1,16 @@
+@import'./variables.scss';
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 90vw;
+    margin: 0 auto;
+    a{
+        text-decoration: none;
+        color: #000;
+    }
+}
