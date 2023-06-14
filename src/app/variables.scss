@@ -1,3 +1,9 @@
+$font-ml:20px;
+$font-l:28px;
+$light-gray:#6c757d;
+$dark-blue:#00253e;
+$border-radius:25px;
+
 @mixin flexbox($direction , $justify , $align) {
     display: flex;
     flex-direction: $direction;

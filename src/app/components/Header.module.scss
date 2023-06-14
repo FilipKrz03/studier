@@ -4,8 +4,22 @@
     padding: 1em 0rem;
     width: 100%;
     @include flexbox(row , space-between , center);
+    h3{
+        font-size:$font-l
+    }
     .login-options{
         @include flexbox(row , space-between ,center);
         gap: 40px;
+        a{
+            font-size: $font-ml;
+            padding: 0.4em 1em;
+            color: $light-gray;
+            border-radius:$border-radius;
+            transition: 250ms ease-in-out;
+            &:hover{
+                background: $dark-blue;
+                color: #ffff;
+            }
+        }
     }
 }
