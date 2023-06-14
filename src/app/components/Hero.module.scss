@@ -1,6 +1,6 @@
 @import '../variables.scss';
 .hero{
-    height: 75vh;
+    height: calc(100vh - 65px);
     display: grid;
     width: 100vw;
     grid-template-columns: 55% 45%;

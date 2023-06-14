@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 .header{
-    padding: 1em 0rem;
+    height: 70px;
     width: 100%;
     @include flexbox(row , space-between , center);
     h3{

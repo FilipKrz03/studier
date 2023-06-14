@@ -1,0 +1,19 @@
+@import '../variables.scss';
+
+.article{
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(3 , 1fr);
+    justify-items: center;
+    row-gap: 30px;
+    .description-box{
+        @include flexbox(column , center , center);
+        font-size: $font-l;
+        padding: 1em;
+        color: #fff;
+        width: 260px;
+        height: 250px;
+        background-image: $linear-gradient;
+        border-radius: $border-radius;
+    }
+}
