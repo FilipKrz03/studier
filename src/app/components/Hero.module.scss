@@ -1,12 +1,12 @@
 @import '../variables.scss';
 .hero{
-    height: calc(100vh - 65px);
+    height: 100vh;
     display: grid;
     width: 100vw;
     grid-template-columns: 55% 45%;
     place-content: center;
     justify-items: stretch;
-    
+    margin-top: -65px;
     &-info{
         margin-top: 12%;
         display: flex;
