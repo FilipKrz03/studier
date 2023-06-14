@@ -10,11 +10,10 @@ const Hero = () => {
             </div>
             <div className={classes['hero-image']}
             style={{
-                backgroundImage:'url(/img/undraw_Design_notes_re_eklr.png)' , 
-                backgroundSize:'580px ',
+                width:'100%' ,
+                background:  'url(/img/undraw_design_notes_re_eklr.svg)' , 
+                backgroundSize:'contain',
                 backgroundRepeat:'no-repeat' , 
-                backgroundPosition:'15% -20%',
-                height:'90vh'
                 }}/>
         </section>
     )

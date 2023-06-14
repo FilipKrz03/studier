@@ -1,16 +1,18 @@
 @import '../variables.scss';
 .hero{
-    
-    height: 80vh;
-    width: 100vw;
-    margin-top: 5.5%;
+    height: 75vh;
     display: grid;
-    grid-template-columns: 50% 50%;
+    width: 100vw;
+    grid-template-columns: 55% 45%;
+    place-content: center;
+    justify-items: stretch;
+    
     &-info{
         margin-top: 12%;
         display: flex;
         flex-direction: column;
         gap: 20px;
+        max-width: 85%;
         h2{
             font-size: $font-xl;
             color:$dark-blue;
@@ -21,10 +23,10 @@
         a{
             background-color: $dark-blue;
             color: #fff;
-            max-width: 150px;
+            max-width: 200px;
             height: 50px;
+            font-size: $font-ml;
             @include flexbox(row , center , center);
-            padding: 0.4em 0.8em;
             border-radius: $border-radius;
         }
     }
