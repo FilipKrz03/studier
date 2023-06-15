@@ -1,21 +1,20 @@
 @import "../../variables.scss";
 .hero {
   height: 100vh;
-  display: grid;
-  width: 100vw;
-  grid-template-columns: 55% 45%;
-  place-content: center;
-  justify-items: stretch;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-top: -65px;
-
   &-info {
-    margin-top: 12%;
+    margin-top: -80px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     max-width: 85%;
     h2 {
-      font-size: $font-xl;
+      font-size: $font-xxl;
       color: $dark-blue;
     }
     p {
@@ -31,17 +30,21 @@
       border-radius: $border-radius;
     }
   }
+  .image{
+    margin-top: 80px;
+  }
 }
 
 @include media-l {
   .hero {
-    margin-top: -20px;
+   margin-top: 20px;
     margin-bottom: 60px;
     height: auto;
     display: flex;
     flex-direction: column;
     gap: 40px;
     &-info {
+      margin-top: 0px;
       justify-content: center;
       align-items: center;
       text-align: center;
@@ -49,7 +52,8 @@
         padding: 1em 2em;
       }
     }
-    &-image {
+    .image {
+      margin-top: 0px;
       height: 400px;
     }
   }
@@ -57,11 +61,20 @@
 
 @include media-m {
   .hero {
+  gap: 50px;
     &-info {
+      gap: 20px;
+      h2{
+        font-size:$font-l;
+      }
       p {
         font-size: $font-ml;
       }
     }
+  }
+  .image{
+    margin-top: -40px!important;
+    width: 80vw;
   }
 }
 

@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import classes from "./Hero.module.scss";
+
 
 const Hero = () => {
   return (
@@ -12,15 +14,7 @@ const Hero = () => {
         </p>
         <Link href="/register">Get Started</Link>
       </div>
-      <div
-        className={classes["hero-image"]}
-        style={{
-          marginRight: "10px",
-          background: "url(/img/undraw_design_notes_re_eklr.svg)",
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+      <Image src={'/img/undraw_design_notes_re_eklr.svg'} width={600} height={600} alt="d" className={classes.image}  />
     </section>
   );
 };
