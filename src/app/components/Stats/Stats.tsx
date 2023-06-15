@@ -1,19 +1,31 @@
 "use client";
-import CountUp from 'react-countup';
-import classes from './Stats.module.scss';
-import { stats } from '@/data/stats';
+import { useRef } from "react";
+import CountUp from "react-countup";
+import { stats } from "@/data/stats";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import classes from "./Stats.module.scss";
 
 const Stats = () => {
-    return(
-        <aside className={classes.aside}>
-            {stats.map(stat => {
-                return <div key={stat} className={classes['stat-item']}>
-                    <h2><CountUp start={0} end={100} duration={3}/>%</h2>
-                    <p>{stat}</p>
-                </div>
-            })}
-        </aside>
-    )
-}
+  const ref = useRef<HTMLElement | null>(null);
+  const entry = useIntersectionObserver(ref, true);
+  const isVisible = !!entry?.isIntersecting;
+
+  let statis = stats.map((stat) => {
+    return (
+      <div key={stat} className={classes["stat-item"]}>
+        <h2>
+          <CountUp start={0} end={100} duration={3} />%
+        </h2>
+        <p>{stat}</p>
+      </div>
+    );
+  });
+
+  return (
+    <aside className={classes.aside} ref={ref}>
+      {isVisible && statis}
+    </aside>
+  );
+};
 
 export default Stats;
