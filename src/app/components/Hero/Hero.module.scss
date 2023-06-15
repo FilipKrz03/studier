@@ -31,3 +31,38 @@
     }
   }
 }
+
+@include media-l{
+  .hero{
+    margin-top: -20px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    &-info{
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      a{
+        padding:1em 2em;
+      }
+    }
+    &-image{
+      height: 400px;
+    
+    }
+  }
+}
+
+@include media-m{
+  .hero{
+    &-info{
+      h2{
+        font-size: $font-l;
+      }
+      p{
+        font-size: $font-ml;
+      }
+    }
+  }
+}

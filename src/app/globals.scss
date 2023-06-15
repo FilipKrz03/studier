@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+html{
+  overflow-x: hidden;
+}
+
 body {
   background-color: $primary-background;
   overflow-x: hidden;

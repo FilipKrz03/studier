@@ -15,3 +15,14 @@ $border-radius-l:50px;
   justify-content: $justify;
   align-items: $align;
 }
+
+@mixin media-l{
+  @media (max-width:1100px){
+    @content;
+  }
+}
+@mixin media-m{
+  @media (max-width:680px){
+    @content;
+  }
+}

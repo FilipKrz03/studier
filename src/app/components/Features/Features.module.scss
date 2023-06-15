@@ -18,3 +18,15 @@
     border-radius: $border-radius;
   }
 }
+
+@include media-l{
+  .article{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@include media-m{
+  .article{
+    grid-template-columns: repeat(1,1fr);
+  }
+}
