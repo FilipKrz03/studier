@@ -3,15 +3,14 @@ $font-l: 28px;
 $font-xl: 55px;
 $primary-background: #f2f2f2;
 $primary-background-second: #fff;
-$dark-theme-background:#161b22;
-$dark-theme-background-second:#343a40;
-$light-dark:#212529;
+$dark-theme-background: #161b22;
+$dark-theme-background-second: #23262e;
+$light-dark: #212529;
 $light-gray: #6c757d;
 $dark-blue: #00253e;
 $linear-gradient: linear-gradient(to right, #fc5c7d, #6a82fb);
 $border-radius: 25px;
-$border-radius-l:50px;
-
+$border-radius-l: 50px;
 
 @mixin flexbox($direction, $justify, $align) {
   display: flex;
@@ -20,13 +19,13 @@ $border-radius-l:50px;
   align-items: $align;
 }
 
-@mixin media-l{
-  @media (max-width:1100px){
+@mixin media-l {
+  @media (max-width: 1100px) {
     @content;
   }
 }
-@mixin media-m{
-  @media (max-width:680px){
+@mixin media-m {
+  @media (max-width: 680px) {
     @content;
   }
 }

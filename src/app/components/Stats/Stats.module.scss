@@ -22,16 +22,11 @@
     height: auto;
     flex-direction: column;
     gap: 30px;
-    .stat-item {
-      h2 {
-        font-size: $font-l;
-      }
-    }
   }
 }
 
 [data-theme="dark"] {
   .aside {
-    background-color:$dark-theme-background-second;
+    background-color: $dark-theme-background-second;
   }
 }

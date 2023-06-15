@@ -7,6 +7,7 @@
   place-content: center;
   justify-items: stretch;
   margin-top: -65px;
+
   &-info {
     margin-top: 12%;
     display: flex;
@@ -32,47 +33,44 @@
   }
 }
 
-@include media-l{
-  .hero{
+@include media-l {
+  .hero {
     margin-top: -20px;
+    margin-bottom: 60px;
     height: auto;
     display: flex;
     flex-direction: column;
     gap: 40px;
-    &-info{
+    &-info {
       justify-content: center;
       align-items: center;
       text-align: center;
-      a{
-        padding:1em 2em;
+      a {
+        padding: 1em 2em;
       }
     }
-    &-image{
+    &-image {
       height: 400px;
-    
     }
   }
 }
 
-@include media-m{
-  .hero{
-    &-info{
-      h2{
-        font-size: $font-l;
-      }
-      p{
+@include media-m {
+  .hero {
+    &-info {
+      p {
         font-size: $font-ml;
       }
     }
   }
 }
 
-[data-theme="dark"]{
-  .hero-info{
-    h2{
+[data-theme="dark"] {
+  .hero-info {
+    h2 {
       color: #fff;
     }
-    a{
+    a {
       background-color: #fff;
       color: $dark-blue;
     }
