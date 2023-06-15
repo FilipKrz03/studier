@@ -1,0 +1,17 @@
+@import '../../variables.scss';
+
+.aside{
+    width: 100vw;
+    background-color:$dark-blue;
+    height: 200px;
+    padding: 0em 3em;
+    margin-bottom: 100px;
+    color: #fff;
+    @include flexbox(row , space-between, center);
+    .stat-item{
+        @include flexbox(column , space-between , center);
+        h2{
+            font-size: $font-xl;
+        }
+    }
+}

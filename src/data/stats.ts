@@ -1,0 +1,1 @@
+export const stats:string[] = ['Functionalitie' , 'Intuitiveness' , 'Safisfied Users']

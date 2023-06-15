@@ -2,7 +2,8 @@
 
 .header {
   height: 70px;
-  width: 100%;
+  width: 85vw;
+  margin: 0 auto;
   @include flexbox(row, space-between, center);
   h3 {
     font-size: $font-l;

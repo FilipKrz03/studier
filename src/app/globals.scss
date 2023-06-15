@@ -9,8 +9,12 @@
 body {
   background-color: $primary-background;
   overflow-x: hidden;
-  width: 85vw;
-  margin: 0 auto;
+
+  main , header {
+    width: 85vw;
+    margin: 0 auto;
+  }
+
   color: $light-gray;
   a {
     text-decoration: none;
