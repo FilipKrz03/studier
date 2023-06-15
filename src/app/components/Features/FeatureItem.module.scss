@@ -1,10 +1,11 @@
 @import "../../variables.scss";
 
 .item {
+  position: relative;
   width: 260px;
   height: 250px;
   padding: 2em;
-  @include flexbox(column, space-between, start);
+  @include flexbox(column, space-between, flex-start);
   background-color: $primary-background-second;
   border-radius: $border-radius;
   h2 {
@@ -15,5 +16,13 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: $font-ml;
+  }
+  .icon {
+    padding: 0.5em;
+    position: absolute;
+    top: -20px;
+    left: 10%;
+    background: $linear-gradient;
+    border-radius: $border-radius-l;
   }
 }
