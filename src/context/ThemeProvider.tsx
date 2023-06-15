@@ -18,5 +18,5 @@ export default function Providers({ children }:Props) {
     return <>{children}</>;
   }
 
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return <ThemeProvider enableSystem={true}>{children}</ThemeProvider>;
 }
