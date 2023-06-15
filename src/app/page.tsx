@@ -1,15 +1,14 @@
 import Features from "./components/Features/Features";
-import Hero from "./components/Hero";
+import Hero from "./components/Hero/Hero";
 import Stats from "./components/Stats/Stats";
 export default function Home() {
   return (
     <>
-       <main>
-      <Hero />
-      <Features />
-    </main>
-    <Stats />
+      <main>
+        <Hero />
+        <Features />
+      </main>
+      <Stats />
     </>
-
   );
 }
