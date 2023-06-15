@@ -3,7 +3,7 @@
 .aside {
   width: 100vw;
   background-color: $dark-blue;
-  height: 200px;
+  height: 150px;
   padding: 0em 3em;
 
   color: #fff;
@@ -30,4 +30,8 @@
   }
 }
 
-
+[data-theme="dark"] {
+  .aside {
+    background-color:$dark-theme-background-second;
+  }
+}
