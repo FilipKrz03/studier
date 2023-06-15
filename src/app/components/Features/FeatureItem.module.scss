@@ -26,3 +26,12 @@
     border-radius: $border-radius-l;
   }
 }
+
+[data-theme="dark"] {
+  .item {
+    background-color: $dark-blue;
+    h2 {
+      color: #fff;
+    }
+  }
+}

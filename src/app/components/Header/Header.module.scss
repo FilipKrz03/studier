@@ -5,19 +5,18 @@
   width: 85vw;
   margin: 0 auto;
   @include flexbox(row, space-between, center);
-  .logo{
-    @include flexbox(row , space-between , center);
+  .logo {
+    @include flexbox(row, space-between, center);
     gap: 20px;
     h3 {
       font-size: $font-l;
       color: $dark-blue;
     }
-    .icon{
+    .icon {
       cursor: pointer;
-      animation: appear .3s ease-in-out;
+      animation: appear 0.3s ease-in-out;
     }
   }
- 
   .login-options {
     @include flexbox(row, space-between, center);
     gap: 40px;
@@ -35,10 +34,29 @@
 }
 
 @keyframes appear {
-  from{
+  from {
     opacity: 0;
   }
-  to{
+  to {
     opacity: 1;
+  }
+}
+
+[data-theme="dark"] {
+  .header {
+    .logo {
+      h3 {
+        color: #fff;
+      }
+    }
+    .login-options {
+      a {
+        color: $primary-background;
+        &:hover {
+          background-color: #fff;
+          color: $dark-blue;
+        }
+      }
+    }
   }
 }
