@@ -11,6 +11,7 @@ html{
 }
 
 body {
+  transition: 200ms ease-in-out;
   background-color: $primary-background;
   overflow-x: hidden;
 
@@ -23,5 +24,11 @@ body {
   a {
     text-decoration: none;
     color: $light-gray;
+  }
+}
+
+[data-theme='dark']{
+  body{
+    background-color: black;
   }
 }

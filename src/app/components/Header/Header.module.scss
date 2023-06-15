@@ -5,10 +5,19 @@
   width: 85vw;
   margin: 0 auto;
   @include flexbox(row, space-between, center);
-  h3 {
-    font-size: $font-l;
-    color: $dark-blue;
+  .logo{
+    @include flexbox(row , space-between , center);
+    gap: 20px;
+    h3 {
+      font-size: $font-l;
+      color: $dark-blue;
+    }
+    .icon{
+      cursor: pointer;
+      animation: appear .3s ease-in-out;
+    }
   }
+ 
   .login-options {
     @include flexbox(row, space-between, center);
     gap: 40px;
@@ -22,5 +31,14 @@
         color: #ffff;
       }
     }
+  }
+}
+
+@keyframes appear {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
   }
 }
