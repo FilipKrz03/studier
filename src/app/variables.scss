@@ -30,3 +30,8 @@ $border-radius-l: 50px;
     @content;
   }
 }
+@mixin media-s{
+  @media (max-width:480px) {
+    @content
+  }
+}

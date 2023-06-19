@@ -2,7 +2,6 @@
 
 .header {
   height: 70px;
-  width: 85vw;
   margin: 0 auto;
   @include flexbox(row, space-between, center);
   .logo {
@@ -58,5 +57,11 @@
         }
       }
     }
+  }
+}
+
+@include media-s{
+  .header .login-options {
+    display: none;
   }
 }

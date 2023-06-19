@@ -25,6 +25,12 @@
   }
 }
 
+@include media-s {
+  .aside {
+    margin-bottom: 70px;
+  }
+}
+
 [data-theme="dark"] {
   .aside {
     background-color: $dark-theme-background-second;

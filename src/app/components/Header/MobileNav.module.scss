@@ -1,0 +1,33 @@
+@import "../../variables.scss";
+
+.nav {
+  display: none;
+}
+
+@include media-s {
+  .nav {
+    position: relative;
+    height: 70px;
+    width: 100vw;
+    @include flexbox(row, space-evenly, center);
+    background-color: $primary-background-second;
+    a{
+    color: $dark-theme-background!important;
+    font-size: $font-ml;
+    }
+    position: fixed;
+    bottom: 0;
+    z-index: 5;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  }
+}
+
+[data-theme="dark"] {
+  .nav {
+    background-color: $dark-theme-background;
+    box-shadow: rgba(92, 83, 83, 0.56) 0px 22px 70px 4px;
+    a{
+        color: $primary-background!important;
+        }
+  }
+}
