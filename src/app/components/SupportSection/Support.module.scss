@@ -1,6 +1,6 @@
 @import "../../variables.scss";
 .support {
-  padding-top: 100px;
+  padding-top: 150px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -22,6 +22,7 @@
     .devices {
       display: flex;
       flex-direction: column;
+      gap: 10px;
       .device-text {
         display: flex;
         flex-direction: row;
@@ -33,11 +34,67 @@
           -webkit-text-fill-color: transparent;
           font-size: $font-xl;
         }
-        p{
-            font-size: $font-l;
-            color: $dark-blue;
+        p {
+          font-size: $font-l;
+          color: $dark-blue;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 1250px) {
+  .image {
+    width: 40vw;
+  }
+
+  .support .support-info {
+    h2 {
+      font-size: $font-ll;
+    }
+    p {
+      font-size: $font-m;
+    }
+    .devices .device-text {
+      h3 {
+        font-size: $font-ll;
+      }
+    }
+  }
+}
+
+@include media-l{
+  .image{
+    width: 60vw;
+  }
+  .support{
+    padding-top: 100px;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+}
+
+@include media-m{
+  .support{
+    padding-top: 150px;
+  }
+.support .support-info  .devices{
+  gap: 30px;
+  .device-text{
+  flex-direction: column;
+  }
+  }
+}
+
+@include media-s{
+  .image{
+    width: 80vw;
+  }
+  .support{
+    margin-bottom: 90px;
+    &-info{
+      margin-top: -120px;
     }
   }
 }
@@ -47,7 +104,7 @@
     h2 {
       color: #fff;
     }
-   .devices p {
+    .devices p {
       color: white;
     }
   }

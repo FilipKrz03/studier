@@ -20,7 +20,7 @@ const Support = () => {
         className={classes["device-text"]}
         animate={{ scale: 1, filter: "blur(0px)" }}
         initial={{ scale: 0, filter: "blur(5px)" }}
-        transition={{ delay: 0 + animationDealy }}
+        transition={{ delay: 0 + animationDealy, duration: 0.4 }}
       >
         <h3>{device.question}</h3>
         <p>{device.answer}</p>
@@ -31,6 +31,7 @@ const Support = () => {
   return (
     <section className={classes.support}>
       <Image
+        className={classes.image}
         src={"/img/undraw_devices_re_dxae.svg"}
         width={600}
         height={600}
