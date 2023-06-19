@@ -8,9 +8,9 @@ import classes from "./Stats.module.scss";
 const Stats = () => {
   const ref = useRef<HTMLElement | null>(null);
   const entry = useIntersectionObserver(ref, true);
-  const isVisible = !!entry?.isIntersecting;
+  const wasSeen = !!entry?.isIntersecting;
 
-  let statis = stats.map((stat) => {
+  const statistics = stats.map((stat) => {
     return (
       <div key={stat} className={classes["stat-item"]}>
         <h2>
@@ -23,7 +23,7 @@ const Stats = () => {
 
   return (
     <aside className={classes.aside} ref={ref}>
-      {isVisible && statis}
+      {wasSeen && statistics}
     </aside>
   );
 };
