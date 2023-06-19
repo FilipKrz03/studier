@@ -1,11 +1,12 @@
 @import "../../variables.scss";
 
 .aside {
-  width: 100vw;
+  width: 100vw!important;
+  position:absolute;
+  left: 0;
   background-color: $dark-blue;
   height: 150px;
   padding: 0em 3em;
-
   color: #fff;
   @include flexbox(row, space-between, center);
   .stat-item {

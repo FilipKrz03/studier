@@ -10,7 +10,7 @@ const Hero = () => {
         <h2>More than just studie planner</h2>
         <p>
           Build your own lesson plan , add tests , presetation and own grades.
-          We will deliver analythics{" "}
+          We will deliver analythics
         </p>
         <Link href="/register">Get Started</Link>
       </div>

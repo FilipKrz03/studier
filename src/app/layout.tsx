@@ -2,7 +2,8 @@ import Providers from "@/context/ThemeProvider";
 import Header from "./components/Header/Header";
 import { Inter } from "next/font/google";
 import "./globals.scss";
-import MobileNav from "./components/Header/MobileNav";
+import MobileNav from "./components/MobileNav/MobileNav";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,9 @@ export default function RootLayout({
         <Providers>
         <Header />
         {children}
-        </Providers>
         <MobileNav />
+        </Providers>
+        
       </body>
     </html>
   );
