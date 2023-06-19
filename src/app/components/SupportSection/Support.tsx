@@ -1,6 +1,7 @@
 "use client";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useRef } from "react";
+import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { devices } from "@/data/devices";
 import Image from "next/image";
@@ -10,6 +11,7 @@ const Support = () => {
   const devicesRef = useRef<HTMLDivElement | null>(null);
   const entry = useIntersectionObserver(devicesRef, true);
   const wasSeen = entry?.isIntersecting;
+  const {theme} = useTheme();
 
   let animationDealy = 0;
   const deviceQuestions = devices.map((device) => {
@@ -30,13 +32,24 @@ const Support = () => {
 
   return (
     <section className={classes.support}>
-      <Image
+      {theme === 'light' && 
+        <Image
         className={classes.image}
         src={"/img/undraw_devices_re_dxae.svg"}
         width={600}
         height={600}
         alt="Support-pic"
       />
+      }
+      {theme === 'dark' && 
+        <Image
+        className={classes.image}
+        src={"/img/undraw_devices-gray.svg"}
+        width={600}
+        height={600}
+        alt="Support-pic"
+      />
+      }
       <div className={classes["support-info"]}>
         <h2>Our support ! </h2>
         <p>Our website works excelent in all kinds of devices</p>

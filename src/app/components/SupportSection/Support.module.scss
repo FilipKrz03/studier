@@ -78,6 +78,9 @@
 @include media-m{
   .support{
     padding-top: 150px;
+    &-info{
+      align-items: center;
+    }
   }
 .support .support-info  .devices{
   gap: 30px;
@@ -93,6 +96,7 @@
   }
   .support{
     margin-bottom: 90px;
+
     &-info{
       margin-top: -120px;
     }
