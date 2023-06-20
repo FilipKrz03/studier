@@ -11,7 +11,7 @@ const Support = () => {
   const devicesRef = useRef<HTMLDivElement | null>(null);
   const entry = useIntersectionObserver(devicesRef, true);
   const wasSeen = entry?.isIntersecting;
-  const {theme} = useTheme();
+  const { theme } = useTheme();
 
   let animationDealy = 0;
   const deviceQuestions = devices.map((device) => {
@@ -30,26 +30,17 @@ const Support = () => {
     );
   });
 
+  const picSrc =  theme === "light" ? "/img/undraw_devices_re_dxae.svg" : "/img/undraw_devices-gray.svg";
+
   return (
     <section className={classes.support}>
-      {theme === 'light' && 
-        <Image
+      <Image
         className={classes.image}
-        src={"/img/undraw_devices_re_dxae.svg"}
+        src={picSrc}
         width={600}
         height={600}
         alt="Support-pic"
       />
-      }
-      {theme === 'dark' && 
-        <Image
-        className={classes.image}
-        src={"/img/undraw_devices-gray.svg"}
-        width={600}
-        height={600}
-        alt="Support-pic"
-      />
-      }
       <div className={classes["support-info"]}>
         <h2>Our support ! </h2>
         <p>Our website works excelent in all kinds of devices</p>
