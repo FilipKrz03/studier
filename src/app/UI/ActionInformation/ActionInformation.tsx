@@ -1,8 +1,13 @@
 "use client";
-import classes from "./Welcome.module.scss";
+import classes from "./ActionInformation.module.scss";
 import { motion } from "framer-motion";
 
-const Welcome = () => {
+type Props = {
+  mainTitle: string;
+  message: string;
+};
+
+const ActionInformation = ({ mainTitle, message }: Props) => {
   return (
     <motion.div
       className={classes.welcome}
@@ -10,10 +15,10 @@ const Welcome = () => {
       initial={{ x: -200, filter: "blur(5px)", opacity: 0.5 }}
       transition={{ duration: 0.5 }}
     >
-      <p>Welcome Back</p>
-      <span>Log in !</span>
+      <p>{mainTitle}</p>
+      <span>{message}</span>
     </motion.div>
   );
 };
 
-export default Welcome;
+export default ActionInformation;

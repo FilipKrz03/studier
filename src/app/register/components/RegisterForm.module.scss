@@ -1,0 +1,42 @@
+@import "../../variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  width: 300px;
+  &-element{
+    @include flexbox(column , center , center);
+    gap:20px;
+  }
+  button {
+    margin: 0 auto;
+    width: 250px;
+    height: 40px;
+    border: none;
+    border-radius: $border-radius;
+    background-color: $dark-blue;
+    color: #fff;
+    font-size: $font-ml;
+    cursor: pointer;
+  }
+}
+
+[data-theme="dark"] {
+  .form {
+    input {
+      color: $primary-background-second;
+      outline-color: #fff!important;
+    }
+    button{
+    background-color: $primary-background-second;
+    color: $dark-blue;
+    }
+  }
+}
+
+@include media-s{
+  .form{
+    margin-bottom: 80px;
+  }
+}

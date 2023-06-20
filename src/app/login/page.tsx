@@ -1,12 +1,12 @@
 import LoginForm from "./components/LoginForm"
-import Welcome from "./components/Welcome";
-import classes from './page.module.scss';
+import ActionContainer from "../UI/ActionsContainer/ActionContainer";
+import ActionInformation from "../UI/ActionInformation/ActionInformation";
 
 export default function Login() {
   return (
-    <div className={classes.page}>
-    <Welcome />
+    <ActionContainer>
+    <ActionInformation mainTitle="Welcome Back" message="Log in !" />
     <LoginForm />
-    </div>
+    </ActionContainer>
   )
 }
