@@ -19,3 +19,25 @@
     color: $primary-background;
   }
 }
+
+@include media-m{
+  .welcome{
+    p{
+      font-size: $font-xl;
+    }
+    span{
+      font-size: $font-ll;
+    }
+  }
+}
+
+@include media-s{
+  .welcome{
+    p{
+      font-size: $font-ll;
+    }
+    span{
+      font-size: $font-l;
+    }
+  }
+}

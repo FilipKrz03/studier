@@ -6,9 +6,9 @@ import classes from "./LoginForm.module.scss";
 
 const theme = createTheme({
   palette: {
-    primary:{
+    primary: {
       main: "#00253e",
-    } , 
+    },
     secondary: {
       main: "#f2f2f2",
     },
@@ -37,12 +37,14 @@ const LoginForm = () => {
           label="E-mail"
           color={inputColor}
           className={classes.input}
+          focused
         />
         <TextField
           type="password"
           label="Password"
           color={inputColor}
           className={classes.input}
+          focused
         />
         <button type="submit">Log in</button>
       </motion.form>

@@ -4,3 +4,13 @@
     min-height:  90vh;
     @include flexbox(row , space-evenly , center)
 }
+
+@include media-l{
+    .page{
+        min-height: auto!important;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 50px;
+        gap: 50px;
+    }
+}
