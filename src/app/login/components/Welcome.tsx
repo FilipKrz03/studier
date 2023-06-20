@@ -10,8 +10,8 @@ const Welcome = () => {
       initial={{ x: -200, filter: "blur(5px)", opacity: 0.5 }}
       transition={{ duration: 0.5 }}
     >
-      <p>Welcome Back !</p>
-      <span>Log in </span>
+      <p>Welcome Back</p>
+      <span>Log in !</span>
     </motion.div>
   );
 };
