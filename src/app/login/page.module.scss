@@ -1,0 +1,6 @@
+@import '../variables.scss';
+
+.page{
+    min-height:  90vh;
+    @include flexbox(row , space-evenly , center)
+}

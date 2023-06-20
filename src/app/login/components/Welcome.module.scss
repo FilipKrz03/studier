@@ -1,0 +1,21 @@
+@import "../../variables.scss";
+
+.welcome {
+    @include flexbox(column , center , center);
+    gap: 20px;
+  p {
+    font-size: $font-xxl;
+    font-weight: bolder;
+  }
+    span{
+        font-size: $font-sxxl;
+    }
+  
+  color: black;
+}
+
+[data-theme="dark"]{
+  .welcome{
+    color: $primary-background;
+  }
+}

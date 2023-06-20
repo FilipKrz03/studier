@@ -27,7 +27,7 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <div className={classes.logo}>
-        <h3 className={kanit.className}>Studier</h3>
+       <Link href={'/'}><h3 className={kanit.className}>Studier</h3></Link>
         {theme === "light" && (
           <WbSunnyIcon
             fontSize="large"

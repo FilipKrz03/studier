@@ -1,0 +1,29 @@
+@import "../../variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  width: 250px;
+  button {
+    height: 40px;
+    border: none;
+    border-radius: $border-radius;
+    background-color: $dark-blue;
+    color: #fff;
+    font-size: $font-ml;
+    cursor: pointer;
+  }
+}
+
+[data-theme="dark"] {
+  .form {
+    input {
+      color: $primary-background-second;
+    }
+    button{
+    background-color: $primary-background-second;
+    color: $dark-blue;
+    }
+  }
+}
