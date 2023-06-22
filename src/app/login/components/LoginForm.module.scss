@@ -5,9 +5,9 @@
   flex-direction: column;
   gap: 45px;
   width: 300px;
-  &-element{
-    @include flexbox(column , center , center);
-    gap:20px;
+  &-element {
+    @include flexbox(column, center, flex-start);
+    gap: 5px;
   }
   button {
     margin: 0 auto;
@@ -26,17 +26,17 @@
   .form {
     input {
       color: $primary-background-second;
-      outline-color: #fff!important;
+      outline-color: #fff !important;
     }
-    button{
-    background-color: $primary-background-second;
-    color: $dark-blue;
+    button {
+      background-color: $primary-background-second;
+      color: $dark-blue;
     }
   }
 }
 
-@include media-s{
-  .form{
+@include media-s {
+  .form {
     margin-bottom: 80px;
   }
 }

@@ -6,8 +6,8 @@
   gap: 45px;
   width: 300px;
   &-element{
-    @include flexbox(column , center , center);
-    gap:20px;
+    @include flexbox(column , center , flex-start);
+    gap:5px;
   }
   button {
     margin: 0 auto;

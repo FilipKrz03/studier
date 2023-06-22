@@ -1,5 +1,6 @@
 "use client";
-import { TextField, createTheme, ThemeProvider, Alert } from "@mui/material";
+import { TextField, createTheme, ThemeProvider } from "@mui/material";
+import Alert from "@/app/UI/Alert/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
@@ -47,15 +48,6 @@ const LoginForm = () => {
         transition={{ duration: 0.5 }}
       >
         <div className={classes["form-element"]}>
-          {errors.eMail && (
-            <Alert
-              sx={{ maxWidth: "300px", fontSize: "13px" }}
-              variant="filled"
-              severity="error"
-            >
-              Enter valid email adress !
-            </Alert>
-          )}
           <TextField
             fullWidth
             {...register("eMail", { required: true, pattern: /^\S+@\S+$/i })}
@@ -64,17 +56,9 @@ const LoginForm = () => {
             className={classes.input}
             focused
           />
+          {errors.eMail && <Alert alertMessage="Enter valid email adress" />}
         </div>
         <div className={classes["form-element"]}>
-          {errors.password && (
-            <Alert
-              sx={{ maxWidth: "300px", fontSize: "13px" }}
-              variant="filled"
-              severity="error"
-            >
-              Password must be at least 6 characters length !
-            </Alert>
-          )}
           <TextField
             fullWidth
             {...register("password", { required: true, minLength: 6 })}
@@ -84,6 +68,9 @@ const LoginForm = () => {
             className={classes.input}
             focused
           />
+          {errors.password && (
+            <Alert alertMessage="Password need to be at least 6 characters length" />
+          )}
         </div>
         <button type="submit">Log in</button>
       </motion.form>
