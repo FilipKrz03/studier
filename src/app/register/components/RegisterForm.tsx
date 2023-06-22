@@ -1,7 +1,7 @@
 "use client";
-import { TextField, createTheme, ThemeProvider} from "@mui/material";
+import { TextField, createTheme, ThemeProvider } from "@mui/material";
 import Alert from "@/app/UI/Alert/Alert";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler,} from "react-hook-form";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import classes from "./RegisterForm.module.scss";
@@ -18,10 +18,10 @@ const theme = createTheme({
 });
 
 interface IFormInput {
-  userName:string , 
-  eMail: string , 
-  password: string ,
-  repeatPassword:string , 
+  userName: string;
+  eMail: string;
+  password: string;
+  repeatPassword: string;
 }
 
 const RegisterForm = () => {
@@ -29,6 +29,7 @@ const RegisterForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<IFormInput>();
 
@@ -40,6 +41,7 @@ const RegisterForm = () => {
   const userInputColor = errors.userName ? "error" : inputColor;
   const emailInputColor = errors.eMail ? "error" : inputColor;
   const passwordInputColor = errors.password ? "error" : inputColor;
+  const repeatPasswordInputColor = errors.repeatPassword ? "error" : inputColor;
 
   return (
     <ThemeProvider theme={theme}>
@@ -53,16 +55,14 @@ const RegisterForm = () => {
         <div className={classes["form-element"]}>
           <TextField
             fullWidth
-            {...register("userName", { required: true, minLength:3})}
+            {...register("userName", { required: true, minLength: 3 })}
             label="User name"
             color={userInputColor}
             className={classes.input}
             focused
           />
-           {errors.userName && (
-            <Alert
-            alertMessage="User name should be at least 3 character long ! "
-           />
+          {errors.userName && (
+            <Alert alertMessage="User name should be at least 3 character long ! " />
           )}
         </div>
         <div className={classes["form-element"]}>
@@ -74,11 +74,7 @@ const RegisterForm = () => {
             className={classes.input}
             focused
           />
-          {errors.eMail && (
-            <Alert
-            alertMessage="Enter valid email adress !"
-          />
-          )}
+          {errors.eMail && <Alert alertMessage="Enter valid email adress !" />}
         </div>
         <div className={classes["form-element"]}>
           <TextField
@@ -90,26 +86,28 @@ const RegisterForm = () => {
             className={classes.input}
             focused
           />
-             {errors.password && (
-            <Alert
-            alertMessage="Password must be at least 6 characters length !"
-           />
+          {errors.password && (
+            <Alert alertMessage="Password must be at least 6 characters length !" />
           )}
         </div>
         <div className={classes["form-element"]}>
           <TextField
             fullWidth
-            {...register("repeatPassword", { required: true, minLength: 6 })}
+            {...register("repeatPassword", {
+              required: true,
+              validate: (val: string) => {
+                if (watch("password") != val)
+                  return "Your passwords do not match";
+              },
+            })}
             type="password"
             label="Repeat Password"
-            color={passwordInputColor}
+            color={repeatPasswordInputColor}
             className={classes.input}
             focused
           />
-          {errors.password && (
-            <Alert
-            alertMessage="Password must be at least 6 characters length !"
-            />
+          {errors.repeatPassword && (
+            <Alert alertMessage={errors.repeatPassword!.message!} />
           )}
         </div>
         <button type="submit">Register</button>
