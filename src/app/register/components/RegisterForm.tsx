@@ -5,6 +5,7 @@ import { useForm, SubmitHandler,} from "react-hook-form";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import classes from "./RegisterForm.module.scss";
+import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
 
 const theme = createTheme({
   palette: {
@@ -110,7 +111,7 @@ const RegisterForm = () => {
             <Alert alertMessage={errors.repeatPassword!.message!} />
           )}
         </div>
-        <button type="submit">Register</button>
+        <SubmitButton description="Register"/>
       </motion.form>
     </ThemeProvider>
   );

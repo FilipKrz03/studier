@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import classes from "./LoginForm.module.scss";
+import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
 
 const theme = createTheme({
   palette: {
@@ -72,7 +73,7 @@ const LoginForm = () => {
             <Alert alertMessage="Password need to be at least 6 characters length" />
           )}
         </div>
-        <button type="submit">Log in</button>
+        <SubmitButton description="Log in" />
       </motion.form>
     </ThemeProvider>
   );
