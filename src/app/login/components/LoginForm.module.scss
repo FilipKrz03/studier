@@ -9,17 +9,6 @@
     @include flexbox(column, center, flex-start);
     gap: 5px;
   }
-  button {
-    margin: 0 auto;
-    width: 250px;
-    height: 40px;
-    border: none;
-    border-radius: $border-radius;
-    background-color: $dark-blue;
-    color: #fff;
-    font-size: $font-ml;
-    cursor: pointer;
-  }
 }
 
 [data-theme="dark"] {
@@ -27,10 +16,6 @@
     input {
       color: $primary-background-second;
       outline-color: #fff !important;
-    }
-    button {
-      background-color: $primary-background-second;
-      color: $dark-blue;
     }
   }
 }
