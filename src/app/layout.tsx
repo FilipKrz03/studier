@@ -1,5 +1,6 @@
 import Providers from "@/context/ThemeProvider";
 import Header from "./components/Header/Header";
+import ProgressBarPage from "./UI/ProgressBar/ProgressBar";
 import { Inter } from "next/font/google";
 import "./globals.scss";
 import MobileNav from "./components/MobileNav/MobileNav";
@@ -21,11 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+        <ProgressBarPage />
         <Header />
         {children}
         <MobileNav />
-        </Providers>
-        
+        </Providers>    
       </body>
     </html>
   );
