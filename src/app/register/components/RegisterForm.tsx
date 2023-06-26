@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import signUp from "@/firebase/auth/signup";
 import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
+import { useRouter } from "next/navigation";
 import classes from "./RegisterForm.module.scss";
 
 const theme = createTheme({
@@ -28,6 +29,8 @@ interface IFormInput {
 
 const RegisterForm = () => {
   const { theme: currentTheme } = useTheme();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -38,9 +41,9 @@ const RegisterForm = () => {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const { result, error } = await signUp(data.eMail, data.password);
     if (!error) {
-      console.log(result);
+      router.push("/dashboard");
     } else {
-      console.log(error);
+     console.log(error);
     }
   };
 

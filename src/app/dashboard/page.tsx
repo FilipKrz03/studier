@@ -20,9 +20,7 @@ export default function Dashboard() {
     }
   }, [user , router]);
 
-  if (user) {
-    console.log(user.email);
-  }
+ 
 
   const logoutHandler = async () => {
     await signOut(auth);

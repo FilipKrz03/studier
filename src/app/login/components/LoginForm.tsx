@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import signIn from "@/firebase/auth/signin";
 import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
 import classes from "./LoginForm.module.scss";
+import { useRouter } from "next/navigation";
 
 const theme = createTheme({
   palette: {
@@ -25,7 +26,10 @@ interface IFormInput {
 }
 
 const LoginForm = () => {
+
+  const router = useRouter();
   const { theme: currentTheme } = useTheme();
+
   const {
     register,
     handleSubmit,
@@ -35,9 +39,10 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const { result, error } = await signIn(data.eMail, data.password);
     if (error) {
-      console.log(error);
+     console.log(error);
+     
     } else {
-      console.log(result);
+      return router.push('/dashboard');
     }
   };
 

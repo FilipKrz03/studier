@@ -2,12 +2,11 @@
 import { ThemeProvider } from "next-themes";
 import { useState, useEffect } from "react";
 
-type Props ={
-  children:React.ReactNode
-}
+type Props = {
+  children: React.ReactNode;
+};
 
-export default function ThemeContextProvider({ children }:Props) {
-  
+export default function ThemeContextProvider({ children }: Props) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
