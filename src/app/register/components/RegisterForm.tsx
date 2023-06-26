@@ -9,6 +9,7 @@ import signUp from "@/firebase/auth/signup";
 import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
 import { useRouter } from "next/navigation";
 import classes from "./RegisterForm.module.scss";
+import LoadingBody from '@/app/UI/LoadingBody/LoadingBody';
 
 const theme = createTheme({
   palette: {
@@ -28,15 +29,14 @@ interface IFormInput {
   repeatPassword: string;
 }
 
-type Props = {
-  onLoadingChange:(loadingState:boolean)=> void
-}
 
-const RegisterForm = ({onLoadingChange:setLoading}:Props) => {
+
+const RegisterForm = () => {
 
   const { theme: currentTheme } = useTheme();
   const router = useRouter();
-  const [error , setError] = useState("");
+  const [error , setError] = useState(false);
+  const [loading , setLoading] = useState(false);
   
 
   const {
@@ -47,18 +47,17 @@ const RegisterForm = ({onLoadingChange:setLoading}:Props) => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    setError("");
+    setError(false);
     try{
       setLoading(true);
       await signUp(data.eMail, data.password);
     }
     catch{
-      setLoading(false);
-     return setError("This email exist");
+     setLoading(false);
+     setError(true);
+     return;
     }
-    setLoading(false);
     return router.push("/dashboard");
-    
   };
 
   const inputColor = currentTheme === "light" ? "primary" : "secondary";
@@ -68,6 +67,8 @@ const RegisterForm = ({onLoadingChange:setLoading}:Props) => {
   const repeatPasswordInputColor = errors.repeatPassword ? "error" : inputColor;
 
   return (
+    <>
+    {loading && <LoadingBody />}
     <ThemeProvider theme={theme}>
       <motion.form
         className={classes.form}
@@ -135,8 +136,10 @@ const RegisterForm = ({onLoadingChange:setLoading}:Props) => {
           )}
         </div>
         <SubmitButton description="Register" />
+        {error && <Alert alertMessage="This email already exist !"/>}
       </motion.form>
     </ThemeProvider>
+    </>
   );
 };
 
