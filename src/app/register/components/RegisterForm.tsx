@@ -1,11 +1,12 @@
 "use client";
 import { TextField, createTheme, ThemeProvider } from "@mui/material";
 import Alert from "@/app/UI/Alert/Alert";
-import { useForm, SubmitHandler,} from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import classes from "./RegisterForm.module.scss";
+import signUp from "@/firebase/auth/signup";
 import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
+import classes from "./RegisterForm.module.scss";
 
 const theme = createTheme({
   palette: {
@@ -34,8 +35,13 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    const { result, error } = await signUp(data.eMail, data.password);
+    if (!error) {
+      console.log(result);
+    } else {
+      console.log(error);
+    }
   };
 
   const inputColor = currentTheme === "light" ? "primary" : "secondary";
@@ -111,7 +117,7 @@ const RegisterForm = () => {
             <Alert alertMessage={errors.repeatPassword!.message!} />
           )}
         </div>
-        <SubmitButton description="Register"/>
+        <SubmitButton description="Register" />
       </motion.form>
     </ThemeProvider>
   );

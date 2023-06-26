@@ -4,8 +4,9 @@ import Alert from "@/app/UI/Alert/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import classes from "./LoginForm.module.scss";
+import signIn from "@/firebase/auth/signin";
 import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
+import classes from "./LoginForm.module.scss";
 
 const theme = createTheme({
   palette: {
@@ -31,8 +32,13 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    const { result, error } = await signIn(data.eMail, data.password);
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(result);
+    }
   };
 
   const inputColor = currentTheme === "light" ? "primary" : "secondary";
