@@ -1,15 +1,11 @@
-import classes from './ActionContainer.module.scss';
+import classes from "./ActionContainer.module.scss";
 
 type Props = {
-    children:React.ReactNode , 
-}
+  children: React.ReactNode;
+};
 
-const ActionContainer = ({children}:Props) => {
-    return(
-        <div className={classes.container}>
-            {children}
-        </div>
-    )
-}
+const ActionContainer = ({ children }: Props) => {
+  return <div className={classes.container}>{children}</div>;
+};
 
-export default ActionContainer
+export default ActionContainer;

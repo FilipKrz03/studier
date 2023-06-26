@@ -1,13 +1,12 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
-.alert{
-@include flexbox(row  , center , center);
-gap: 20px;
-color: $red;
-font-size: $font-s;
+.alert {
+  @include flexbox(row, center, center);
+  gap: 20px;
+  color: $red;
+  font-size: $font-s;
 
-.icon{
-    color:$red;
-}
-
+  .icon {
+    color: $red;
+  }
 }

@@ -1,42 +1,42 @@
 @import "../../variables.scss";
 
 .welcome {
-    @include flexbox(column , center , center);
-    gap: 20px;
+  @include flexbox(column, center, center);
+  gap: 20px;
   p {
     font-size: $font-xxl;
     font-weight: bolder;
   }
-    span{
-        font-size: $font-sxxl;
-    }
-  
+  span {
+    font-size: $font-sxxl;
+  }
+
   color: black;
 }
 
-[data-theme="dark"]{
-  .welcome{
+[data-theme="dark"] {
+  .welcome {
     color: $primary-background;
   }
 }
 
-@include media-m{
-  .welcome{
-    p{
+@include media-m {
+  .welcome {
+    p {
       font-size: $font-xl;
     }
-    span{
+    span {
       font-size: $font-ll;
     }
   }
 }
 
-@include media-s{
-  .welcome{
-    p{
+@include media-s {
+  .welcome {
+    p {
       font-size: $font-ll;
     }
-    span{
+    span {
       font-size: $font-l;
     }
   }

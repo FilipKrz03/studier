@@ -10,7 +10,9 @@ const Providers = ({ children }: Props) => {
   return (
     <>
       <AuthContextProvider>
-        <ThemeContextProvider>{children}</ThemeContextProvider>
+        <ThemeContextProvider>
+          {children}
+          </ThemeContextProvider>
       </AuthContextProvider>
     </>
   );

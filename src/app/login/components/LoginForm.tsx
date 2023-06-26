@@ -61,6 +61,7 @@ const LoginForm = () => {
     <>
       {loading && <LoadingBody />}
       <ThemeProvider theme={theme}>
+        {error && <Alert alertMessage="Bad email or password" />}
         <motion.form
           className={classes.form}
           onSubmit={handleSubmit(onSubmit)}
@@ -94,7 +95,6 @@ const LoginForm = () => {
             )}
           </div>
           <SubmitButton description="Log in" />
-          {error && <Alert alertMessage="Bad email or password" />}
         </motion.form>
       </ThemeProvider>
     </>

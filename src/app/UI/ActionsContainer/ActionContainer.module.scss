@@ -1,17 +1,17 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
-.container{
-    min-height:  90vh;
-    @include flexbox(row , center , center);
-    gap: 170px;
+.container {
+  min-height: 90vh;
+  @include flexbox(row, center, center);
+  gap: 170px;
 }
 
-@include media-l{
-    .container{
-        min-height: auto!important;
-        flex-direction: column;
-        justify-content: flex-start;
-        margin-top: 50px;
-        gap: 50px;
-    }
+@include media-l {
+  .container {
+    min-height: auto !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 50px;
+    gap: 50px;
+  }
 }
