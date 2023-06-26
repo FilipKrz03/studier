@@ -18,7 +18,7 @@ export default function Dashboard() {
     if (user === null) {
       return router.push("/");
     }
-  }, [user]);
+  }, [user , router]);
 
   if (user) {
     console.log(user.email);
