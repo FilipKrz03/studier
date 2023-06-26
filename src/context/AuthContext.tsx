@@ -15,7 +15,6 @@ type Props = {
 
 export const AuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -24,15 +23,9 @@ export const AuthContextProvider = ({ children }: Props) => {
       } else {
         setUser(null);
       }
-      setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
-  return (
-    <AuthContext.Provider value={user}>
-      {loading ? <div>Loading</div> : children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };

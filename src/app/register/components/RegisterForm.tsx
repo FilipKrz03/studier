@@ -1,4 +1,5 @@
 "use client";
+import {useState} from 'react';
 import { TextField, createTheme, ThemeProvider } from "@mui/material";
 import Alert from "@/app/UI/Alert/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -27,9 +28,16 @@ interface IFormInput {
   repeatPassword: string;
 }
 
-const RegisterForm = () => {
+type Props = {
+  onLoadingChange:(loadingState:boolean)=> void
+}
+
+const RegisterForm = ({onLoadingChange:setLoading}:Props) => {
+
   const { theme: currentTheme } = useTheme();
   const router = useRouter();
+  const [error , setError] = useState("");
+  
 
   const {
     register,
@@ -39,12 +47,18 @@ const RegisterForm = () => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    const { result, error } = await signUp(data.eMail, data.password);
-    if (!error) {
-      router.push("/dashboard");
-    } else {
-     console.log(error);
+    setError("");
+    try{
+      setLoading(true);
+      await signUp(data.eMail, data.password);
     }
+    catch{
+      setLoading(false);
+     return setError("This email exist");
+    }
+    setLoading(false);
+    return router.push("/dashboard");
+    
   };
 
   const inputColor = currentTheme === "light" ? "primary" : "secondary";
