@@ -1,4 +1,4 @@
-import ThemeContext from "@/context/ThemeContext";
+import Providers from "@/context/Providers";
 import Header from "./components/Header/Header";
 import ProgressBarPage from "./UI/ProgressBar/ProgressBar";
 import { Inter } from "next/font/google";
@@ -22,14 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <AuthContextProvider>
-        <ThemeContext>
+        <Providers>
         <ProgressBarPage />
         <Header />
         {children}
         <MobileNav />
-        </ThemeContext>    
-        </AuthContextProvider>
+        </Providers>
       </body>
     </html>
   );
