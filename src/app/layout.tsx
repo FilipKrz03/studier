@@ -1,9 +1,10 @@
-import Providers from "@/context/ThemeProvider";
+import ThemeContext from "@/context/ThemeContext";
 import Header from "./components/Header/Header";
 import ProgressBarPage from "./UI/ProgressBar/ProgressBar";
 import { Inter } from "next/font/google";
 import "./globals.scss";
 import MobileNav from "./components/MobileNav/MobileNav";
+import { AuthContextProvider } from "@/context/AuthContext";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,12 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
+      <AuthContextProvider>
+        <ThemeContext>
         <ProgressBarPage />
         <Header />
         {children}
         <MobileNav />
-        </Providers>    
+        </ThemeContext>    
+        </AuthContextProvider>
       </body>
     </html>
   );

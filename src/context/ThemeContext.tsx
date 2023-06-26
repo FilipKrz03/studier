@@ -6,7 +6,7 @@ type Props ={
   children:React.ReactNode
 }
 
-export default function Providers({ children }:Props) {
+export default function ThemeContext({ children }:Props) {
   
   const [mounted, setMounted] = useState(false);
 
