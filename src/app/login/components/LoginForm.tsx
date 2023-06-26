@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
-import { TextField, createTheme, ThemeProvider, CircularProgress } from "@mui/material";
+import {
+  TextField,
+  createTheme,
+  ThemeProvider,
+  CircularProgress,
+} from "@mui/material";
 import Alert from "@/app/UI/Alert/Alert";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
@@ -27,11 +32,10 @@ interface IFormInput {
 }
 
 type Props = {
-  onLoadingChange:(isLoading:boolean)=>void
-}
+  onLoadingChange: (isLoading: boolean) => void;
+};
 
-  const LoginForm = ({onLoadingChange:setIsLoading}:Props) => {
-
+const LoginForm = ({ onLoadingChange: setIsLoading }: Props) => {
   const router = useRouter();
   const { theme: currentTheme } = useTheme();
   const [error, setError] = useState("");
@@ -51,10 +55,8 @@ type Props = {
       setIsLoading(false);
       return setError("Failed to log in , bad email or password");
     }
-    setIsLoading(false);
     return router.push("/dashboard");
   };
-
 
   const inputColor = currentTheme === "light" ? "primary" : "secondary";
   const emailInputColor = errors.eMail ? "error" : inputColor;

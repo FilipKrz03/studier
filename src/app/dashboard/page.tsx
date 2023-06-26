@@ -13,18 +13,16 @@ export default function Dashboard() {
 
   const user: any = useAuthContext();
   const router = useRouter();
-
-  useEffect(() => {
-    if (user === null) {
-      return router.push("/");
-    }
-  }, [user , router]);
-
  
-
   const logoutHandler = async () => {
     await signOut(auth);
   };
+  
+  if(!user){
+    return(
+      <div>You are not loged in!</div>
+    )
+  }
 
   if (user) {
     return (
