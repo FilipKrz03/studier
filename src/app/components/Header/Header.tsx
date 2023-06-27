@@ -6,6 +6,7 @@ import Brightness3Icon from "@mui/icons-material/Brightness3";
 import classes from "./Header.module.scss";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { useAuthContext } from "@/context/AuthContext";
 
 const kanit = Kanit({
   subsets: ["latin"],
@@ -15,6 +16,7 @@ const kanit = Kanit({
 const Header = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const user: any = useAuthContext();
 
   useEffect(() => {
     setMounted(true);
@@ -27,7 +29,9 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <div className={classes.logo}>
-       <Link href={'/'}><h3 className={kanit.className}>Studier</h3></Link>
+        <Link href={"/"}>
+          <h3 className={kanit.className}>Studier</h3>
+        </Link>
         {theme === "light" && (
           <WbSunnyIcon
             fontSize="large"
@@ -50,8 +54,9 @@ const Header = () => {
         )}
       </div>
       <nav className={classes["login-options"]}>
-        <Link href="/login">Login</Link>
-        <Link href="/register">Sign Up</Link>
+        {!user && <Link href="/login">Login</Link>}
+        {!user && <Link href="/register">Sign Up</Link>}
+        {user && <Link href="/">About</Link>}
       </nav>
     </header>
   );

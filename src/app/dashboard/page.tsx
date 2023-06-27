@@ -14,21 +14,7 @@ export default function Dashboard() {
     if (user == null) router.push("/");
   }, [user, router]);
 
-  const { userData, loading, error } = useUserData(user ? user.uid : null);
-
   if (user) {
-    return (
-      <>
-        <p>{!loading && userData.username.stringValue}</p>
-        <button
-          onClick={() => {
-            signOut(auth);
-            router.push("/");
-          }}
-        >
-          Sign out
-        </button>
-      </>
-    );
+    return <div></div>;
   }
 }

@@ -1,0 +1,9 @@
+@import '../variables.scss';
+.dashboard{
+    width: 100vw!important;
+    @include flexbox(row , flex-start , flex-start);
+}
+
+li{
+    list-style-type: none;
+}

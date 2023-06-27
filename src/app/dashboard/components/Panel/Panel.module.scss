@@ -1,0 +1,41 @@
+@import "../../../variables.scss";
+
+.panel {
+    color: $light-dark;
+  .gretting {
+    @include flexbox(column, center, center);
+    gap: 20px;
+    h2 {
+      font-size: $font-l;
+    }
+    span {
+      font-size: $font-ml;
+    }
+  }
+  padding: 1em;
+  @include flexbox(column, flex-start, center);
+  gap: 50px;
+  height: calc(100vh - 70px);
+  width: 200px;
+  background-color: $primary-background;
+  border: 1px solid lightgray;
+
+  ul {
+    li {
+      @include flexbox(row, center, center);
+      gap: 6px;
+    }
+  }
+  .logout {
+    @include flexbox(row, center, center);
+    gap: 6px;
+    cursor: pointer;
+  }
+}
+
+[data-theme = "dark"]{
+    .panel{
+        background-color:$dark-theme-background;
+        color: $primary-background;
+    }
+}

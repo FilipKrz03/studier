@@ -5,14 +5,11 @@ import Support from "./components/SupportSection/Support";
 
 export default function Home() {
   return (
-    <>
       <main>
         <Hero />
         <Features />
         <Stats />
         <Support />
       </main>
-   
-    </>
   );
 }
