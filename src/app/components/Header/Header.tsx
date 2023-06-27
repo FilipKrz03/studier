@@ -57,6 +57,7 @@ const Header = () => {
         {!user && <Link href="/login">Login</Link>}
         {!user && <Link href="/register">Sign Up</Link>}
         {user && <Link href="/">About</Link>}
+        {user && <Link href="/dashboard">Dashboard</Link>}
       </nav>
     </header>
   );
