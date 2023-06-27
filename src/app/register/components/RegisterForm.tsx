@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import signUp from "@/firebase/auth/signup";
 import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
 import { useRouter } from "next/navigation";
+import addData from "@/firebase/firestore/addData";
 import classes from "./RegisterForm.module.scss";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
 
@@ -43,16 +44,22 @@ const RegisterForm = () => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    let result:any = ""
     setError(false);
     try {
       setLoading(true);
-      await signUp(data.eMail, data.password);
+      result = await signUp(data.eMail, data.password);
     } catch {
       setLoading(false);
       setError(true);
       return;
     }
-    return router.push("/dashboard");
+    const {error} = await addData('users', result.user.uid , {username : data.userName});  
+    if(error){
+      console.log('Failed to add username');
+    }
+    router.push("/dashboard");
+    
   };
 
   const inputColor = currentTheme === "light" ? "primary" : "secondary";

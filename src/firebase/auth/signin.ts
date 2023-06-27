@@ -6,5 +6,6 @@ import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 const auth = getAuth(app);
 
 export default function signIn(emial: string, password: string) {
-    return signInWithEmailAndPassword(auth, emial, password);
+    const result = signInWithEmailAndPassword(auth, emial, password);
+    return result;
 }

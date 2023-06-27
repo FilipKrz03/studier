@@ -1,36 +1,27 @@
 "use client";
-import { useEffect } from "react";
 import { useAuthContext } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import getData from "@/firebase/firestore/getData";
 import { signOut, getAuth } from "firebase/auth";
+import { User } from "@/types/User";
 import app from "@/firebase/config";
 
 
 // only for test purposes
 
 export default function Dashboard() {
-  const auth = getAuth(app);
 
-  const user: any = useAuthContext();
-  const router = useRouter();
- 
-  const logoutHandler = async () => {
-    await signOut(auth);
-  };
-  
-  if(!user){
-    return(
-      <div>You are not loged in!</div>
+  const auth = getAuth(app);
+  const user:User|null = useAuthContext();
+
+  if(user === null){
+    return (
+      <div>You are not login</div>
     )
   }
 
-  if (user) {
-    return (
-      <>
-        <div>Only loged in </div>
-        <p>Email {user.email}</p>
-        <button onClick={logoutHandler}>logout</button>
-      </>
-    );
+  if(user){
+    
   }
+
+
 }
