@@ -61,7 +61,6 @@ const LoginForm = () => {
     <>
       {loading && <LoadingBody />}
       <ThemeProvider theme={theme}>
-        {error && <Alert alertMessage="Bad email or password" />}
         <motion.form
           className={classes.form}
           onSubmit={handleSubmit(onSubmit)}
@@ -69,6 +68,7 @@ const LoginForm = () => {
           initial={{ x: 200, filter: "blur(5px)", opacity: 0.5 }}
           transition={{ duration: 0.5 }}
         >
+          {error && <Alert alertMessage="Bad email or password" />}
           <div className={classes["form-element"]}>
             <TextField
               fullWidth

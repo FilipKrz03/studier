@@ -16,7 +16,7 @@ const kanit = Kanit({
 const Header = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  const user: any = useAuthContext();
+  const user = useAuthContext();
 
   useEffect(() => {
     setMounted(true);
