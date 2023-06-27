@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import app from "@/firebase/config";
+import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
 
 const auth = getAuth(app);
 
@@ -15,6 +16,7 @@ type Props = {
 
 export const AuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -23,9 +25,12 @@ export const AuthContextProvider = ({ children }: Props) => {
       } else {
         setUser(null);
       }
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={user}>
+    {loading ? <LoadingBody /> : children}
+    </AuthContext.Provider>;
 };

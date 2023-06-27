@@ -1,27 +1,34 @@
 "use client";
+import { useEffect } from "react";
 import { useAuthContext } from "@/context/AuthContext";
-import getData from "@/firebase/firestore/getData";
 import { signOut, getAuth } from "firebase/auth";
-import { User } from "@/types/User";
-import app from "@/firebase/config";
-
-
-// only for test purposes
+import useUserData from "@/hooks/useUserData";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
+  const user: any = useAuthContext();
+  const auth = getAuth();
+  const router = useRouter();
 
-  const auth = getAuth(app);
-  const user:User|null = useAuthContext();
+  useEffect(() => {
+    if (user == null) router.push("/");
+  }, [user, router]);
 
-  if(user === null){
+  const { userData, loading, error } = useUserData(user ? user.uid : null);
+
+  if (user) {
     return (
-      <div>You are not login</div>
-    )
+      <>
+        <p>{!loading && userData.username.stringValue}</p>
+        <button
+          onClick={() => {
+            signOut(auth);
+            router.push("/");
+          }}
+        >
+          Sign out
+        </button>
+      </>
+    );
   }
-
-  if(user){
-    
-  }
-
-
 }
