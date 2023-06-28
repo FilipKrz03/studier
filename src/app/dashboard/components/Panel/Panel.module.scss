@@ -1,7 +1,16 @@
 @import "../../../variables.scss";
 
 .panel {
-    color: $light-dark;
+  color: $light-dark;
+  height: calc(100vh - 70px);
+  width: 225px;
+  background-color: $primary-background;
+  border: 3px solid $dark-white;
+  border-radius: 0 $border-radius $border-radius 0;
+  padding: 1em;
+  @include flexbox(column, flex-start, center);
+  gap: 50px;
+
   .gretting {
     @include flexbox(column, center, center);
     gap: 20px;
@@ -12,17 +21,10 @@
       font-size: $font-ml;
     }
   }
-  padding: 1em;
-  @include flexbox(column, flex-start, center);
-  gap: 50px;
-  height: calc(100vh - 70px);
-  width: 200px;
-  background-color: $primary-background;
-  border: 1px solid lightgray;
-
   ul {
-    li {
+    li , a {
       @include flexbox(row, center, center);
+      color: $light-dark;
       gap: 6px;
     }
   }
@@ -33,9 +35,13 @@
   }
 }
 
-[data-theme = "dark"]{
-    .panel{
-        background-color:$dark-theme-background;
-        color: $primary-background;
+[data-theme="dark"] {
+  .panel {
+    background-color: $dark-theme-background;
+    color: $primary-background;
+    border-color: $dark-theme-background-second;
+    ul , li , a {
+      color: $primary-background;
     }
+  }
 }

@@ -5,6 +5,7 @@ import { dashboard } from "@/data/dashboard";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { signOut, getAuth } from "firebase/auth";
+import Link from "next/link";
 import classes from "./Panel.module.scss";
 
 const Panel = () => {
@@ -28,8 +29,10 @@ const Panel = () => {
           const Icon = item.icon;
           return (
             <li key={item.title}>
-              <Icon fontSize="large" />
-              <p>{item.title}</p>
+              <Link href={item.link}>
+                <Icon fontSize="large" />
+                <p>{item.title}</p>
+              </Link>
             </li>
           );
         })}
