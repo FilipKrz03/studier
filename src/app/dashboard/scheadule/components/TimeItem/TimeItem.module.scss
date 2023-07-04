@@ -1,0 +1,18 @@
+@import "../../../../variables.scss";
+
+.time-item {
+    display: flex!important;
+    flex-direction: column!important;
+    justify-content: space-evenly!important;
+    background-color: $primary-background-second;
+    width:calc(100%/8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $light-gray;
+   .line{
+    background-color: $dark-theme-background;
+    width: 100%;
+    height: 1px;
+   }
+}
