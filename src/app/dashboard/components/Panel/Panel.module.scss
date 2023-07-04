@@ -45,3 +45,15 @@
     }
   }
 }
+
+@include media-l{
+  .panel{
+    width: 150px;
+  }
+}
+
+@include media-ms{
+  .panel{
+    display: none;
+  }
+}
