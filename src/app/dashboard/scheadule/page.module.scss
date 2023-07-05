@@ -6,8 +6,3 @@
     margin: 0 auto;
 }
 
-@include media-ms {
-    .container{
-    transform: translateX(-120px);
-    }
-}

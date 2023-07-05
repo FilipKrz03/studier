@@ -5,26 +5,33 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 import Button from "@/app/UI/Button/Button";
 import TimeItem from "../TimeItem/TimeItem";
 import Modal from "@/app/UI/Modal/Modal";
-import { days , hoursRanges } from "@/data/scheadule";
+import { days, hoursRanges } from "@/data/scheadule";
 import classes from "./LessonsScheadule.module.scss";
 
 const LessonScheadule = () => {
-
   const windowWidth = useWindowWidth();
-  const [showModal , setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const addLessonHandler = () => {
     setShowModal(true);
-  }
+  };
 
   const closeModalHandler = () => {
     setShowModal(false);
-  }
+  };
 
   return (
     <>
-     {showModal && <Modal onClose={closeModalHandler}><AddLesonForm onClose={closeModalHandler} /></Modal>}
-      <Button description="Add Lesson" isSubmit={false} clickFunction={addLessonHandler}/>
+      {showModal && (
+        <Modal onClose={closeModalHandler}>
+          <AddLesonForm onClose={closeModalHandler} />
+        </Modal>
+      )}
+          <Button
+          description="Add Lesson"
+          isSubmit={false}
+          clickFunction={addLessonHandler}
+        />
       <div className={classes.table}>
         <div className={classes.description}>
           <span className={classes["description-item"]}>Hours</span>

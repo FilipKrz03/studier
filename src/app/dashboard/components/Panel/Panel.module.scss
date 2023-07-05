@@ -61,7 +61,7 @@
 
 @include media-ms{
   .panel{
-   position: relative;
+   position:absolute;
    transform: translateX(-200px);
   }
   .active{
