@@ -6,6 +6,8 @@
  transition: 300ms ease-in-out;
 }
 .panel {
+  z-index: 1;
+
   transition: 300ms ease-in-out;
   color: $light-dark;
   height: calc(100vh - 70px);
@@ -66,10 +68,11 @@
     transform: translateX(0px);
    }
   .mobile-icon{
+    cursor: pointer;
     position: absolute;
     display: block;
     top: 50%;
-    left: -5px;
+    left: -2px;
 
   }
   .sticky{
