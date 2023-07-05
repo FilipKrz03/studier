@@ -1,0 +1,22 @@
+@import "../../variables.scss";
+
+.modal {
+  background-color: $primary-background;
+  padding: 1em;
+  border-radius: $border-radius-s;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+}
+
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vw;
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.75);
+}

@@ -1,0 +1,23 @@
+@import "../../../../variables.scss";
+
+.form {
+  padding-top: 50px;
+  position: relative;
+  @include flexbox(column, center, center);
+  gap: 30px;
+  .data {
+    @include flexbox(row, space-between, center);
+    gap: 30px;
+  }
+  .inputs {
+    width: 100%;
+    @include flexbox(column, center, center);
+    gap: 30px;
+  }
+  .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+}
