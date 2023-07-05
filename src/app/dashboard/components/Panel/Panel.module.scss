@@ -1,6 +1,13 @@
 @import "../../../variables.scss";
 
+
+.mobile-icon{
+  transition: 300ms ease-in-out;
+  display: none;
+  cursor: pointer;
+}
 .panel {
+  transition: 300ms ease-in-out;
   color: $light-dark;
   height: calc(100vh - 70px);
   width: 225px;
@@ -10,7 +17,6 @@
   padding: 1em;
   @include flexbox(column, flex-start, center);
   gap: 50px;
-
   .gretting {
     @include flexbox(column, center, center);
     gap: 20px;
@@ -54,6 +60,20 @@
 
 @include media-ms{
   .panel{
-    display: none;
+   position: relative;
+   transform: translateX(-200px);
+  }
+  .active{
+    transform: translateX(0px);
+   }
+  .mobile-icon{
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: -5px;
+  }
+  .sticky{
+    transform: translateX(125px);
+    z-index: 10;
   }
 }
