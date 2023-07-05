@@ -7,10 +7,13 @@ import TimeItem from "../TimeItem/TimeItem";
 import Modal from "@/app/UI/Modal/Modal";
 import { days, hoursRanges } from "@/data/scheadule";
 import classes from "./LessonsScheadule.module.scss";
+import { Lesson } from "@/types/Lesson";
 
 const LessonScheadule = () => {
+
   const windowWidth = useWindowWidth();
   const [showModal, setShowModal] = useState(false);
+  const [lessons , setLessons] = useState<Lesson[]>([]);
 
   const addLessonHandler = () => {
     setShowModal(true);
@@ -20,11 +23,16 @@ const LessonScheadule = () => {
     setShowModal(false);
   };
 
+  const addLesson = (lesson:Lesson) => {
+    setLessons([...lessons , lesson]);
+    console.log(lessons);
+  }
+
   return (
     <>
       {showModal && (
         <Modal onClose={closeModalHandler}>
-          <AddLesonForm onClose={closeModalHandler} />
+          <AddLesonForm onClose={closeModalHandler} onAddLesson={addLesson} />
         </Modal>
       )}
           <Button

@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
-import { TextField } from "@mui/material";
+import { TextField , Select , MenuItem , InputLabel, FormControl, SelectChangeEvent } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { TimeField, LocalizationProvider } from "@mui/x-date-pickers";
 import WarningIcon from "@mui/icons-material/Warning";
+import { Lesson } from "@/types/Lesson";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import classes from "./AddLesonForm.module.scss";
 import Button from "@/app/UI/Button/Button";
@@ -12,13 +13,15 @@ import Alert from "@/app/UI/Alert/Alert";
 
 type Props = {
   onClose: () => void;
+  onAddLesson: (lesson:Lesson) => void;
 };
 
-const AddLesonForm = ({ onClose }: Props) => {
+const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
   const [startTimeValue, setStartTimeValue] = useState<any>({ $H: 8, $m: 0 });
   const [endTimeValue, setEndTimeValue] = useState<any>({ $H: 20, $m: 0 });
   const [subjectValue, setSubjectValue] = useState("");
   const [teacherValue, setTeacherValue] = useState("");
+  const [dayValue , setDayValue] = useState('Monday');
   const [formHoursError, setFormHoursError] = useState(false);
   const [subjectError, setSubjectError] = useState(false);
   const [teacherError, setTeacherError] = useState(false);
@@ -49,6 +52,14 @@ const AddLesonForm = ({ onClose }: Props) => {
       setTeacherError(true);
     }
     if (!formHoursError && !teacherError && !subjectError) {
+      const lesson:Lesson = {
+        startTime : {hour:startTimeValue.$H , minute : startTimeValue.$m} , 
+        endTime : {hour:endTimeValue.$H , minute:startTimeValue.$m} , 
+        day:dayValue , 
+        subject:subjectValue , 
+        teacher:teacherValue , 
+      }
+      onAddLesson(lesson);
     }
   };
 
@@ -65,6 +76,10 @@ const AddLesonForm = ({ onClose }: Props) => {
     setTeacherValue(event.target.value);
     setTeacherError(false);
   };
+
+  const dayChangeHandler = (event:SelectChangeEvent<string>) => {
+    setDayValue(event.target.value);
+  }
 
   const eight = dayjs().set("hour", 8).startOf("hour");
   const twenty = dayjs().set("hour", 20).startOf("hour");
@@ -111,6 +126,18 @@ const AddLesonForm = ({ onClose }: Props) => {
         </div>
         {formHoursError && <Alert alertMessage="Enter valid time data" />}
         <div className={classes.inputs}>
+        <FormControl fullWidth>
+          <InputLabel>Day</InputLabel>
+          <Select  label='Day' defaultValue={dayValue} onChange={dayChangeHandler}   >
+            <MenuItem value={'Modnay'}>Monday</MenuItem>
+            <MenuItem value={'Tuesday'}>Tuesday</MenuItem>
+            <MenuItem value={'Wednesday'}>Wednesday</MenuItem>
+            <MenuItem value={'Thursday'}>Thursday</MenuItem>
+            <MenuItem value={'Friday'}>Friday</MenuItem>
+            <MenuItem value={'Satudray'}>Satudray</MenuItem>
+            <MenuItem value={'Sunday'}>Sunday</MenuItem>
+          </Select>
+          </FormControl>
           <TextField
             fullWidth
             label="Enter Subject"
