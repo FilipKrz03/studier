@@ -5,6 +5,11 @@
   position: relative;
   @include flexbox(column, center, center);
   gap: 30px;
+  .rules{
+    @include flexbox(row , flex-start , center);
+    gap: 20px;
+    font-size: $font-s;
+  }
   .data {
     @include flexbox(row, space-between, center);
     gap: 30px;
