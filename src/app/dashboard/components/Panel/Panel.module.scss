@@ -2,9 +2,8 @@
 
 
 .mobile-icon{
-  transition: 300ms ease-in-out;
-  display: none;
-  cursor: pointer;
+ display: none;
+ transition: 300ms ease-in-out;
 }
 .panel {
   transition: 300ms ease-in-out;
@@ -71,6 +70,7 @@
     display: block;
     top: 50%;
     left: -5px;
+
   }
   .sticky{
     transform: translateX(125px);

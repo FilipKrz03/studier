@@ -5,8 +5,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { dashboard } from "@/data/dashboard";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { signOut, getAuth } from "firebase/auth";
 import Link from "next/link";
 import classes from "./Panel.module.scss";
@@ -29,22 +28,13 @@ const Panel = () => {
 
   return (
     <>
-      {!mobileMenuActive &&
-        <ArrowCircleRightIcon
+      <ChangeCircleIcon
         className={`${classes["mobile-icon"]} ${
           mobileMenuActive ? classes.sticky : ""
         }`}
         fontSize="large"
         onClick={mobileMenuChangeHandler}
-      />}
-      {mobileMenuActive &&
-        <ArrowCircleLeftIcon
-        className={`${classes["mobile-icon"]} ${
-          mobileMenuActive ? classes.sticky : ""
-        }`}
-        fontSize="large"
-        onClick={mobileMenuChangeHandler}
-      />}
+      />
       <nav
         className={`${classes.panel} ${mobileMenuActive ? classes.active : ""}`}
       >
@@ -57,7 +47,10 @@ const Panel = () => {
             const Icon = item.icon;
             return (
               <li key={item.title}>
-                <Link href={item.link}>
+                <Link
+                  href={item.link}
+                  onClick={() => setMobileMenuActive(false)}
+                >
                   <Icon fontSize="large" />
                   <p>{item.title}</p>
                 </Link>
