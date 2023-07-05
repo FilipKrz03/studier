@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import signIn from "@/firebase/auth/signin";
-import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
+import Button from "@/app/UI/Button/Button";
 import classes from "./LoginForm.module.scss";
 import { useRouter } from "next/navigation";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
@@ -94,7 +94,7 @@ const LoginForm = () => {
               <Alert alertMessage="Password need to be at least 6 characters length" />
             )}
           </div>
-          <SubmitButton description="Log in" />
+          <Button description="Log in" isSubmit={true} />
         </motion.form>
       </ThemeProvider>
     </>

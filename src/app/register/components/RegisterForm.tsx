@@ -6,7 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import signUp from "@/firebase/auth/signup";
-import SubmitButton from "@/app/UI/SubmitButton/SubmitButton";
+import Button from "@/app/UI/Button/Button";
 import { useRouter } from "next/navigation";
 import addData from "@/firebase/firestore/addData";
 import classes from "./RegisterForm.module.scss";
@@ -44,7 +44,7 @@ const RegisterForm = () => {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    let result:any = ""
+    let result: any = "";
     setError(false);
     try {
       setLoading(true);
@@ -54,12 +54,13 @@ const RegisterForm = () => {
       setError(true);
       return;
     }
-    const {error} = await addData('users', result.user.uid , {username : data.userName});  
-    if(error){
-      console.log('Failed to add username');
+    const { error } = await addData("users", result.user.uid, {
+      username: data.userName,
+    });
+    if (error) {
+      console.log("Failed to add username");
     }
     router.push("/dashboard");
-    
   };
 
   const inputColor = currentTheme === "light" ? "primary" : "secondary";
@@ -140,7 +141,7 @@ const RegisterForm = () => {
               <Alert alertMessage={errors.repeatPassword!.message!} />
             )}
           </div>
-          <SubmitButton description="Register" />
+          <Button description="Register" isSubmit={true} />
         </motion.form>
       </ThemeProvider>
     </>
