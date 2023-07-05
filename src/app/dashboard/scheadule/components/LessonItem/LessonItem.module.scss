@@ -4,6 +4,6 @@
   font-size: $font-xs;
   @include flexbox(column, center, center);
   z-index: 2;
-  width: calc(75vw / 8);
+  width: calc((75vw / 8) - 3px);
   background-color: rgb(123, 247, 141);
 }
