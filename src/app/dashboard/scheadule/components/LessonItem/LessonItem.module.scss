@@ -1,4 +1,9 @@
-.lesson{
-    width: calc(75vw/8);
-    background-color: red;
+@import "../../../../variables.scss";
+
+.lesson {
+  font-size: $font-xs;
+  @include flexbox(column, center, center);
+  z-index: 2;
+  width: calc(75vw / 8);
+  background-color: rgb(123, 247, 141);
 }

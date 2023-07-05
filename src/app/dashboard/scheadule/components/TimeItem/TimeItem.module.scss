@@ -1,6 +1,7 @@
 @import "../../../../variables.scss";
 
 .time-item {
+    position: relative;
     display: flex!important;
     flex-direction: column!important;
     justify-content: space-evenly!important;

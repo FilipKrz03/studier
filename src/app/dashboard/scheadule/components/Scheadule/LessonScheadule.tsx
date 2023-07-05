@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import AddLesonForm from "../AddLesonForm/AddLesonForm";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Button from "@/app/UI/Button/Button";
@@ -8,12 +8,12 @@ import Modal from "@/app/UI/Modal/Modal";
 import { days, hoursRanges } from "@/data/scheadule";
 import classes from "./LessonsScheadule.module.scss";
 import { Lesson } from "@/types/Lesson";
+import LessonItem from "../LessonItem/LessonItem";
 
 const LessonScheadule = () => {
-
   const windowWidth = useWindowWidth();
   const [showModal, setShowModal] = useState(false);
-  const [lessons , setLessons] = useState<Lesson[]>([]);
+  const [lessons, setLessons] = useState<Lesson[]>([]);
 
   const addLessonHandler = () => {
     setShowModal(true);
@@ -23,10 +23,10 @@ const LessonScheadule = () => {
     setShowModal(false);
   };
 
-  const addLesson = (lesson:Lesson) => {
-    setLessons([...lessons , lesson]);
+  const addLesson = (lesson: Lesson) => {
+    setLessons([...lessons, lesson]);
     console.log(lessons);
-  }
+  };
 
   return (
     <>
@@ -35,11 +35,11 @@ const LessonScheadule = () => {
           <AddLesonForm onClose={closeModalHandler} onAddLesson={addLesson} />
         </Modal>
       )}
-          <Button
-          description="Add Lesson"
-          isSubmit={false}
-          clickFunction={addLessonHandler}
-        />
+      <Button
+        description="Add Lesson"
+        isSubmit={false}
+        clickFunction={addLessonHandler}
+      />
       <div className={classes.table}>
         <div className={classes.description}>
           <span className={classes["description-item"]}>Hours</span>
@@ -52,11 +52,27 @@ const LessonScheadule = () => {
           })}
         </div>
         {hoursRanges.map((range) => {
+          const lessonsInCurrentRange = lessons.filter(
+            (lesson) =>
+              lesson.startTime.hour >= range.rangeStart &&
+              lesson.startTime.hour < range.rangeEnd
+          );
           return (
-            <div className={classes.range} key={range}>
-              <div className={classes["range-item"]}>{range}</div>
+            <div className={classes.range} key={range.rangeStart}>
+              <div className={classes["range-item"]}>{range.range}</div>
               {days.map((day) => {
-                return <TimeItem key={day.fullName} />;
+                const lessonInRangeWithCurrentDay =
+                  lessonsInCurrentRange.filter(
+                    (lesson) => lesson.day === day.fullName
+                  );
+                return (
+                    <TimeItem key={day.shortName}>
+                    {lessonInRangeWithCurrentDay.map((lesson) => {
+                      const distanceFromTopOfRangeInMinutes = 60 * (lesson.startTime.hour - range.rangeStart) + lesson.startTime.minute;
+                      return <LessonItem key={Math.random()} lessons={lesson} distanceFromTopOfRange={distanceFromTopOfRangeInMinutes} />;
+                    })}
+                    </TimeItem>
+                );
               })}
             </div>
           );

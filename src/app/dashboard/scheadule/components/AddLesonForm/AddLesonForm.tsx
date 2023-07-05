@@ -39,17 +39,20 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
         endTimeValue.$H > 8 &&
         endTimeValue.$H <= 20 &&
         (startTimeValue.$H < endTimeValue.$H ||
-          (startTimeValue.$H === startTimeValue &&
-            startTimeValue.$m < endTimeValue.$m))
+        (startTimeValue.$H === startTimeValue &&
+        startTimeValue.$m < endTimeValue.$m))
       )
     ) {
       setFormHoursError(true);
+      return;
     }
     if (subjectValue === "") {
       setSubjectError(true);
+      return;
     }
     if (teacherValue === "") {
       setTeacherError(true);
+      return;
     }
     if (!formHoursError && !teacherError && !subjectError) {
       const lesson:Lesson = {
@@ -128,8 +131,8 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
         <div className={classes.inputs}>
         <FormControl fullWidth>
           <InputLabel>Day</InputLabel>
-          <Select  label='Day' defaultValue={dayValue} onChange={dayChangeHandler}   >
-            <MenuItem value={'Modnay'}>Monday</MenuItem>
+          <Select  label='Day' value={dayValue} onChange={dayChangeHandler}   >
+            <MenuItem value={'Monday'}>Monday</MenuItem>
             <MenuItem value={'Tuesday'}>Tuesday</MenuItem>
             <MenuItem value={'Wednesday'}>Wednesday</MenuItem>
             <MenuItem value={'Thursday'}>Thursday</MenuItem>
