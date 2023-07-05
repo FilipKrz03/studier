@@ -38,6 +38,17 @@
   }
 }
 
+[data-theme="dark"] {
+  .table {
+    border-color: $primary-background;
+    .description .description-item,
+    .range .range-item {
+      background-color: $dark-theme-background;
+      color: $primary-background-second;
+    }
+  }
+}
+
 @include media-l {
   .table {
     width: 80vw;

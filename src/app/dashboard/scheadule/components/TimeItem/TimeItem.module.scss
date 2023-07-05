@@ -16,3 +16,8 @@
     height: 1px;
    }
 }
+[data-theme="dark"]{
+   .time-item{
+    background-color: $dark-theme-background;
+   }
+  }
