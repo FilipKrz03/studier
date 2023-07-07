@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState , useEffect } from "react";
+import {User as FirebaseUser} from 'firebase/auth'
 import useUserData from "@/hooks/useUserData";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { dashboard } from "@/data/dashboard";
@@ -10,10 +11,11 @@ import { signOut, getAuth } from "firebase/auth";
 import Link from "next/link";
 import classes from "./Panel.module.scss";
 
-const Panel = () => {
+const Panel = () => 
+{
   const [mobileMenuActive, setMobileMenuActive] = useState(false);
-  const user: any = useAuthContext();
-  const { userData, loading, error } = useUserData(user ? user.uid : null);
+  const user:FirebaseUser|undefined = useAuthContext();
+  const { userData, loading, error } = useUserData(user?.uid || '');
   const router = useRouter();
   const auth = getAuth();
 
@@ -22,10 +24,16 @@ const Panel = () => {
     router.push("/");
   };
 
+  useEffect(() => {
+    if (user === null) router.push("/");
+  }, [user, router]);
+
+
   const mobileMenuChangeHandler = () => {
     setMobileMenuActive((prevValue) => !prevValue);
   };
 
+  if(user){
   return (
     <>
       <ChangeCircleIcon
@@ -66,5 +74,6 @@ const Panel = () => {
     </>
   );
 };
+}
 
 export default Panel;

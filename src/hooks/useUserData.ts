@@ -5,7 +5,7 @@ import { UserData } from "@/types/UserData";
 
 
 const useUserData = (userId: string) => {
-  
+
   const db = getFirestore(app);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

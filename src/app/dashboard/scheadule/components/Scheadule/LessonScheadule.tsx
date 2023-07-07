@@ -10,6 +10,7 @@ import classes from "./LessonsScheadule.module.scss";
 import { Lesson } from "@/types/Lesson";
 import LessonItem from "../LessonItem/LessonItem";
 import addData from "@/firebase/firestore/addData";
+import {User as FirebaseUser} from 'firebase/auth';
 import { useAuthContext } from "@/context/AuthContext";
 import useUserData from "@/hooks/useUserData";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
@@ -19,8 +20,8 @@ const LessonScheadule = () => {
   const windowWidth = useWindowWidth();
   const [showModal, setShowModal] = useState(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
-  const user: any = useAuthContext();
-  const { userData, loading, error } = useUserData(user ? user.uid : null);
+  const user:FirebaseUser|undefined = useAuthContext();
+  const { userData, loading, error } = useUserData(user?.uid || '');
 
     
   useEffect(()=>{
@@ -39,7 +40,7 @@ const LessonScheadule = () => {
 
   const addLesson = async (lesson: Lesson) => {
     setLessons([...lessons, lesson]);
-    const { error } = await addData("users", user.uid, {
+    const { error } = await addData("users", user!.uid, {
       lessons: [...lessons, lesson],
     });
     if (error) {

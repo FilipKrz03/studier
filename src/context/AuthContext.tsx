@@ -7,7 +7,7 @@ import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
 
 const auth = getAuth(app);
 
-export const AuthContext = React.createContext(null);
+export const AuthContext = React.createContext<FirebaeUser|undefined>(undefined);
 
 export const useAuthContext = () => React.useContext(AuthContext);
 
@@ -17,7 +17,7 @@ type Props = {
 
 export const AuthContextProvider = ({ children }: Props) => {
   
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<FirebaeUser>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }: Props) => {
       if (user) {
         setUser(user);
       } else {
-        setUser(null);
+        setUser(undefined);
       }
       setLoading(false);
     });
