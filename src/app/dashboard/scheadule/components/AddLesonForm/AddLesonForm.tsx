@@ -10,6 +10,8 @@ import classes from "./AddLesonForm.module.scss";
 import Button from "@/app/UI/Button/Button";
 import dayjs from "dayjs";
 import Alert from "@/app/UI/Alert/Alert";
+import { useAuthContext } from "@/context/AuthContext";
+import addData from "@/firebase/firestore/addData";
 
 type Props = {
   onClose: () => void;
@@ -17,6 +19,10 @@ type Props = {
 };
 
 const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
+
+  const user:any = useAuthContext();
+  
+
   const [startTimeValue, setStartTimeValue] = useState<any>({ $H: 8, $m: 0 });
   const [endTimeValue, setEndTimeValue] = useState<any>({ $H: 20, $m: 0 });
   const [subjectValue, setSubjectValue] = useState("");
@@ -25,6 +31,8 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
   const [formHoursError, setFormHoursError] = useState(false);
   const [subjectError, setSubjectError] = useState(false);
   const [teacherError, setTeacherError] = useState(false);
+  const [error , setError] = useState(false);
+  const [loading , setLoading] = useState(false);
 
   const closeModalHandler = () => {
     onClose();
@@ -63,6 +71,7 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
         teacher:teacherValue , 
       }
       onAddLesson(lesson);
+      onClose();
     }
   };
 

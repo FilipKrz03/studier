@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useState , useEffect } from "react";
 import AddLesonForm from "../AddLesonForm/AddLesonForm";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Button from "@/app/UI/Button/Button";
@@ -9,11 +9,25 @@ import { days, hoursRanges } from "@/data/scheadule";
 import classes from "./LessonsScheadule.module.scss";
 import { Lesson } from "@/types/Lesson";
 import LessonItem from "../LessonItem/LessonItem";
+import addData from "@/firebase/firestore/addData";
+import { useAuthContext } from "@/context/AuthContext";
+import useUserData from "@/hooks/useUserData";
+import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
 
 const LessonScheadule = () => {
+
   const windowWidth = useWindowWidth();
   const [showModal, setShowModal] = useState(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  const user: any = useAuthContext();
+  const { userData, loading, error } = useUserData(user ? user.uid : null);
+
+    
+  useEffect(()=>{
+    if(!loading){
+      setLessons(userData!.lessons || []);
+    }
+  } , [loading , userData])
 
   const addLessonHandler = () => {
     setShowModal(true);
@@ -23,11 +37,22 @@ const LessonScheadule = () => {
     setShowModal(false);
   };
 
-  const addLesson = (lesson: Lesson) => {
+  const addLesson = async (lesson: Lesson) => {
     setLessons([...lessons, lesson]);
-    console.log(lessons);
+    const { error } = await addData("users", user.uid, {
+      lessons: [...lessons, lesson],
+    });
+    if (error) {
+      console.log(error);
+    }
   };
+  
 
+  if (loading) {
+    return <LoadingBody />;
+  }
+
+ 
   return (
     <>
       {showModal && (
@@ -66,12 +91,22 @@ const LessonScheadule = () => {
                     (lesson) => lesson.day === day.fullName
                   );
                 return (
-                    <TimeItem key={day.shortName}>
+                  <TimeItem key={day.shortName}>
                     {lessonInRangeWithCurrentDay.map((lesson) => {
-                      const distanceFromTopOfRangeInMinutes = 60 * (lesson.startTime.hour - range.rangeStart) + lesson.startTime.minute;
-                      return <LessonItem key={Math.random()} lessons={lesson} distanceFromTopOfRange={distanceFromTopOfRangeInMinutes} />;
+                      const distanceFromTopOfRangeInMinutes =
+                        60 * (lesson.startTime.hour - range.rangeStart) +
+                        lesson.startTime.minute;
+                      return (
+                        <LessonItem
+                          key={Math.random()}
+                          lessons={lesson}
+                          distanceFromTopOfRange={
+                            distanceFromTopOfRangeInMinutes
+                          }
+                        />
+                      );
                     })}
-                    </TimeItem>
+                  </TimeItem>
                 );
               })}
             </div>

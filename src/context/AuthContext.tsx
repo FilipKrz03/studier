@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import {User as FirebaeUser} from 'firebase/auth';
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import app from "@/firebase/config";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
@@ -15,7 +16,8 @@ type Props = {
 };
 
 export const AuthContextProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<any>(null);
+  
+  const [user, setUser] = useState<any>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

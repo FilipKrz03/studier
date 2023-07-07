@@ -40,7 +40,7 @@ const Panel = () => {
       >
         <div className={classes.gretting}>
           <h2>Hey!</h2>{" "}
-          <span> {!loading && userData.username.stringValue} </span>
+          <span> {!loading && userData!.username} </span>
         </div>
         <ul>
           {dashboard.map((item) => {

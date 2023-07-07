@@ -11,6 +11,7 @@ const LessonItem = ({
   lessons: { startTime, endTime, subject, teacher },
   distanceFromTopOfRange,
 }: Params) => {
+  
   const hourDiffernce = endTime.hour - startTime.hour;
   const minuteDifference = endTime.minute - startTime.minute;
   const totalDifferenceInMinut = hourDiffernce * 60 + minuteDifference;

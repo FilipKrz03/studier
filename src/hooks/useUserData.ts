@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import app from "@/firebase/config";
+import { UserData } from "@/types/UserData";
+
 
 const useUserData = (userId: string) => {
+  
   const db = getFirestore(app);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [userData, setUserData] = <any>useState();
+  const [userData, setUserData] = useState<UserData|null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -14,7 +17,7 @@ const useUserData = (userId: string) => {
         const docRef = doc(db, "users", userId);
         const docSnap: any = await getDoc(docRef);
         if (docSnap.exists()) {
-          const fetchedUserData = docSnap._document.data.value.mapValue.fields;
+          const fetchedUserData:UserData = docSnap.data();
           setUserData(fetchedUserData);
         }
       } catch (err) {

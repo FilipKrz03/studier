@@ -1,9 +1,23 @@
 @import "../../../../variables.scss";
 
 .lesson {
-  font-size: $font-xs;
   @include flexbox(column, center, center);
+  color: $dark-blue;
+  font-size: $font-xs;
   z-index: 2;
-  width: calc((75vw / 8) - 3px);
+  width: calc((75vw / 8) - 2px);
   background-color: rgb(123, 247, 141);
+}
+
+@include media-l {
+  .lesson{
+    width:calc((80vw / 8) - 2px);
+  }
+}
+
+@include media-ms{
+  .lesson{
+  font-size: $font-xxs;
+  width:calc((90vw / 8) - 2px);
+  }
 }
