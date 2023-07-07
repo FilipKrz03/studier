@@ -1,0 +1,37 @@
+@import "../../../../../variables.scss";
+
+.info-box {
+  width: 400px;
+  position: relative;
+  font-size: $font-ml;
+  color: $dark-blue;
+  h3 {
+    font-size: $font-l;
+  }
+  .icon {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    cursor: pointer;
+  }
+  @include flexbox(column, center, flex-start);
+  gap: 10px;
+  padding: 1em 1.5em;
+  .hour-info {
+    width: 100%;
+    @include flexbox(column, center, flex-start);
+    gap: 5px;
+    &-item {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+@include media-s {
+  .info-box {
+    width: 300px;
+  }
+}
