@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { Lesson } from "@/types/Lesson";
-import InfoIcon from '@mui/icons-material/Info';
+import InfoIcon from "@mui/icons-material/Info";
+import DeleteIcon from "@mui/icons-material/Delete";
 import classes from "./LessonItem.module.scss";
 import Modal from "@/app/UI/Modal/Modal";
 import LessonInfo from "./LessonInfoModal/LessonInfo";
@@ -31,7 +32,10 @@ const LessonItem = ({
     <>
       {infoModalActive && (
         <Modal onClose={closeInfoModalHandler}>
-          <LessonInfo onClose={closeInfoModalHandler} lesson={{ startTime, endTime, day, subject, teacher }} />
+          <LessonInfo
+            onClose={closeInfoModalHandler}
+            lesson={{ startTime, endTime, day, subject, teacher }}
+          />
         </Modal>
       )}
       <div
@@ -42,7 +46,14 @@ const LessonItem = ({
           top: `${disanceTromTopInPercents}%`,
         }}
       >
-        <InfoIcon className={classes.icon} onClick={()=>{setInfoModalActive(true)}}  />
+        <InfoIcon
+          className={classes.icon}
+          onClick={() => {
+            setInfoModalActive(true);
+          }}
+          fontSize="small"
+        />
+        <DeleteIcon className={classes.delate} fontSize="small" />
         <h2>{subject}</h2>
       </div>
     </>

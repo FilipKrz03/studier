@@ -14,7 +14,15 @@
     cursor: pointer;
     color: black;
   }
+  .delate{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    color: black;
+  }
 }
+
 
 @include media-l {
   .lesson{
@@ -28,3 +36,4 @@
   width:calc((90vw / 8) - 2px);
   }
 }
+
