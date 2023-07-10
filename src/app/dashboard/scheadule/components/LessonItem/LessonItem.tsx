@@ -4,7 +4,7 @@ import { Lesson } from "@/types/Lesson";
 import InfoIcon from "@mui/icons-material/Info";
 import classes from "./LessonItem.module.scss";
 import Modal from "@/app/UI/Modal/Modal";
-import LessonInfo from "./LessonInfoModal/LessonInfo";
+import LessonInfoModal from "./LessonInfoModal/LessonInfoModal";
 
 type Params = {
   id:number , 
@@ -39,7 +39,7 @@ const LessonItem = ({
     <>
       {infoModalActive && (
         <Modal onClose={closeInfoModalHandler}>
-          <LessonInfo
+          <LessonInfoModal
             onClose={closeInfoModalHandler}
             lesson={{ startTime, endTime, day, subject, teacher , id }}
             onDelate={delateLessonHandler}

@@ -1,0 +1,43 @@
+@import "../../../../../variables.scss";
+
+.confrimer {
+  border: 2px solid $light-gray;
+  border-radius: $border-radius;
+  color: $light-dark;
+  @include flexbox(column, space-around, center);
+  width: 320px;
+  height: 230px;
+  background-color: $primary-background-second;
+  padding: 1em;
+  border-radius: $border-radius-s;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  .icon{
+    position: absolute;
+    top: 8px;
+    right:8px;
+    cursor: pointer;
+  }
+  .buttons {
+    padding: 0em 1.5em;
+    width: 100%;
+    @include flexbox(row, space-between, center);
+    button {
+      cursor: pointer;
+      width: 80px;
+      height: 25px;
+      outline: none;
+      border: none;
+      border-radius: $border-radius-s;
+    }
+    .refuse {
+        background-color: $red;
+      }
+      .confirm {
+        background-color: green;
+      }
+  }
+}
