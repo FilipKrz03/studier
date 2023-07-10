@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState , useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import AddLesonForm from "../AddLesonForm/AddLesonForm";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Button from "@/app/UI/Button/Button";
@@ -10,25 +10,23 @@ import classes from "./LessonsScheadule.module.scss";
 import { Lesson } from "@/types/Lesson";
 import LessonItem from "../LessonItem/LessonItem";
 import addData from "@/firebase/firestore/addData";
-import {User as FirebaseUser} from 'firebase/auth';
+import { User as FirebaseUser } from "firebase/auth";
 import { useAuthContext } from "@/context/AuthContext";
 import useUserData from "@/hooks/useUserData";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
 
 const LessonScheadule = () => {
-
   const windowWidth = useWindowWidth();
   const [showModal, setShowModal] = useState(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
-  const user:FirebaseUser|undefined = useAuthContext();
-  const { userData, loading, error } = useUserData(user?.uid || '');
+  const user: FirebaseUser | undefined = useAuthContext();
+  const { userData, loading, error } = useUserData(user?.uid || "");
 
-    
-  useEffect(()=>{
-    if(!loading){
+  useEffect(() => {
+    if (!loading) {
       setLessons(userData!.lessons || []);
     }
-  } , [loading , userData])
+  }, [loading, userData]);
 
   const addLessonHandler = () => {
     setShowModal(true);
@@ -47,13 +45,22 @@ const LessonScheadule = () => {
       console.log(error);
     }
   };
-  
+
+  const delateLesson = async (id: number) => {
+    const updatedLessons = lessons.filter((lesson) => lesson.id !== id);
+    setLessons(updatedLessons);
+    const { error } = await addData("users", user!.uid, {
+      lessons: updatedLessons,
+    });
+    if (error) {
+      console.log(error);
+    }
+  };
 
   if (loading) {
     return <LoadingBody />;
   }
 
- 
   return (
     <>
       {showModal && (
@@ -99,7 +106,9 @@ const LessonScheadule = () => {
                         lesson.startTime.minute;
                       return (
                         <LessonItem
+                          id={lesson.id}
                           key={Math.random()}
+                          onDelate={delateLesson}
                           lessons={lesson}
                           distanceFromTopOfRange={
                             distanceFromTopOfRangeInMinutes

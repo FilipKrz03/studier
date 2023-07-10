@@ -14,6 +14,13 @@
     right: -5px;
     cursor: pointer;
   }
+  .delate {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    cursor: pointer;
+    color: red;
+  }
   @include flexbox(column, center, flex-start);
   gap: 10px;
   padding: 1em 1.5em;

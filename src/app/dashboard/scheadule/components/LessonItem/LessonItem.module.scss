@@ -7,33 +7,24 @@
   z-index: 2;
   width: calc((75vw / 8) - 2px);
   background-color: rgb(123, 247, 141);
-  .icon{
+  .icon {
     position: absolute;
     top: 0;
     right: 0;
     cursor: pointer;
     color: black;
   }
-  .delate{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    cursor: pointer;
-    color: black;
-  }
 }
-
 
 @include media-l {
-  .lesson{
-    width:calc((80vw / 8) - 2px);
+  .lesson {
+    width: calc((80vw / 8) - 2px);
   }
 }
 
-@include media-ms{
-  .lesson{
-  font-size: $font-xxs;
-  width:calc((90vw / 8) - 2px);
+@include media-ms {
+  .lesson {
+    font-size: $font-xxs;
+    width: calc((90vw / 8) - 2px);
   }
 }
-

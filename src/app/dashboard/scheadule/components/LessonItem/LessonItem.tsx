@@ -2,31 +2,38 @@
 import { useState } from "react";
 import { Lesson } from "@/types/Lesson";
 import InfoIcon from "@mui/icons-material/Info";
-import DeleteIcon from "@mui/icons-material/Delete";
 import classes from "./LessonItem.module.scss";
 import Modal from "@/app/UI/Modal/Modal";
 import LessonInfo from "./LessonInfoModal/LessonInfo";
 
 type Params = {
+  id:number , 
   lessons: Lesson;
   distanceFromTopOfRange: number;
+  onDelate : (id:number) => void , 
 };
 
 const LessonItem = ({
-  lessons: { startTime, endTime, subject, teacher, day },
+  lessons: { startTime, endTime, subject, teacher, day , id },
   distanceFromTopOfRange,
+  onDelate , 
 }: Params) => {
+
   const [infoModalActive, setInfoModalActive] = useState(false);
-
-  const closeInfoModalHandler = () => {
-    setInfoModalActive(false);
-  };
-
   const hourDiffernce = endTime.hour - startTime.hour;
   const minuteDifference = endTime.minute - startTime.minute;
   const totalDifferenceInMinut = hourDiffernce * 60 + minuteDifference;
   const totalMinutesInPlan = 720;
   const disanceTromTopInPercents = (distanceFromTopOfRange / 180) * 100;
+
+  const closeInfoModalHandler = () => {
+    setInfoModalActive(false);
+  };
+
+
+  const delateLessonHandler = (id:number) => {
+    onDelate(id);
+  }
 
   return (
     <>
@@ -34,7 +41,8 @@ const LessonItem = ({
         <Modal onClose={closeInfoModalHandler}>
           <LessonInfo
             onClose={closeInfoModalHandler}
-            lesson={{ startTime, endTime, day, subject, teacher }}
+            lesson={{ startTime, endTime, day, subject, teacher , id }}
+            onDelate={delateLessonHandler}
           />
         </Modal>
       )}
@@ -53,7 +61,6 @@ const LessonItem = ({
           }}
           fontSize="small"
         />
-        <DeleteIcon className={classes.delate} fontSize="small" />
         <h2>{subject}</h2>
       </div>
     </>

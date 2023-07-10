@@ -31,8 +31,7 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
   const [formHoursError, setFormHoursError] = useState(false);
   const [subjectError, setSubjectError] = useState(false);
   const [teacherError, setTeacherError] = useState(false);
-  const [error , setError] = useState(false);
-  const [loading , setLoading] = useState(false);
+
 
   const closeModalHandler = () => {
     onClose();
@@ -64,6 +63,7 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
     }
     if (!formHoursError && !teacherError && !subjectError) {
       const lesson:Lesson = {
+        id:Math.random() ,  
         startTime : {hour:startTimeValue.$H , minute : startTimeValue.$m} , 
         endTime : {hour:endTimeValue.$H , minute:startTimeValue.$m} , 
         day:dayValue , 
