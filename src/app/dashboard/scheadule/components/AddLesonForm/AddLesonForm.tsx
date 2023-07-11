@@ -43,10 +43,10 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
       !(
         startTimeValue.$H >= 8 &&
         startTimeValue.$H < 20 &&
-        endTimeValue.$H > 8 &&
+        endTimeValue.$H >= 8 &&
         endTimeValue.$H <= 20 &&
         (startTimeValue.$H < endTimeValue.$H ||
-        (startTimeValue.$H === startTimeValue &&
+        (startTimeValue.$H === endTimeValue.$H &&
         startTimeValue.$m < endTimeValue.$m))
       )
     ) {
@@ -65,7 +65,7 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
       const lesson:Lesson = {
         id:Math.random() ,  
         startTime : {hour:startTimeValue.$H , minute : startTimeValue.$m} , 
-        endTime : {hour:endTimeValue.$H , minute:startTimeValue.$m} , 
+        endTime : {hour:endTimeValue.$H , minute:endTimeValue.$m} , 
         day:dayValue , 
         subject:subjectValue , 
         teacher:teacherValue , 

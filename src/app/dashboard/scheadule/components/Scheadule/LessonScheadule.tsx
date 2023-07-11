@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AddLesonForm from "../AddLesonForm/AddLesonForm";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Button from "@/app/UI/Button/Button";
@@ -14,11 +14,13 @@ import { User as FirebaseUser } from "firebase/auth";
 import { useAuthContext } from "@/context/AuthContext";
 import useUserData from "@/hooks/useUserData";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
+import Alert from "@/app/UI/Alert/Alert";
 
 const LessonScheadule = () => {
   const windowWidth = useWindowWidth();
   const [showModal, setShowModal] = useState(false);
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [showBadDataModal, setShowBadDataModal] = useState(false);
   const user: FirebaseUser | undefined = useAuthContext();
   const { userData, loading, error } = useUserData(user?.uid || "");
 
@@ -37,6 +39,29 @@ const LessonScheadule = () => {
   };
 
   const addLesson = async (lesson: Lesson) => {
+    let isHourAvaliable = true;
+    const newLessonStartTimeInMinute =
+      lesson.startTime.hour * 60 + lesson.startTime.minute;
+    const newLessonEndTimeInMinute =
+      lesson.endTime.hour * 60 + lesson.endTime.minute;
+    lessons.map((savedLesson) => {
+      const savedLessonStartTimeInMinute =
+        savedLesson.startTime.hour * 60 + savedLesson.startTime.minute;
+      const savedLessonEndTimeInMinute =
+        savedLesson.endTime.hour * 60 + savedLesson.endTime.minute;
+      if (
+        savedLesson.day === lesson.day &&
+        newLessonStartTimeInMinute <= savedLessonEndTimeInMinute &&
+        newLessonEndTimeInMinute >= savedLessonStartTimeInMinute
+      ) {
+        isHourAvaliable = false;
+        setShowBadDataModal(true);
+        return;
+      }
+    });
+
+    if (!isHourAvaliable) return;
+
     setLessons([...lessons, lesson]);
     const { error } = await addData("users", user!.uid, {
       lessons: [...lessons, lesson],
@@ -63,6 +88,25 @@ const LessonScheadule = () => {
 
   return (
     <>
+      {showBadDataModal && (
+        <Modal
+          onClose={() => {
+            setShowBadDataModal(false);
+          }}
+        >
+          <div className={classes.error}>
+            <Alert alertMessage="Lesson already exist in entered day and hour range !" />
+            <button
+              className={classes.confirm}
+              onClick={() => {
+                setShowBadDataModal(false);
+              }}
+            >
+              Okay
+            </button>
+          </div>
+        </Modal>
+      )}
       {showModal && (
         <Modal onClose={closeModalHandler}>
           <AddLesonForm onClose={closeModalHandler} onAddLesson={addLesson} />
