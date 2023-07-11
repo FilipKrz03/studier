@@ -58,7 +58,7 @@ const LessonItem = ({
       <div
         className={classes.lesson}
         style={{
-          height: `calc((75vh - 30px) / (${totalMinutesInPlan} / ${totalDifferenceInMinut}))`,
+          height: `calc((75vh - 20px) / (${totalMinutesInPlan} / ${totalDifferenceInMinut}))`,
           position: "absolute",
           top: `${disanceTromTopInPercents}%`,
         }}
