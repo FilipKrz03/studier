@@ -19,7 +19,7 @@ const LessonItem = ({
   distanceFromTopOfRange,
   onDelate,
 }: Params) => {
-  
+
   const windowWidth = useWindowWidth();
   const [infoModalActive, setInfoModalActive] = useState(false);
   const hourDiffernce = endTime.hour - startTime.hour;
@@ -34,7 +34,7 @@ const LessonItem = ({
   if (windowWidth < 700) subjectLength = 5;
   if (windowWidth < 450) subjectLength = 3;
 
-  const subjectNameToDisplay = subject.slice(0, subjectLength) + "...";
+  const subjectNameToDisplay = subject.length > 9 ? subject.slice(0, subjectLength) + "..." : subject;
 
   const closeInfoModalHandler = () => {
     setInfoModalActive(false);
@@ -58,7 +58,7 @@ const LessonItem = ({
       <div
         className={classes.lesson}
         style={{
-          height: `calc((75vh - 40px) / (${totalMinutesInPlan} / ${totalDifferenceInMinut}))`,
+          height: `calc((75vh - 30px) / (${totalMinutesInPlan} / ${totalDifferenceInMinut}))`,
           position: "absolute",
           top: `${disanceTromTopInPercents}%`,
         }}
