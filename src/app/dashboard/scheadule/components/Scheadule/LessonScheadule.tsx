@@ -38,27 +38,33 @@ const LessonScheadule = () => {
     setShowModal(false);
   };
 
-  const addLesson = async (lesson: Lesson) => {
+
+  const isHourAvaliableChecker = (lessonsArray:Lesson[] , lessonItem:Lesson) =>{
     let isHourAvaliable = true;
     const newLessonStartTimeInMinute =
-      lesson.startTime.hour * 60 + lesson.startTime.minute;
+      lessonItem.startTime.hour * 60 + lessonItem.startTime.minute;
     const newLessonEndTimeInMinute =
-      lesson.endTime.hour * 60 + lesson.endTime.minute;
-    lessons.map((savedLesson) => {
+      lessonItem.endTime.hour * 60 + lessonItem.endTime.minute;
+    lessonsArray.map((savedLesson) => {
       const savedLessonStartTimeInMinute =
         savedLesson.startTime.hour * 60 + savedLesson.startTime.minute;
       const savedLessonEndTimeInMinute =
         savedLesson.endTime.hour * 60 + savedLesson.endTime.minute;
       if (
-        savedLesson.day === lesson.day &&
+        savedLesson.day === lessonItem.day &&
         newLessonStartTimeInMinute <= savedLessonEndTimeInMinute &&
         newLessonEndTimeInMinute >= savedLessonStartTimeInMinute
       ) {
         isHourAvaliable = false;
         setShowBadDataModal(true);
-        return;
       }
     });
+    return isHourAvaliable;
+  }
+
+  const addLesson = async (lesson: Lesson) => {
+  
+    const isHourAvaliable = isHourAvaliableChecker(lessons , lesson);
 
     if (!isHourAvaliable) return;
 
@@ -76,6 +82,20 @@ const LessonScheadule = () => {
     setLessons(updatedLessons);
     const { error } = await addData("users", user!.uid, {
       lessons: updatedLessons,
+    });
+    if (error) {
+      console.log(error);
+    }
+  };
+
+  const updateLesson = async (lesson: Lesson) => {
+    const arrayWithoutUpdatedLesson = lessons.filter((filterLesson) => filterLesson.id !== lesson.id);
+    const isHourAvaliable = isHourAvaliableChecker(arrayWithoutUpdatedLesson , lesson);
+    if (!isHourAvaliable) return;
+
+    setLessons([...arrayWithoutUpdatedLesson, lesson]);
+    const { error } = await addData("users", user!.uid, {
+      lessons: [...arrayWithoutUpdatedLesson, lesson],
     });
     if (error) {
       console.log(error);
@@ -152,6 +172,7 @@ const LessonScheadule = () => {
                         <LessonItem
                           id={lesson.id}
                           key={Math.random()}
+                          onEdit={updateLesson}
                           onDelate={delateLesson}
                           lessons={lesson}
                           distanceFromTopOfRange={

@@ -3,34 +3,39 @@ import classes from "./Modal.module.scss";
 
 type BackdropProps = {
   onClose: () => void;
+  isHigherOrder?:boolean , 
 };
 
 type ModalOverlayProps = {
   children: React.ReactNode;
+  isHigherOrder?:boolean , 
 };
 
 type ModalProps = {
   children: React.ReactNode;
   onClose: () => void;
+  isHigherOrder?:boolean , 
 };
 
-const ModalOverlay = ({ children }: ModalOverlayProps) => {
-  return <div className={classes.modal}>{children}</div>;
+const ModalOverlay = ({ children , isHigherOrder }: ModalOverlayProps) => {
+
+  return <div className={`${classes.modal} ${isHigherOrder ? classes['higher-order'] : ''} `}>{children}</div>;
 };
 
-const Backdrop = ({ onClose }: BackdropProps) => {
-  return <div className={classes.backdrop} onClick={onClose}></div>;
+const Backdrop = ({ onClose , isHigherOrder }: BackdropProps) => {
+  return <div className={isHigherOrder ? '' : classes.backdrop} onClick={onClose}></div>;
 };
 
-const Modal = ({ children, onClose }: ModalProps) => {
+const Modal = ({ children, onClose , isHigherOrder = false }: ModalProps) => {
   return (
     <>
       <Backdrop
+        isHigherOrder = {isHigherOrder}
         onClose={() => {
           onClose();
         }}
       />
-      <ModalOverlay>{children}</ModalOverlay>
+      <ModalOverlay isHigherOrder={isHigherOrder}>{children}</ModalOverlay>
     </>
   );
 };

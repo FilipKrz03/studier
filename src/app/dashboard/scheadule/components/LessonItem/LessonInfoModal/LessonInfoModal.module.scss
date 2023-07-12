@@ -8,18 +8,24 @@
   h3 {
     font-size: $font-l;
   }
+  .edit{
+    position: absolute;
+    left: 48%;
+    top:-8px;
+    cursor: pointer;
+  }
   .icon {
     position: absolute;
-    top: -5px;
+    top: -8px;
     right: -5px;
     cursor: pointer;
   }
   .delate {
     position: absolute;
-    top: -5px;
+    top: -8px;
     left: -5px;
     cursor: pointer;
-    color: red;
+    color: $red;
   }
   @include flexbox(column, center, flex-start);
   gap: 10px;

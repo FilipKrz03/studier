@@ -11,23 +11,26 @@ import Button from "@/app/UI/Button/Button";
 import dayjs from "dayjs";
 import Alert from "@/app/UI/Alert/Alert";
 import { useAuthContext } from "@/context/AuthContext";
-import addData from "@/firebase/firestore/addData";
+
 
 type Props = {
-  onClose: () => void;
-  onAddLesson: (lesson:Lesson) => void;
+  onClose: () => void ,
+  onAddLesson?: (lesson:Lesson) => void ,
+  onEditLesson?:(lesson:Lesson) => void , 
+  lessonInfo?:Lesson , 
+  isEditing?:boolean
 };
 
-const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
+const AddLesonForm = ({ onClose , onAddLesson , onEditLesson ,  lessonInfo , isEditing = false }: Props) => {
 
-  const user:any = useAuthContext();
-  
+  const startTime = dayjs().set("hour", lessonInfo?.startTime.hour || 8).minute(lessonInfo?.startTime.minute || 0);
+  const endTime = dayjs().set("hour", lessonInfo?.endTime.hour || 20).minute(lessonInfo?.endTime.minute || 0);
 
-  const [startTimeValue, setStartTimeValue] = useState<any>({ $H: 8, $m: 0 });
+  const [startTimeValue, setStartTimeValue] = useState<any>({$H: 8 , $m:0});
   const [endTimeValue, setEndTimeValue] = useState<any>({ $H: 20, $m: 0 });
-  const [subjectValue, setSubjectValue] = useState("");
-  const [teacherValue, setTeacherValue] = useState("");
-  const [dayValue , setDayValue] = useState('Monday');
+  const [subjectValue, setSubjectValue] = useState(lessonInfo?.subject || "");
+  const [teacherValue, setTeacherValue] = useState(lessonInfo?.teacher || "");
+  const [dayValue , setDayValue] = useState(lessonInfo?.day || 'Monday');
   const [formHoursError, setFormHoursError] = useState(false);
   const [subjectError, setSubjectError] = useState(false);
   const [teacherError, setTeacherError] = useState(false);
@@ -63,14 +66,19 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
     }
     if (!formHoursError && !teacherError && !subjectError) {
       const lesson:Lesson = {
-        id:Math.random() ,  
+        id: lessonInfo?.id || Math.random() ,  
         startTime : {hour:startTimeValue.$H , minute : startTimeValue.$m} , 
         endTime : {hour:endTimeValue.$H , minute:endTimeValue.$m} , 
         day:dayValue , 
         subject:subjectValue , 
         teacher:teacherValue , 
       }
-      onAddLesson(lesson);
+      if(!isEditing){
+      onAddLesson!(lesson);
+      }
+      if(isEditing){
+        onEditLesson!(lesson);
+      }
       onClose();
     }
   };
@@ -94,7 +102,7 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
   }
 
   const eight = dayjs().set("hour", 8).startOf("hour");
-  const twenty = dayjs().set("hour", 20).startOf("hour");
+  const twenty = dayjs().set("hour", 20).minute(1);
 
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
@@ -118,7 +126,7 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
             maxTime={twenty}
             format="HH:mm"
             label="Pic start time"
-            defaultValue={eight}
+            defaultValue={startTime}
             onChange={(prevValue) => {
               setStartTimeValue(prevValue);
               setFormHoursError(false);
@@ -129,7 +137,7 @@ const AddLesonForm = ({ onClose , onAddLesson }: Props) => {
             minTime={eight}
             format="HH:mm"
             label="Pic end time"
-            defaultValue={twenty}
+            defaultValue={endTime}
             onChange={(newValue) => {
               setEndTimeValue(newValue);
               setFormHoursError(false);
