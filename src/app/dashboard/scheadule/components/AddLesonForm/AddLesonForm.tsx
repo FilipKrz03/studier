@@ -26,8 +26,8 @@ const AddLesonForm = ({ onClose , onAddLesson , onEditLesson ,  lessonInfo , isE
   const startTime = dayjs().set("hour", lessonInfo?.startTime.hour || 8).minute(lessonInfo?.startTime.minute || 0);
   const endTime = dayjs().set("hour", lessonInfo?.endTime.hour || 20).minute(lessonInfo?.endTime.minute || 0);
 
-  const [startTimeValue, setStartTimeValue] = useState<any>({$H: 8 , $m:0});
-  const [endTimeValue, setEndTimeValue] = useState<any>({ $H: 20, $m: 0 });
+  const [startTimeValue, setStartTimeValue] = useState<any>({$H: lessonInfo?.startTime.hour || 8 , $m:lessonInfo?.startTime.minute || 0});
+  const [endTimeValue, setEndTimeValue] = useState<any>({ $H:  lessonInfo?.endTime.hour || 20, $m: lessonInfo?.endTime.minute || 0 });
   const [subjectValue, setSubjectValue] = useState(lessonInfo?.subject || "");
   const [teacherValue, setTeacherValue] = useState(lessonInfo?.teacher || "");
   const [dayValue , setDayValue] = useState(lessonInfo?.day || 'Monday');
@@ -35,7 +35,7 @@ const AddLesonForm = ({ onClose , onAddLesson , onEditLesson ,  lessonInfo , isE
   const [subjectError, setSubjectError] = useState(false);
   const [teacherError, setTeacherError] = useState(false);
 
-
+ 
   const closeModalHandler = () => {
     onClose();
   };

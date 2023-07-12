@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import classes from "./FeatureItem.module.scss";
+import { useAuthContext } from "@/context/AuthContext";
 
 type Props = {
   title: string;
@@ -9,12 +11,13 @@ type Props = {
 
 const FeatureItem = ({ title, description, icon }: Props) => {
   const Icon = icon;
+  const user = useAuthContext();
 
   return (
     <div className={classes.item}>
       <h2>{title}</h2>
       <p>{description}</p>
-      <Link href="/register">Get started</Link>
+      <Link href={user ? "/dashboard" : "/register"}>Get started</Link>
       <div className={classes.icon}>
         <Icon fontSize="small" style={{ color: "white" }} />
       </div>
