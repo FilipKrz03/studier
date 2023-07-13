@@ -1,0 +1,15 @@
+@import '../../../../variables.scss';
+
+.form{
+    font-size: $font-ml;
+    color: $dark-blue;
+    @include flexbox(column , center , center);
+    gap: 30px;
+    .subject{
+        width: 100%;
+    }
+    .date-picker{
+        @include flexbox(row , center , center);
+        gap: 20px;
+    }
+}

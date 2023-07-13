@@ -1,5 +1,3 @@
-import Providers from "@/context/Providers";
-import ProgressBarPage from "../UI/ProgressBar/ProgressBar";
 import Panel from "./components/Panel/Panel";
 import "./styles.scss";
 
@@ -14,14 +12,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <Providers>
-        <ProgressBarPage />
-        <div className="dashboard">
-          <Panel />
-          {children}
-        </div>
-      </Providers>
-    </>
+    <div className="dashboard">
+      <Panel />
+      <div className="container">
+      {children}
+      </div>
+    </div>
   );
 }

@@ -10,8 +10,6 @@ import classes from "./AddLesonForm.module.scss";
 import Button from "@/app/UI/Button/Button";
 import dayjs from "dayjs";
 import Alert from "@/app/UI/Alert/Alert";
-import { useAuthContext } from "@/context/AuthContext";
-
 
 type Props = {
   onClose: () => void ,
@@ -98,7 +96,7 @@ const AddLesonForm = ({ onClose , onAddLesson , onEditLesson ,  lessonInfo , isE
   };
 
   const dayChangeHandler = (event:SelectChangeEvent<string>) => {
-    setDayValue(event.target.value);
+      setDayValue(event.target.value);
   }
 
   const eight = dayjs().set("hour", 8).startOf("hour");

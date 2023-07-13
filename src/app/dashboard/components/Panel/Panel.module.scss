@@ -34,6 +34,7 @@
       @include flexbox(row, flex-start, center);
       color: $light-dark;
       gap: 10px;
+      cursor: pointer;
     }
   }
 }
@@ -43,7 +44,7 @@
     background-color: $dark-theme-background;
     color: $primary-background;
     border-color: $dark-theme-background-second;
-    ul , li , a {
+    ul , li , a  , span {
       color: $primary-background;
     }
   }
