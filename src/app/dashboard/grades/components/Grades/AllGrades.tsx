@@ -3,17 +3,29 @@ import { useState } from "react";
 import Button from "@/app/UI/Button/Button";
 import classes from "./AllGrades.module.scss";
 import Modal from "@/app/UI/Modal/Modal";
+import SubjectItem from "../SubjectItem/SubjectItem";
 import NewGradeForm from "../NewGradeForm/NewGradeForm";
-import { Grade } from "@/types/Grade";
+import { Grade, Subject } from "@/types/Grade";
 
 const AllGrades = () => {
 
   const [showForm, setShowForm] = useState(false);
-  const [grades , setGrades] = useState<Grade[]>([])
+  const [subjects , setSubjects] = useState<Subject[]>([])
 
   const addGrade = (grade:Grade) => {
-    setGrades([...grades , grade]);
-    console.log(grades);
+    let isSubjectExisting = false
+    const subjectsArray = subjects;
+    subjectsArray.map(subject => {
+    if(grade.subject === subject.subject){
+        subject.grades.push(grade);
+        isSubjectExisting = true;
+        return;
+    }
+   })
+   if (!isSubjectExisting){
+    subjectsArray.push({subject:grade.subject , grades:[grade]});
+   }
+   setSubjects(subjectsArray);
   }
 
   return (
@@ -32,6 +44,7 @@ const AllGrades = () => {
           />
         </Modal>
       )}
+      <div className={classes['subject-container']}>
       <Button
         description="Add Grade"
         isSubmit={false}
@@ -39,6 +52,10 @@ const AllGrades = () => {
           setShowForm(true);
         }}
       />
+        {subjects.map(subject => {
+            return <SubjectItem key={subject.subject} subjectData={subject} />
+        })}
+      </div>
     </>
   );
 };

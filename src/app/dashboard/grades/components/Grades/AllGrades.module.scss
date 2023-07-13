@@ -1,0 +1,6 @@
+@import '../../../../variables.scss';
+
+.subject-container{
+    @include flexbox(column  , center , center);
+    gap: 30px;
+}

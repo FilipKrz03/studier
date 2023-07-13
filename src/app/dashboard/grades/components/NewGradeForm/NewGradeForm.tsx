@@ -39,8 +39,10 @@ const NewGradeForm = ({onClose , onAdd}:Props) => {
 
       const submitFormHandler = (event:React.MouseEvent<HTMLFormElement>) => {
         event.preventDefault();
-        subjectName === '' ? setSubjectError(true) : '';
-        if (subjectError) return;
+        if ( subjectName === ''){
+            setSubjectError(true);
+            return;
+        } 
         const gradeItem:Grade = {
             day:selectedDay , 
             subject : subjectName , 
@@ -48,7 +50,7 @@ const NewGradeForm = ({onClose , onAdd}:Props) => {
             category:selectedCategory , 
         }
         onAdd(gradeItem);
-        onClose();
+        onClose(); 
       }
 
     return(
