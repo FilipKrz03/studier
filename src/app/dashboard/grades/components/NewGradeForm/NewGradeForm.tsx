@@ -1,16 +1,27 @@
 "use client";
 import {useState} from 'react';
 import {FormControl , InputLabel , Select , MenuItem , SelectChangeEvent , TextField} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { DatePicker , LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { grades , categories } from '@/data/grades';
-import classes from './NewGradeForm.module.scss';
+import { Grade } from '@/types/Grade';
 import Button from '@/app/UI/Button/Button';
+import dayjs , {Dayjs} from 'dayjs';
+import Alert from '@/app/UI/Alert/Alert';
+import classes from './NewGradeForm.module.scss';
+type Props = {
+    onClose:() => void , 
+    onAdd:(grade:Grade) => void , 
+}
 
-const NewGradeForm = () => {
-
-    const[selectedGrade , setSelectedGrade] = useState('3');
+const NewGradeForm = ({onClose , onAdd}:Props) => {
+    
+    const [selectedDay , setSelectedDay] = useState<Dayjs | null>(dayjs());
+    const [selectedGrade , setSelectedGrade] = useState('3');
     const [selectedCategory , setSelectedCategory] = useState('Test');
+    const [subjectName , setSubjectName] = useState('');
+    const [subjectError , setSubjectError] = useState(false);
 
 
     const gradeChangeHandler = (event:SelectChangeEvent) => {
@@ -21,21 +32,37 @@ const NewGradeForm = () => {
         setSelectedCategory(event.target.value);
       }
 
+    const subjectChangeHandler = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
+        setSubjectError(false);
+        setSubjectName(event.target.value);
+    }
+
       const submitFormHandler = (event:React.MouseEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+        subjectName === '' ? setSubjectError(true) : '';
+        if (subjectError) return;
+        const gradeItem:Grade = {
+            day:selectedDay , 
+            subject : subjectName , 
+            grade : selectedGrade , 
+            category:selectedCategory , 
+        }
+        onAdd(gradeItem);
+        onClose();
       }
 
     return(
     <form className={classes.form} onSubmit={submitFormHandler}>
+        <CloseIcon className={classes.icon} fontSize='large' onClick={()=>{onClose()}} />
         <div className={classes['date-picker']}>
             Pick Date 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker />
+            <DatePicker value={selectedDay} onChange={(newValue) => setSelectedDay(newValue)} />
             </LocalizationProvider>
         </div>
         <div className={classes.subject}>
-        <TextField fullWidth label='Subject' />
+        <TextField fullWidth label='Subject' onChange={subjectChangeHandler} />
+        {subjectError && <Alert alertMessage='Enter subject name' />}
         </div>
         <FormControl fullWidth>
         <InputLabel>Grade</InputLabel>
