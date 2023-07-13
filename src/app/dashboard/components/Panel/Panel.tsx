@@ -65,11 +65,13 @@ const Panel = () =>
               </li>
             );
           })}
+          <li>
+            <span onClick={logoutHandler}>
+              <LogoutIcon fontSize="large" />
+              <p>Logout</p>
+            </span>
+          </li>
         </ul>
-        <div className={classes.logout} onClick={logoutHandler}>
-          <LogoutIcon fontSize="large" />
-          <p>Logout</p>
-        </div>
       </nav>
     </>
   );

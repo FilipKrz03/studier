@@ -7,7 +7,6 @@
 }
 .panel {
   z-index: 3;
-
   transition: 300ms ease-in-out;
   color: $light-dark;
   height: calc(100vh - 70px);
@@ -17,7 +16,7 @@
   border-radius: 0 $border-radius $border-radius 0;
   padding: 1em;
   @include flexbox(column, flex-start, center);
-  gap: 50px;
+  gap: 25px;
   .gretting {
     @include flexbox(column, center, center);
     gap: 20px;
@@ -29,16 +28,13 @@
     }
   }
   ul {
-    li , a {
-      @include flexbox(row, center, center);
+    @include flexbox(column , flex-start , flex-start);
+    gap: 25px;
+    li , a , span {
+      @include flexbox(row, flex-start, center);
       color: $light-dark;
-      gap: 6px;
+      gap: 10px;
     }
-  }
-  .logout {
-    @include flexbox(row, center, center);
-    gap: 6px;
-    cursor: pointer;
   }
 }
 
