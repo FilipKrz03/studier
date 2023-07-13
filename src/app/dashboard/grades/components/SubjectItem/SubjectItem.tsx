@@ -8,7 +8,8 @@ type Props = {
 
 const SubjectItem = ({subjectData}:Props) => {
     return(
-        <div className={classes.subject}>
+        <div className={classes.wraper}>
+        <div className={classes.subject} style={{overflowY:'visible'}}>
             <h3>{subjectData.subject}</h3>
             <div className={classes.grades}>
                 {subjectData.grades.map(grade =>{
@@ -17,6 +18,7 @@ const SubjectItem = ({subjectData}:Props) => {
                     )
                 })}
             </div>
+        </div>
         </div>
     )
 }

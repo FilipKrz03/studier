@@ -1,7 +1,10 @@
+@import '../../../../variables.scss';
+
 .grade{
+    position: relative;
     display: grid;
     place-content: center;
-    height: 30px;
-    width: 30px;
-    background-color: red;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
 }
