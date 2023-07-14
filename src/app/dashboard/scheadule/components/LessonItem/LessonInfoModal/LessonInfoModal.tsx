@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DelateConfrimer from "./DelateConfirmer";
+import DelateConfrimer from "@/app/UI/DelateConfrimer/DelateConfrimer";
 import classes from "./LessonInfoModal.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -69,6 +69,7 @@ const LessonInfoModal = ({
       )}
       {showDelateConfrimer && (
         <DelateConfrimer
+          item="lesson"
           onConfirm={delateLessonHandler}
           onRefuse={hideModalHandler}
         />
