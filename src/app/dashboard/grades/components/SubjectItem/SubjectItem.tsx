@@ -1,16 +1,21 @@
-import { Subject } from "@/types/Grade";
+import { Grade, Subject } from "@/types/Grade";
 import classes from "./SubjectItem.module.scss";
 import GradeItem from "../GradeItem/GradeItem";
 
 type Props = {
-  subjectData: Subject;
-  onDelate: (id: number) => void;
+  subjectData: Subject ,
+  onDelate: (id: number) => void , 
+  onEdit:(grade:Grade) => void , 
 };
 
-const SubjectItem = ({ subjectData, onDelate }: Props) => {
+const SubjectItem = ({ subjectData, onDelate , onEdit }: Props) => {
   const delateHandler = (id: number) => {
     onDelate(id);
   };
+
+  const editHandler = (grade:Grade) => {
+    onEdit(grade);
+  }
 
   let gradeTimes = 0;
   let gradeSum = 0;
@@ -30,9 +35,10 @@ const SubjectItem = ({ subjectData, onDelate }: Props) => {
         gradeWeight = 1;
         break;
     }
-    gradeSum += parseInt(grade.grade) * gradeWeight;
+    gradeSum += parseFloat(grade.grade) * gradeWeight;
     gradeTimes += gradeWeight;
   });
+
 
   const weightedAverage = (gradeSum / gradeTimes).toFixed(2);
 
@@ -43,6 +49,7 @@ const SubjectItem = ({ subjectData, onDelate }: Props) => {
         {subjectData.grades.map((grade) => {
           return (
             <GradeItem
+              onEdit={editHandler}
               key={Math.random()}
               gradeInfo={grade}
               onDelate={delateHandler}

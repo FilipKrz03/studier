@@ -1,17 +1,21 @@
-.info{
-    padding: 1.5em;
-    position: relative;
-    .icon{
-        cursor: pointer;
-        position: absolute;
-    }
-    .close{
-        top: -10px;
-        right: -10px;
-    }
-    .delete{
-        color: red;
-        top:-10px;
-        left:-10px;
-    }
+.info {
+  padding: 1.5em;
+  position: relative;
+  .icon {
+    cursor: pointer;
+    position: absolute;
+  }
+  .close {
+    top: -12px;
+    right: -10px;
+  }
+  .delete {
+    color: red;
+    top: -12px;
+    left: -10px;
+  }
+  .edit {
+    top: -12px;
+    left: 45%;
+  }
 }
