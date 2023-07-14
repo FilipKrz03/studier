@@ -1,5 +1,5 @@
 "use client";
-import { useState , useEffect } from "react";
+import { useState , useEffect , useCallback } from "react";
 import Button from "@/app/UI/Button/Button";
 import classes from "./AllGrades.module.scss";
 import Modal from "@/app/UI/Modal/Modal";
@@ -19,13 +19,12 @@ const AllGrades = () => {
   const user:FirebaseUser|undefined = useAuthContext();
   const {userData , error , loading} = useUserData(user?.uid || '');
 
-
   useEffect(()=>{
     if(!loading){
       setSubjects(userData!.subjects || []);
     }
   }, [loading , userData ])
-  
+
 
   const addGrade = async (grade:Grade) => {
     let isSubjectExisting = false
@@ -48,7 +47,8 @@ const AllGrades = () => {
     console.log(error);
    }
   }
-
+  
+  
   const delateHandler = async(id:number) => {
     const arrayWithoutGrade = subjects.map(subject =>{
       const filteredGrades = subject.grades.filter(grade => grade.id !== id);

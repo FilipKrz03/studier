@@ -12,22 +12,45 @@ const SubjectItem = ({ subjectData, onDelate }: Props) => {
     onDelate(id);
   };
 
+  let gradeTimes = 0;
+  let gradeSum = 0;
+  subjectData.grades.map((grade) => {
+    let gradeWeight = 5;
+    switch (grade.category) {
+      case "Short-Test":
+        gradeWeight = 4;
+        break;
+      case "Oral Answer":
+        gradeWeight = 3;
+        break;
+      case "Project":
+        gradeWeight = 2;
+        break;
+      case "Activity":
+        gradeWeight = 1;
+        break;
+    }
+    gradeSum += grade.grade * gradeWeight;
+    gradeTimes += gradeWeight;
+  });
+
+  const weightedAverage = (gradeSum / gradeTimes).toFixed(2);
+
   return (
-    <div className={classes.wraper}>
-      <div className={classes.subject}>
-        <h3>{subjectData.subject}</h3>
-        <div className={classes.grades}>
-          {subjectData.grades.map((grade) => {
-            return (
-              <GradeItem
-                key={Math.random()}
-                gradeInfo={grade}
-                onDelate={delateHandler}
-              />
-            );
-          })}
-        </div>
+    <div className={classes.subject}>
+      <h3>{subjectData.subject}</h3>
+      <div className={classes.grades}>
+        {subjectData.grades.map((grade) => {
+          return (
+            <GradeItem
+              key={Math.random()}
+              gradeInfo={grade}
+              onDelate={delateHandler}
+            />
+          );
+        })}
       </div>
+      <div className={classes.average}>Average : {weightedAverage}</div>
     </div>
   );
 };
