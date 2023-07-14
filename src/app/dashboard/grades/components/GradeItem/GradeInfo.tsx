@@ -11,12 +11,12 @@ type Props = {
 };
 
 const GradeInfo = ({ gradeInfo , weight , onClose }: Props) => {
-  const data = dayjs(gradeInfo.day).format("MM/DD/YYYY");
+
 
   return (
     <div className={classes.info}>
       <CloseIcon fontSize="large" className={classes.icon} onClick={onClose} />
-      <p>Date : {data} </p>
+      <p>Date : {gradeInfo.day} </p>
       <p>Category : {gradeInfo.category}</p>
       <p>Weight : {weight}</p>
     </div>

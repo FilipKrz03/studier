@@ -43,8 +43,9 @@ const NewGradeForm = ({onClose , onAdd}:Props) => {
             setSubjectError(true);
             return;
         } 
+        const date = dayjs(selectedDay).format('MM/DD/YYYY');
         const gradeItem:Grade = {
-            day:selectedDay , 
+            day:date , 
             subject : subjectName , 
             grade : selectedGrade , 
             category:selectedCategory , 

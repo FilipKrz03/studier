@@ -21,3 +21,10 @@
     gap: 7px;
   }
 }
+
+
+[data-theme = 'dark']{
+ .subject{
+  color: $primary-background-second;
+ }   
+}

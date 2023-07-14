@@ -1,18 +1,33 @@
 "use client";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import Button from "@/app/UI/Button/Button";
 import classes from "./AllGrades.module.scss";
 import Modal from "@/app/UI/Modal/Modal";
 import SubjectItem from "../SubjectItem/SubjectItem";
 import NewGradeForm from "../NewGradeForm/NewGradeForm";
 import { Grade, Subject } from "@/types/Grade";
+import addData from "@/firebase/firestore/addData";
+import {User as FirebaseUser} from 'firebase/auth';
+import { useAuthContext } from "@/context/AuthContext";
+import useUserData from "@/hooks/useUserData";
+import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
 
 const AllGrades = () => {
 
   const [showForm, setShowForm] = useState(false);
   const [subjects , setSubjects] = useState<Subject[]>([])
+  const user:FirebaseUser|undefined = useAuthContext();
+  const {userData , error , loading} = useUserData(user?.uid || '');
 
-  const addGrade = (grade:Grade) => {
+
+  useEffect(()=>{
+    if(!loading){
+      setSubjects(userData!.subjects);
+    }
+  }, [loading , userData ])
+  
+
+  const addGrade = async (grade:Grade) => {
     let isSubjectExisting = false
     const subjectsArray = subjects;
     subjectsArray.map(subject => {
@@ -26,6 +41,17 @@ const AllGrades = () => {
     subjectsArray.push({subject:grade.subject , grades:[grade]});
    }
    setSubjects(subjectsArray);
+   const {error} = await addData('users' , user!.uid , {
+    subjects: subjectsArray
+   })
+   if(error){
+    console.log(error);
+   }
+  }
+
+
+  if(loading){
+    return <LoadingBody />
   }
 
   return (
