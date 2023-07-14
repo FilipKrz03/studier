@@ -4,7 +4,7 @@ export type Grade = {
   day:string;
   subject: string;
   category: string;
-  grade: number;
+  grade: string;
 };
 
 export type Subject = {

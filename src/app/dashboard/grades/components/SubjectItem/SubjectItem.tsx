@@ -30,7 +30,7 @@ const SubjectItem = ({ subjectData, onDelate }: Props) => {
         gradeWeight = 1;
         break;
     }
-    gradeSum += grade.grade * gradeWeight;
+    gradeSum += parseInt(grade.grade) * gradeWeight;
     gradeTimes += gradeWeight;
   });
 
