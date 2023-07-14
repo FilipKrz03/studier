@@ -6,11 +6,17 @@ import classes from "./GradeItem.module.scss";
 import GradeInfo from "./GradeInfo";
 
 type Props = {
-  gradeInfo: Grade;
+  gradeInfo: Grade , 
+  onDelate : (id:number) => void , 
 };
 
-const GradeItem = ({ gradeInfo }: Props) => {
+const GradeItem = ({ gradeInfo  , onDelate }: Props) => {
+
   const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const delateHandler = () => {
+    onDelate(gradeInfo.id);
+  }
 
   let color = "#9d0208";
   let gradeWeight = 5;
@@ -42,7 +48,7 @@ const GradeItem = ({ gradeInfo }: Props) => {
             setShowInfoModal(false);
           }}
         >
-            <GradeInfo onClose={()=>{setShowInfoModal(false)}} gradeInfo={gradeInfo} weight={gradeWeight} />
+            <GradeInfo onClose={()=>{setShowInfoModal(false)}} gradeInfo={gradeInfo} weight={gradeWeight} onDelate={delateHandler} />
         </Modal>
       )}
       <div

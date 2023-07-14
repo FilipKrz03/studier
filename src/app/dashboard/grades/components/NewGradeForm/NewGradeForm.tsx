@@ -45,6 +45,7 @@ const NewGradeForm = ({onClose , onAdd}:Props) => {
         } 
         const date = dayjs(selectedDay).format('MM/DD/YYYY');
         const gradeItem:Grade = {
+            id:Math.random() , 
             day:date , 
             subject : subjectName , 
             grade : selectedGrade , 

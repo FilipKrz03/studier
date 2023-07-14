@@ -22,7 +22,7 @@ const AllGrades = () => {
 
   useEffect(()=>{
     if(!loading){
-      setSubjects(userData!.subjects);
+      setSubjects(userData!.subjects || []);
     }
   }, [loading , userData ])
   
@@ -49,6 +49,20 @@ const AllGrades = () => {
    }
   }
 
+  const delateHandler = async(id:number) => {
+    const arrayWithoutGrade = subjects.map(subject =>{
+      const filteredGrades = subject.grades.filter(grade => grade.id !== id);
+      return {subject : subject.subject , grades:filteredGrades};
+    })
+    const arrayWithoutEmptySubjects = arrayWithoutGrade.filter(subject => subject.grades.length !== 0);
+    setSubjects(arrayWithoutEmptySubjects);
+    const {error} = await addData('users' , user!.uid , {
+      subjects: arrayWithoutEmptySubjects
+     })
+     if(error){
+      console.log(error);
+     }
+  }
 
   if(loading){
     return <LoadingBody />
@@ -79,7 +93,7 @@ const AllGrades = () => {
         }}
       />
         {subjects.map(subject => {
-            return <SubjectItem key={subject.subject} subjectData={subject} />
+            return <SubjectItem key={subject.subject} subjectData={subject} onDelate={delateHandler} />
         })}
       </div>
     </>

@@ -10,13 +10,15 @@ type Props = {
   gradeInfo: Grade , 
   weight:number ,
   onClose:() => void , 
+  onDelate:() => void , 
 };
 
-const GradeInfo = ({ gradeInfo , weight , onClose }: Props) => {
+const GradeInfo = ({ gradeInfo , weight , onClose , onDelate }: Props) => {
 
   const [showDelateConfrimer , setShowDelateConfrimer] = useState(false);
   
   const delateHandler = ()  => {
+  onDelate();  
   onClose();  
   }
 
