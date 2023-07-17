@@ -1,0 +1,7 @@
+@import "../../../../variables.scss";
+
+.grades-container {
+  margin-top: 50px;
+  @include flexbox(column, flex-start, flex-start);
+  gap: 25px;
+}

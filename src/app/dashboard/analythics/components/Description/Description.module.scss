@@ -1,0 +1,9 @@
+@import '../../../../variables.scss';
+
+.description{
+    @include flexbox(column , center , center);
+    gap: 5px;
+    h2{
+        color: $dark-blue;
+    }
+}

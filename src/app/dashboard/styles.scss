@@ -6,8 +6,10 @@
 
 .container {
   min-height: calc(100vh - 70px);
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
   margin: 0 auto;
 }
 
