@@ -8,13 +8,9 @@ type Props = {
 
 const Providers = ({ children }: Props) => {
   return (
-    <>
-      <AuthContextProvider>
-        <ThemeContextProvider>
-          {children}
-          </ThemeContextProvider>
-      </AuthContextProvider>
-    </>
+    <AuthContextProvider>
+      <ThemeContextProvider>{children}</ThemeContextProvider>
+    </AuthContextProvider>
   );
 };
 

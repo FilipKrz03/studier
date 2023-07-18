@@ -1,0 +1,15 @@
+@import "../../../../variables.scss";
+
+.description {
+  color: $dark-blue;
+  margin: 0px auto 10px;
+  font-size: $font-s;
+  @include flexbox(row, center, center);
+  gap: 5px;
+}
+
+[data-theme="dark"] {
+  .description {
+    color: $primary-background;
+  }
+}

@@ -2,8 +2,8 @@
 
 
 .mobile-icon{
- display: none;
- transition: 300ms ease-in-out;
+ display: none!important;
+ transition: 300ms ease-in-out!important;
 }
 .panel {
   z-index: 3;
@@ -76,12 +76,12 @@
    transform: translateX(-200px);
   }
   .active{
-    transform: translateX(0px);
+    transform: translateX(0px)!important;
    }
   .mobile-icon{
     cursor: pointer;
     position: absolute;
-    display: block;
+    display: block!important;
     top: 50%;
     left: -2px;
 
