@@ -1,0 +1,20 @@
+@import "../../../../variables.scss";
+.form {
+  padding: 1.5em;
+  .icon{
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+  }
+  position: relative;
+  @include flexbox(column, center, center);
+  gap: 20px;
+  .subject , .description {
+    width: 100%;
+  }
+  .date-picker {
+    @include flexbox(row, center, center);
+    gap: 20px;
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../../../variables.scss';
+
+.events-box{
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 20px;
+}
+
+
+@include media-xl{
+    .events-box{
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+@include media-l{
+    .events-box{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@include media-m{
+    .events-box{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@include media-s{
+    .events-box{
+       grid-template-columns: repeat(1,1fr);
+    }
+}

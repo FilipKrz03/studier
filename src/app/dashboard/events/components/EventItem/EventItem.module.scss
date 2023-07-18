@@ -1,0 +1,10 @@
+@import '../../../../variables.scss';
+
+.event{
+    width: 195px;
+    height: 200px;
+    padding: 0.3em;
+    @include flexbox(column , space-around , center);
+    color: $dark-blue;
+    background-color: red;
+}
