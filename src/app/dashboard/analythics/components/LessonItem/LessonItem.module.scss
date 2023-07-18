@@ -1,0 +1,51 @@
+@import "../../../../variables.scss";
+
+.item {
+  width: 75vw;
+  width: max(75vw , 350px);
+  border: 2px solid $light-gray;
+  height: 70px;
+  padding: 0.6em;
+  border-radius: $border-radius-s;
+  color: $dark-blue;
+  direction:ltr;
+  @include flexbox(row, flex-start, center);
+  gap: 20px;
+  h3 {
+    padding-right: 20px;
+    padding: 13px 20px 13px 0px;
+    border-right: 2px solid $light-gray;
+  }
+
+  .grade-info{
+    @include flexbox(row , center , center);
+    gap: 10px;
+    padding-right: 20px;
+    padding: 13px 20px 13px 0px;
+    border-right: 2px solid $light-gray;
+    .grade{
+        display: grid;
+        place-content: center;
+        height: 30px;
+        width: 30px;
+      }
+  }
+}
+
+@include media-ms{
+  .item{
+    width: 95vw;
+    font-size: $font-s;
+    overflow: auto;
+    white-space:nowrap;
+  }
+}
+
+[data-theme='dark']{
+  .item{
+    color: $primary-background;
+    .grade{
+      color: $dark-blue;
+    }
+  }
+}

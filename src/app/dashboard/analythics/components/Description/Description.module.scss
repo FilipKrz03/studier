@@ -1,9 +1,19 @@
 @import '../../../../variables.scss';
 
 .description{
+    text-align: center;
+    margin: 0 auto;
     @include flexbox(column , center , center);
     gap: 5px;
     h2{
         color: $dark-blue;
+    }
+}
+
+[data-theme ='dark']{
+    .description{
+        h2{
+            color: $primary-background;
+        }
     }
 }

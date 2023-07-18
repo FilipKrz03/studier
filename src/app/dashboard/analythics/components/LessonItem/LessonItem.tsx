@@ -22,6 +22,26 @@ const LessonItem = ({ subject }: Props) => {
     prognosedFinalGrade = 2;
   else prognosedFinalGrade = 1;
 
+  let gradeColor = "#006400";
+
+  switch (prognosedFinalGrade) {
+    case 5:
+      gradeColor = "#38b000";
+      break;
+    case 4:
+      gradeColor = "#ccff33";
+      break;
+    case 3:
+      gradeColor = "#fcbf49";
+      break;
+    case 2:
+      gradeColor = "#dc2f02";
+      break;
+    case 1:
+      gradeColor = "#9d0208";
+      break;
+  }
+
   let testsSum = 0;
   let otherSum = 0;
   let testCount = 0;
@@ -37,8 +57,8 @@ const LessonItem = ({ subject }: Props) => {
     }
   });
 
-  const testsAverage = testsSum / testCount;
-  const otherAverage = otherSum / otherCount;
+  const testsAverage = testsSum / testCount || 0;
+  const otherAverage = otherSum / otherCount || 0;
 
   let advice = "You are doing well";
 
@@ -51,8 +71,13 @@ const LessonItem = ({ subject }: Props) => {
   return (
     <div className={classes.item}>
       <h3>{subject.subject}</h3>
-      <span>Prognosed Final Grade : {prognosedFinalGrade}</span>
-      <span>Advice : {advice}</span>
+      <span className={classes["grade-info"]}>
+        Prognosed Final Grade :
+        <span className={classes.grade} style={{ backgroundColor: gradeColor }}>
+          {prognosedFinalGrade}
+        </span>
+      </span>
+      <span className={classes.advice}>Advice : {advice}</span>
     </div>
   );
 };
