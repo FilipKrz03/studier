@@ -4,6 +4,7 @@ import Modal from "@/app/UI/Modal/Modal";
 import { Grade } from "@/types/Grade";
 import classes from "./GradeItem.module.scss";
 import GradeInfo from "./GradeInfo";
+import { pickColorAndWeightDependingOnCategory } from "@/app/utils/pickColorAndWeightDependingOnCategory";
 
 type Props = {
   gradeInfo: Grade;
@@ -18,28 +19,8 @@ const GradeItem = ({ gradeInfo, onDelate, onEdit }: Props) => {
     onDelate(gradeInfo.id);
   };
 
-  let color = "#9d0208";
-  let gradeWeight = 5;
-
-  switch (gradeInfo.category) {
-    case "Short-Test":
-      color = "#dc2f02";
-      gradeWeight = 4;
-      break;
-    case "Oral Answer":
-      color = "#f77f00";
-      gradeWeight = 3;
-      break;
-    case "Project":
-      color = "#2a9d8f";
-      gradeWeight = 2;
-      break;
-    case "Activity":
-      color = "#8ecae6";
-      gradeWeight = 1;
-      break;
-  }
-
+  const {color , gradeWeight} = pickColorAndWeightDependingOnCategory(gradeInfo.category);
+  
   const editHandler = (grade: Grade) => {
     onEdit(grade);
   };

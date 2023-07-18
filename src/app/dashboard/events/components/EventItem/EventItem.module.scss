@@ -1,10 +1,34 @@
-@import '../../../../variables.scss';
+@import "../../../../variables.scss";
 
-.event{
-    width: 195px;
-    height: 200px;
-    padding: 0.3em;
-    @include flexbox(column , space-around , center);
-    color: $dark-blue;
-    background-color: red;
+.event {
+  position: relative;
+  font-size: $font-s;
+  width: 195px;
+  height: 200px;
+  padding: 0.3em;
+  @include flexbox(column, space-around, center);
+  color: $primary-background;
+  background-color: red;
+  .icon {
+    position: absolute;
+    top: 3px;
+    cursor: pointer;
+
+  }
+  .delate {
+    right: 2px;
+  }
+  .edit {
+    left: 2px;
+  }
+}
+
+
+[data-theme='dark']{
+    .event .icon{
+        color: $dark-blue;
+    }
+    .event{
+        color: $dark-theme-background;
+    }
 }

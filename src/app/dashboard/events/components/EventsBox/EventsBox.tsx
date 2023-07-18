@@ -35,6 +35,17 @@ const EventsBox = () => {
     }
   } 
 
+  const delateEventHandler = async(id:number) => {
+    const updatedEventsArray = events.filter(event => event.id !== id);
+    setEvents(updatedEventsArray);
+    const {error} = await addData('users' , user!.uid , {
+      events:updatedEventsArray
+  })
+  if(error){
+    console.log(error);
+  }
+  }
+
   return (
     <>
       {showForm && (
@@ -55,7 +66,7 @@ const EventsBox = () => {
       />
       <div className={classes['events-box']}>
         {events.map(event => {
-          return <EventItem key={event.id} event={event} />
+          return <EventItem key={event.id} event={event} onDelate={delateEventHandler} />
         })}
       </div>
     </>
