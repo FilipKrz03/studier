@@ -8,12 +8,11 @@
   padding: 0.3em;
   @include flexbox(column, space-around, center);
   color: $primary-background;
-  background-color: red;
+  overflow-y: auto;
   .icon {
     position: absolute;
     top: 3px;
     cursor: pointer;
-
   }
   .delate {
     right: 2px;
@@ -23,12 +22,11 @@
   }
 }
 
-
-[data-theme='dark']{
-    .event .icon{
-        color: $dark-blue;
-    }
-    .event{
-        color: $dark-theme-background;
-    }
+[data-theme="dark"] {
+  .event .icon {
+    color: $dark-blue;
+  }
+  .event {
+    color: $dark-theme-background;
+  }
 }

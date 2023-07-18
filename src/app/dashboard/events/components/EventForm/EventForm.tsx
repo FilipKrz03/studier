@@ -21,15 +21,18 @@ import Alert from "@/app/UI/Alert/Alert";
 
 
 type Props = {
-    onAdd:(event:Event) => void , 
     onClose:() => void , 
+    onAdd?:(event:Event) => void , 
+    onEdit?:(event:Event) => void , 
+    eventItem?:Event  
+    isEditing?:boolean , 
 }
 
-const EventForm = ({onAdd , onClose}:Props) => {
-  const [selectedDay, setSelectedDay] = useState<Dayjs | null>(dayjs());
-  const [selectedSubject, setSelectedSubject] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Test");
-  const [descriptionValue, setDescriptionValue] = useState("");
+const EventForm = ({onAdd , onClose , onEdit ,  eventItem ,  isEditing = false}:Props) => {
+  const [selectedDay, setSelectedDay] = useState<Dayjs | null>(dayjs(eventItem?.date || dayjs()));
+  const [selectedSubject, setSelectedSubject] = useState(eventItem?.subject || '');
+  const [selectedCategory, setSelectedCategory] = useState(eventItem?.category || "Test");
+  const [descriptionValue, setDescriptionValue] = useState(eventItem?.description || "");
   const [subjectError, setSbujectError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
 
@@ -63,14 +66,15 @@ const EventForm = ({onAdd , onClose}:Props) => {
     }
     const date = dayjs(selectedDay).format("MM/DD/YYYY");
     const schoolEvent: Event = {
-      id: Math.random(),
+      id: eventItem?.id || Math.random(),
       date,
       subject: selectedSubject,
       category: selectedCategory,
       description: descriptionValue,
     };
-    onAdd(schoolEvent);
-    onClose();
+   if (!isEditing) onAdd!(schoolEvent);
+   if (isEditing) onEdit!(schoolEvent);
+    onClose(); 
   };
 
   return (
