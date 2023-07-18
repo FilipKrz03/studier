@@ -1,0 +1,7 @@
+.container{
+    display: grid;
+    gap: 20px;
+    grid-template-areas:
+     "grades scheadule scheadule analythics"
+     "grades  events   events   analythics";
+}

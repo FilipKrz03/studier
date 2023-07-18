@@ -1,0 +1,29 @@
+@import '../../../../variables.scss';
+
+.item{
+grid-area: scheadule;    
+cursor: pointer;   
+color: $dark-blue;
+border-radius: $border-radius-s;
+background-color: $primary-background-second;
+font-size: $font-s;
+padding: 1em;
+width: 400px;
+height: 250px;
+@include flexbox(column , center , center);
+.image{
+ margin-right: 170px;
+ margin-bottom: 10px
+}
+.plan{
+    font-size: $font-ml;
+    font-weight: bolder;
+}
+}
+
+[data-theme='dark']{
+    .item{
+        color: $primary-background;
+        background-color: $dark-theme-background-second;
+    }
+}

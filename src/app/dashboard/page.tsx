@@ -4,6 +4,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { signOut, getAuth } from "firebase/auth";
 import useUserData from "@/hooks/useUserData";
 import { useRouter } from "next/navigation";
+import HeroContainer from "./components/HeroContainer/HeroContainer";
 
 export default function Dashboard() {
   const user: any = useAuthContext();
@@ -15,6 +16,10 @@ export default function Dashboard() {
   }, [user, router]);
 
   if (user) {
-    return <div></div>;
+    return (
+      <div style={{minHeight:'calc(100vh - 100px)' , display:'grid' , placeContent:'center'}}>
+        <HeroContainer />
+      </div>
+    );
   }
 }
