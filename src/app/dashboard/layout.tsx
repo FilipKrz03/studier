@@ -1,4 +1,5 @@
 import Panel from "./components/Panel/Panel";
+import AuthChecker from "./components/AuthChecker";
 import "./styles.scss";
 
 export const metadata = {
@@ -12,11 +13,13 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
+    <AuthChecker>
     <div className="dashboard">
       <Panel />
       <div className="container">
       {children}
       </div>
     </div>
+    </AuthChecker>
   );
 }

@@ -11,7 +11,7 @@ import { User as FirebaseUser } from "firebase/auth";
 import { useAuthContext } from "@/context/AuthContext";
 import useUserData from "@/hooks/useUserData";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
-import GradeItem from "../GradeItem/GradeItem";
+
 
 const AllGrades = () => {
   const [showForm, setShowForm] = useState(false);
