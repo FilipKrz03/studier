@@ -1,0 +1,36 @@
+@import "../../variables.scss";
+
+.higher {
+  @include flexbox(column, space-around, center);
+  background-color: $primary-background-second;
+  border-radius: $border-radius-s;
+  color: $dark-blue;
+  font-size: $font-s;
+  cursor: pointer;
+  height: 520px;
+  width: 200px;
+  padding: 1em;
+}
+
+.widther {
+  @include flexbox(column, center, center);
+  cursor: pointer;
+  color: $dark-blue;
+  border-radius: $border-radius-s;
+  background-color: $primary-background-second;
+  font-size: $font-s;
+  padding: 1em;
+  width: 400px;
+  height: 250px;
+}
+
+[data-theme="dark"] {
+  .higher {
+    background-color: $dark-theme-background-second;
+    color: $primary-background-second;
+  }
+  .widther {
+    color: $primary-background;
+    background-color: $dark-theme-background-second;
+  }
+}

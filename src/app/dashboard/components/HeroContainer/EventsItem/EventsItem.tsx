@@ -1,18 +1,27 @@
+import DashboardHeroItem from "@/app/UI/DashboardHeroItem/DashboardHeroItem";
 import classes from "./EventsItem.module.scss";
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 const EventsItem = () => {
   return (
-    <motion.div className={classes.item} whileHover={{ scale: 1.15 }}>
-      <Image alt="Events" src={"/img/Events.svg"} width={300} height={135} />
+    <DashboardHeroItem
+      link="/dashboard/events"
+      gridArea="events"
+      isWidther={true}
+    >
+      <Image
+        alt="Events"
+        className={classes.image}
+        src={"/img/Events.svg"}
+        width={300}
+        height={135}
+      />
       <p>
-        Here you can make your
-        <span className={classes.plan}> Lesson Plan ! </span> You are able to
-        add lessons with detail information 📖📖 in easy way You can manage
-        however you want !
+        Here you can add <span className={classes.plan}> your events </span>
+        You can choose subject date and type of event. Event is outdated ? No
+        worries we will automaticly delate him 🖌️🖌️ . 
       </p>
-    </motion.div>
+    </DashboardHeroItem>
   );
 };
 

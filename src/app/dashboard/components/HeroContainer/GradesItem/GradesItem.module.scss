@@ -1,25 +1,6 @@
 @import "../../../../variables.scss";
 
-.item {
-  grid-area: grades;
-  background-color: $primary-background-second;
-  border-radius: $border-radius-s;
-  color: $dark-blue;
-  font-size: $font-s;
-  cursor: pointer;
-  height: 520px;
-  width: 200px;
-  @include flexbox(column, space-around, center);
-  padding: 1em;
-  .grades {
-    font-size: $font-m;
-    font-weight: bolder;
-  }
-}
-
-[data-theme="dark"] {
-  .item {
-    background-color: $dark-theme-background-second;
-    color: $primary-background-second;
-  }
+.grades {
+  font-size: $font-m;
+  font-weight: bolder;
 }

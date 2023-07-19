@@ -1,11 +1,15 @@
 "use client";
 import classes from "./ScheaduleItem.module.scss";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import DashboardHeroItem from "@/app/UI/DashboardHeroItem/DashboardHeroItem";
 
 const ScheaduleItem = () => {
   return (
-    <motion.div className={classes.item} whileHover={{ scale: 1.1 }}>
+    <DashboardHeroItem
+      link="/dashboard/scheadule"
+      isWidther={true}
+      gridArea="scheadule"
+    >
       <Image
         className={classes.image}
         alt="Scheadule-image"
@@ -19,7 +23,7 @@ const ScheaduleItem = () => {
         add lessons with detail information 📖📖 in easy way You can manage
         however you want !
       </p>
-    </motion.div>
+    </DashboardHeroItem>
   );
 };
 

@@ -1,9 +1,14 @@
 import classes from "./AnalythicsItem.module.scss";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import DashboardHeroItem from "@/app/UI/DashboardHeroItem/DashboardHeroItem";
 const AnalythicsItem = () => {
   return (
-    <motion.div className={classes.item} whileHover={{ scale: 1.15 }}>
+    <DashboardHeroItem
+      link="/dashboard/analythics"
+      isWidther={false}
+      gridArea="analythics"
+    >
       <Image
         alt="Analthics"
         src={"/img/Analythics.svg"}
@@ -11,11 +16,11 @@ const AnalythicsItem = () => {
         height={200}
       />
       <p>
-        We are providing our analythics services. Based on{" "}
-        <span className={classes.grades}>your grades </span> we will give you
-        prognose end grade and some good advie
+        We are providing our analythics services . Based on
+        <span className={classes.grades}> your grades </span> we will give you
+        prognose end grade and some good advice 📈📈 
       </p>
-    </motion.div>
+    </DashboardHeroItem>
   );
 };
 
