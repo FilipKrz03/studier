@@ -1,41 +1,62 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import classes from "./Modal.module.scss";
 
 type BackdropProps = {
   onClose: () => void;
-  isHigherOrder?:boolean , 
+  isHigherOrder?: boolean;
 };
 
 type ModalOverlayProps = {
   children: React.ReactNode;
-  isHigherOrder?:boolean , 
+  isHigherOrder: boolean;
 };
 
 type ModalProps = {
   children: React.ReactNode;
   onClose: () => void;
-  isHigherOrder?:boolean , 
+  isHigherOrder: boolean;
 };
 
-const ModalOverlay = ({ children , isHigherOrder }: ModalOverlayProps) => {
-
-  return <div className={`${classes.modal} ${isHigherOrder ? classes['higher-order'] : ''} `}>{children}</div>;
+const ModalOverlay = ({ children, isHigherOrder }: ModalOverlayProps) => {
+  return (
+    <div
+      className={`${classes.modal} ${
+        isHigherOrder ? classes["higher-order"] : ""
+      } `}
+    >
+      {children}
+    </div>
+  );
 };
 
-const Backdrop = ({ onClose , isHigherOrder }: BackdropProps) => {
-  return <div className={isHigherOrder ? '' : classes.backdrop} onClick={onClose}></div>;
+const Backdrop = ({ onClose, isHigherOrder }: BackdropProps) => {
+  return (
+    <div
+      className={isHigherOrder ? "" : classes.backdrop}
+      onClick={onClose}
+    ></div>
+  );
 };
 
-const Modal = ({ children, onClose , isHigherOrder = false }: ModalProps) => {
+const portalEl = document.getElementById("overlays")!;
+
+const Modal = ({ children, onClose, isHigherOrder = false }: ModalProps) => {
   return (
     <>
-      <Backdrop
-        isHigherOrder = {isHigherOrder}
-        onClose={() => {
-          onClose();
-        }}
-      />
-      <ModalOverlay isHigherOrder={isHigherOrder}>{children}</ModalOverlay>
+      {createPortal(
+        <Backdrop
+          isHigherOrder={isHigherOrder}
+          onClose={() => {
+            onClose();
+          }}
+        />,
+        portalEl
+      )}
+      {createPortal(
+        <ModalOverlay isHigherOrder={isHigherOrder}>{children}</ModalOverlay>,
+        portalEl
+      )}
     </>
   );
 };
