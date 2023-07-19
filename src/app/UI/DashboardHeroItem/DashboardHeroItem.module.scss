@@ -34,3 +34,26 @@
     background-color: $dark-theme-background-second;
   }
 }
+
+
+@include media-l{
+  .widther{
+    width: 420px;
+  }
+  .higher{
+    height: 400px;
+  }
+}
+
+
+@include media-s{
+  .higher{
+    width: 43vw;
+  }
+  .widther{
+    width: calc(86vw + 20px)
+  }
+  .widther , .higher {
+    font-size: $font-ms;
+  }
+}

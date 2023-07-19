@@ -1,0 +1,14 @@
+@import '../variables.scss';
+
+.page-container{
+    min-height: calc(100vh - 100px);
+    display: grid;
+    place-content: center;
+    margin-bottom: 30px;
+}
+
+@include media-s{
+    .page-container{
+        margin-bottom: 90px;
+    }
+}

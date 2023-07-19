@@ -19,7 +19,7 @@ const ScheaduleItem = () => {
       />
       <p>
         Here you can make your
-        <span className={classes.plan}> Lesson Plan ! </span> You are able to
+        <span className={classes.plan}> lesson Plan ! </span> You are able to
         add lessons with detail information 📖📖 in easy way You can manage
         however you want !
       </p>

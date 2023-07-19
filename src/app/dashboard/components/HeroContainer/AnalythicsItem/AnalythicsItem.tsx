@@ -14,11 +14,13 @@ const AnalythicsItem = () => {
         src={"/img/Analythics.svg"}
         width={180}
         height={200}
+        className={classes.image}
       />
       <p>
-        We are providing our analythics services . Based on
-        <span className={classes.grades}> your grades </span> we will give you
-        prognose end grade and some good advice 📈📈 
+        We are providing our
+        <span className={classes.grades}> analythics </span> services . Based on
+        your grades we will give you prognose end grade and some good advice
+        📈📈
       </p>
     </DashboardHeroItem>
   );

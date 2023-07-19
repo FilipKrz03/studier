@@ -67,6 +67,12 @@ const LessonItem = ({ subject }: Props) => {
   if (weightedAverage < 4.5 && testsAverage > otherAverage)
     advice =
       "Consider too boost your activity , Oral Answer or Project would help you";
+  if (weightedAverage < 4.5 && testsAverage === otherAverage)
+    advice =
+      "You have simillar grades from tests and activity. But you could imrpove yourself";
+  if (weightedAverage < 1.5)
+    advice =
+      "You need to improve yourself !! Curently you do not pass this subject";
 
   return (
     <div className={classes.item}>

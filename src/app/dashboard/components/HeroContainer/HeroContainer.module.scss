@@ -1,7 +1,18 @@
-.container{
-    display: grid;
-    gap: 20px;
+@import '../../../variables.scss';
+
+.container {
+  display: grid;
+  gap: 20px;
+  grid-template-areas:
+    "grades scheadule scheadule analythics"
+    "grades  events   events   analythics";
+}
+
+@include media-l {
+  .container {
     grid-template-areas:
-     "grades scheadule scheadule analythics"
-     "grades  events   events   analythics";
+      "scheadule scheadule"
+      "grades analythics"
+      "events events";
+  }
 }

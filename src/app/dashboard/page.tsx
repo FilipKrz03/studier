@@ -1,14 +1,12 @@
 "use client";
 import { useEffect } from "react";
 import { useAuthContext } from "@/context/AuthContext";
-import { signOut, getAuth } from "firebase/auth";
-import useUserData from "@/hooks/useUserData";
 import { useRouter } from "next/navigation";
 import HeroContainer from "./components/HeroContainer/HeroContainer";
+import classes from "./page.module.scss";
 
 export default function Dashboard() {
   const user: any = useAuthContext();
-  const auth = getAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -17,7 +15,7 @@ export default function Dashboard() {
 
   if (user) {
     return (
-      <div style={{minHeight:'calc(100vh - 100px)' , display:'grid' , placeContent:'center'}}>
+      <div className={classes["page-container"]}>
         <HeroContainer />
       </div>
     );

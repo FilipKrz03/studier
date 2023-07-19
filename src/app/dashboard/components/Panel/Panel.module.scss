@@ -1,9 +1,8 @@
 @import "../../../variables.scss";
 
-
-.mobile-icon{
- display: none!important;
- transition: 300ms ease-in-out!important;
+.mobile-icon {
+  display: none !important;
+  transition: 300ms ease-in-out !important;
 }
 .panel {
   z-index: 3;
@@ -28,19 +27,21 @@
     }
   }
   ul {
-    @include flexbox(column , flex-start , flex-start);
+    @include flexbox(column, flex-start, flex-start);
     gap: 25px;
-    li , a , span {
+    li,
+    a,
+    span {
       @include flexbox(row, flex-start, center);
       color: $light-dark;
       gap: 10px;
       cursor: pointer;
     }
-    .active{
+    .active {
       padding: 0.3em 0.9em;
       border-radius: $border-radius;
       background-color: $dark-blue;
-      a{
+      a {
         color: $primary-background;
       }
     }
@@ -52,11 +53,14 @@
     background-color: $dark-theme-background;
     color: $primary-background;
     border-color: $dark-theme-background-second;
-    ul , li , a  , span {
+    ul,
+    li,
+    a,
+    span {
       color: $primary-background;
-      .active{
+      .active {
         background-color: $primary-background;
-        a{
+        a {
           color: $dark-blue;
         }
       }
@@ -64,29 +68,28 @@
   }
 }
 
-@include media-l{
-  .panel{
+@include media-l {
+  .panel {
     width: 160px;
   }
 }
 
-@include media-ms{
-  .panel{
-   position:absolute;
-   transform: translateX(-200px);
+@include media-ms {
+  .panel {
+    position: fixed !important;
+    transform: translateX(-200px);
   }
-  .active{
-    transform: translateX(0px)!important;
-   }
-  .mobile-icon{
+  .active {
+    transform: translateX(0px) !important;
+  }
+  .mobile-icon {
+    position: fixed !important;
     cursor: pointer;
-    position: absolute;
-    display: block!important;
+    display: block !important;
     top: 50%;
     left: -2px;
-
   }
-  .sticky{
+  .sticky {
     transform: translateX(125px);
     z-index: 10;
   }

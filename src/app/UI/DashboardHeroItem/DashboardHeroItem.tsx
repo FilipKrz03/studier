@@ -11,7 +11,14 @@ type Props = {
 
 const DashboardHeroItem = ({ children, gridArea, link, isWidther }: Props) => {
   return (
-    <motion.div whileHover={{ scale: 1.15 }} style={{ gridArea }}>
+    <motion.div
+      whileHover={{
+        scale: 1.1,
+        y: -10,
+        zIndex: 2,
+      }}
+      style={{ gridArea }}
+    >
       <Link
         className={isWidther ? classes.widther : classes.higher}
         href={link}

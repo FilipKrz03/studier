@@ -9,7 +9,7 @@ const GradesItem = () => {
       gridArea="grades"
       isWidther={false}
     >
-      <Image alt="Grade" src={"/img/Grades.svg"} width={250} height={200} />
+      <Image className={classes.image} alt="Grade" src={"/img/Grades.svg"} width={250} height={200} />
       <p>
         Here you can add/manage
         <span className={classes.grades}> your grades !</span> It is never been

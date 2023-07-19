@@ -4,3 +4,9 @@
   font-size: $font-m;
   font-weight: bolder;
 }
+
+@include media-s {
+  .image {
+    width: 99% !important;
+  }
+}

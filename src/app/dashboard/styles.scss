@@ -1,4 +1,5 @@
 @import "../variables.scss";
+
 .dashboard {
   width: 100vw !important;
   @include flexbox(row, flex-start, flex-start);
@@ -11,6 +12,7 @@
   align-items: flex-start;
   flex-direction: column;
   margin: 0 auto;
+  padding: 0em 0.2em;
 }
 
 li {
