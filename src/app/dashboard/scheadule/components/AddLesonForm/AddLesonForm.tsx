@@ -54,11 +54,11 @@ const AddLesonForm = ({ onClose , onAddLesson , onEditLesson ,  lessonInfo , isE
       setFormHoursError(true);
       return;
     }
-    if (subjectValue === "") {
+    if (subjectValue.trim() === "") {
       setSubjectError(true);
       return;
     }
-    if (teacherValue === "") {
+    if (teacherValue.trim() === "") {
       setTeacherError(true);
       return;
     }

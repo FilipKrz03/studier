@@ -60,7 +60,7 @@ const NewGradeForm = ({
 
   const submitFormHandler = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (subjectName === "") {
+    if (subjectName.trim() === "") {
       setSubjectError(true);
       return;
     }
