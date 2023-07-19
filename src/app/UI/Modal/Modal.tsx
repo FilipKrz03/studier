@@ -4,7 +4,7 @@ import classes from "./Modal.module.scss";
 
 type BackdropProps = {
   onClose: () => void;
-  isHigherOrder?: boolean;
+  isHigherOrder: boolean;
 };
 
 type ModalOverlayProps = {
@@ -15,7 +15,7 @@ type ModalOverlayProps = {
 type ModalProps = {
   children: React.ReactNode;
   onClose: () => void;
-  isHigherOrder: boolean;
+  isHigherOrder?: boolean;
 };
 
 const ModalOverlay = ({ children, isHigherOrder }: ModalOverlayProps) => {

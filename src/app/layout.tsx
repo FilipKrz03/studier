@@ -4,8 +4,6 @@ import ProgressBarPage from "./UI/ProgressBar/ProgressBar";
 import { Inter } from "next/font/google";
 import "./globals.scss";
 import MobileNav from "./components/MobileNav/MobileNav";
-import { AuthContextProvider } from "@/context/AuthContext";
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,10 +22,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <div id="overlays" />
         <Providers>
-        <ProgressBarPage />
-        <Header />
-        {children}
-        <MobileNav />
+          <ProgressBarPage />
+          <Header />
+          {children}
+          <MobileNav />
         </Providers>
       </body>
     </html>
