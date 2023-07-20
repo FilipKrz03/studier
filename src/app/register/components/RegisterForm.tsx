@@ -97,7 +97,11 @@ const RegisterForm = () => {
           <div className={classes["form-element"]}>
             <TextField
               fullWidth
-              {...register("eMail", { required: true, pattern: /^\S+@\S+$/i })}
+              {...register("eMail", {
+                required: true,
+                pattern:
+                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              })}
               label="E-mail"
               color={emailInputColor}
               className={classes.input}
