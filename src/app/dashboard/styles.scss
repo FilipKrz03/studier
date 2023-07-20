@@ -18,3 +18,9 @@
 li {
   list-style-type: none;
 }
+
+@include media-s{
+  .container{
+    margin-bottom: 80px;
+  }
+}
