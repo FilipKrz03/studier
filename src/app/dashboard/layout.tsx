@@ -12,14 +12,12 @@ export default function DashboardLayout({
 }) {
   return (
     <Provider store={store}>
-    <AuthChecker>
-    <div className="dashboard">
-      <Panel />
-      <div className="container">
-      {children}
-      </div>
-    </div>
-    </AuthChecker>
+      <AuthChecker>
+        <div className="dashboard">
+          <Panel />
+          <div className="container">{children}</div>
+        </div>
+      </AuthChecker>
     </Provider>
   );
 }

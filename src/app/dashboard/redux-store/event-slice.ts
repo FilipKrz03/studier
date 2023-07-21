@@ -1,5 +1,6 @@
 import { Event } from "@/types/Event";
 import addData from "@/firebase/firestore/addData";
+import { errorActions } from "./error-slice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface eventsState {
@@ -60,6 +61,12 @@ export const sendEventData = (uid: string, data: Event[]) => {
     const { error } = await addData("users", uid, {
       events: data,
     });
+    if (error) {
+      dispatch(errorActions.changeAddDataError(true));
+      setTimeout(() => {
+        dispatch(errorActions.changeAddDataError(false));
+      }, 4000);
+    }
   };
 };
 export const eventActions = eventsSlice.actions;

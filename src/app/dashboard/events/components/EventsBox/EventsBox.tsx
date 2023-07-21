@@ -2,6 +2,7 @@
 import { useEffect} from "react";
 import Button from "@/app/UI/Button/Button";
 import classes from "./EventsBox.module.scss";
+import Error from "@/app/UI/Error/Error";
 import EventForm from "../EventForm/EventForm";
 import Modal from "@/app/UI/Modal/Modal";
 import { User as FirebaseUser } from "firebase/auth";
@@ -22,6 +23,7 @@ const EventsBox = () => {
   );
   const hasChanged = useSelector((state: RootState) => state.events.changed);
   const eventsData = useSelector((state: RootState) => state.events.events);
+  const isAddDataError = useSelector((state:RootState) => state.errors.addDataError);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,6 +57,7 @@ const EventsBox = () => {
           />
         </Modal>
       )}
+      {isAddDataError && <Error />}
       <Button
         description="Add Event"
         isSubmit={false}
