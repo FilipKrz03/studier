@@ -7,28 +7,41 @@ import TimeItem from "../TimeItem/TimeItem";
 import Modal from "@/app/UI/Modal/Modal";
 import { days, hoursRanges } from "@/data/scheadule";
 import classes from "./LessonsScheadule.module.scss";
-import { Lesson } from "@/types/Lesson";
 import LessonItem from "../LessonItem/LessonItem";
-import addData from "@/firebase/firestore/addData";
+import { useDispatch } from "react-redux";
 import { User as FirebaseUser } from "firebase/auth";
+import { lessonActions } from "@/app/dashboard/redux-store/lesson-slice";
 import { useAuthContext } from "@/context/AuthContext";
 import useUserData from "@/hooks/useUserData";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
 import Alert from "@/app/UI/Alert/Alert";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/dashboard/redux-store";
+import { sendLessonData } from "@/app/dashboard/redux-store/lesson-slice";
 
 const LessonScheadule = () => {
-  const windowWidth = useWindowWidth();
   const [showModal, setShowModal] = useState(false);
-  const [lessons, setLessons] = useState<Lesson[]>([]);
-  const [showBadDataModal, setShowBadDataModal] = useState(false);
+
+  const lessons = useSelector((state: RootState) => state.lessons.lessons);
+  const showBadDataModal = useSelector((state: RootState) => state.lessons.showBadDataModal );
+  const hasChanged = useSelector((state: RootState) => state.lessons.changed);
+  const dispatch = useDispatch();
+
+  const windowWidth = useWindowWidth();
   const user: FirebaseUser | undefined = useAuthContext();
   const { userData, loading, error } = useUserData(user?.uid || "");
 
   useEffect(() => {
     if (!loading) {
-      setLessons(userData!.lessons || []);
+      dispatch(lessonActions.replaceData(userData!.lessons || []));
     }
-  }, [loading, userData]);
+  }, [loading, dispatch, userData]);
+
+  useEffect(() => {
+    if (hasChanged) {
+      dispatch(sendLessonData(user!.uid, lessons) as any);
+    }
+  }, [lessons, user, hasChanged, dispatch]);
 
   const addLessonHandler = () => {
     setShowModal(true);
@@ -36,70 +49,6 @@ const LessonScheadule = () => {
 
   const closeModalHandler = () => {
     setShowModal(false);
-  };
-
-
-  const isHourAvaliableChecker = (lessonsArray:Lesson[] , lessonItem:Lesson) =>{
-    let isHourAvaliable = true;
-    const newLessonStartTimeInMinute =
-      lessonItem.startTime.hour * 60 + lessonItem.startTime.minute;
-    const newLessonEndTimeInMinute =
-      lessonItem.endTime.hour * 60 + lessonItem.endTime.minute;
-    lessonsArray.map((savedLesson) => {
-      const savedLessonStartTimeInMinute =
-        savedLesson.startTime.hour * 60 + savedLesson.startTime.minute;
-      const savedLessonEndTimeInMinute =
-        savedLesson.endTime.hour * 60 + savedLesson.endTime.minute;
-      if (
-        savedLesson.day === lessonItem.day &&
-        newLessonStartTimeInMinute <= savedLessonEndTimeInMinute &&
-        newLessonEndTimeInMinute >= savedLessonStartTimeInMinute
-      ) {
-        isHourAvaliable = false;
-        setShowBadDataModal(true);
-      }
-    });
-    return isHourAvaliable;
-  }
-
-  const addLesson = async (lesson: Lesson) => {
-  
-    const isHourAvaliable = isHourAvaliableChecker(lessons , lesson);
-
-    if (!isHourAvaliable) return;
-
-    setLessons([...lessons, lesson]);
-    const { error } = await addData("users", user!.uid, {
-      lessons: [...lessons, lesson],
-    });
-    if (error) {
-      console.log(error);
-    }
-  };
-
-  const delateLesson = async (id: number) => {
-    const updatedLessons = lessons.filter((lesson) => lesson.id !== id);
-    setLessons(updatedLessons);
-    const { error } = await addData("users", user!.uid, {
-      lessons: updatedLessons,
-    });
-    if (error) {
-      console.log(error);
-    }
-  };
-
-  const updateLesson = async (lesson: Lesson) => {
-    const arrayWithoutUpdatedLesson = lessons.filter((filterLesson) => filterLesson.id !== lesson.id);
-    const isHourAvaliable = isHourAvaliableChecker(arrayWithoutUpdatedLesson , lesson);
-    if (!isHourAvaliable) return;
-
-    setLessons([...arrayWithoutUpdatedLesson, lesson]);
-    const { error } = await addData("users", user!.uid, {
-      lessons: [...arrayWithoutUpdatedLesson, lesson],
-    });
-    if (error) {
-      console.log(error);
-    }
   };
 
   if (loading) {
@@ -111,7 +60,7 @@ const LessonScheadule = () => {
       {showBadDataModal && (
         <Modal
           onClose={() => {
-            setShowBadDataModal(false);
+            dispatch(lessonActions.closeBadDataModal());
           }}
         >
           <div className={classes.error}>
@@ -119,7 +68,7 @@ const LessonScheadule = () => {
             <button
               className={classes.confirm}
               onClick={() => {
-                setShowBadDataModal(false);
+                dispatch(lessonActions.closeBadDataModal());
               }}
             >
               Okay
@@ -129,7 +78,7 @@ const LessonScheadule = () => {
       )}
       {showModal && (
         <Modal onClose={closeModalHandler}>
-          <AddLesonForm onClose={closeModalHandler} onAddLesson={addLesson} />
+          <AddLesonForm onClose={closeModalHandler} />
         </Modal>
       )}
       <Button
@@ -172,8 +121,6 @@ const LessonScheadule = () => {
                         <LessonItem
                           id={lesson.id}
                           key={Math.random()}
-                          onEdit={updateLesson}
-                          onDelate={delateLesson}
                           lessons={lesson}
                           distanceFromTopOfRange={
                             distanceFromTopOfRangeInMinutes

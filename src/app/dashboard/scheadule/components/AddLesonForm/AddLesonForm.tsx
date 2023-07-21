@@ -3,6 +3,8 @@ import { useState } from "react";
 import { TextField , Select , MenuItem , InputLabel, FormControl, SelectChangeEvent } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { TimeField, LocalizationProvider } from "@mui/x-date-pickers";
+import {useDispatch} from 'react-redux';
+import { lessonActions } from "@/app/dashboard/redux-store/lesson-slice"; 
 import WarningIcon from "@mui/icons-material/Warning";
 import { Lesson } from "@/types/Lesson";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,17 +15,15 @@ import Alert from "@/app/UI/Alert/Alert";
 
 type Props = {
   onClose: () => void ,
-  onAddLesson?: (lesson:Lesson) => void ,
-  onEditLesson?:(lesson:Lesson) => void , 
   lessonInfo?:Lesson , 
   isEditing?:boolean
 };
 
-const AddLesonForm = ({ onClose , onAddLesson , onEditLesson ,  lessonInfo , isEditing = false }: Props) => {
+const AddLesonForm = ({ onClose ,  lessonInfo , isEditing = false }: Props) => {
 
   const startTime = dayjs().set("hour", lessonInfo?.startTime.hour || 8).minute(lessonInfo?.startTime.minute || 0);
   const endTime = dayjs().set("hour", lessonInfo?.endTime.hour || 20).minute(lessonInfo?.endTime.minute || 0);
-
+  const dispatch = useDispatch();
   const [startTimeValue, setStartTimeValue] = useState<any>({$H: lessonInfo?.startTime.hour || 8 , $m:lessonInfo?.startTime.minute || 0});
   const [endTimeValue, setEndTimeValue] = useState<any>({ $H:  lessonInfo?.endTime.hour || 20, $m: lessonInfo?.endTime.minute || 0 });
   const [subjectValue, setSubjectValue] = useState(lessonInfo?.subject || "");
@@ -72,10 +72,10 @@ const AddLesonForm = ({ onClose , onAddLesson , onEditLesson ,  lessonInfo , isE
         teacher:teacherValue , 
       }
       if(!isEditing){
-      onAddLesson!(lesson);
+      dispatch(lessonActions.addLeson(lesson));
       }
       if(isEditing){
-        onEditLesson!(lesson);
+      dispatch(lessonActions.editLesson(lesson));
       }
       onClose();
     }

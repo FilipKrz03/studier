@@ -11,18 +11,16 @@ type Params = {
   id: number;
   lessons: Lesson;
   distanceFromTopOfRange: number;
-  onDelate: (id: number) => void;
-  onEdit: (lesson: Lesson) => void;
 };
 
 const LessonItem = ({
   lessons: { startTime, endTime, subject, teacher, day, id },
   distanceFromTopOfRange,
-  onDelate,
-  onEdit,
 }: Params) => {
   const windowWidth = useWindowWidth();
+
   const [infoModalActive, setInfoModalActive] = useState(false);
+  
   const hourDiffernce = endTime.hour - startTime.hour;
   const minuteDifference = endTime.minute - startTime.minute;
   const totalDifferenceInMinut = hourDiffernce * 60 + minuteDifference;
@@ -42,23 +40,14 @@ const LessonItem = ({
     setInfoModalActive(false);
   };
 
-  const delateLessonHandler = (id: number) => {
-    onDelate(id);
-  };
-
-  const editInfoHandler = (lesson: Lesson) => {
-    onEdit(lesson);
-  };
-
+ 
   return (
     <>
       {infoModalActive && (
         <Modal onClose={closeInfoModalHandler}>
           <LessonInfoModal
-            onEdit={editInfoHandler}
             onClose={closeInfoModalHandler}
             lesson={{ startTime, endTime, day, subject, teacher, id }}
-            onDelate={delateLessonHandler}
           />
         </Modal>
       )}

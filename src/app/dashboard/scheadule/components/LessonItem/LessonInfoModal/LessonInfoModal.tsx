@@ -5,27 +5,27 @@ import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Lesson } from "@/types/Lesson";
+import { useDispatch } from "react-redux";
+import { lessonActions } from "@/app/dashboard/redux-store/lesson-slice";
 import AddLesonForm from "../../AddLesonForm/AddLesonForm";
 import Modal from "@/app/UI/Modal/Modal";
 
 type Params = {
   lesson: Lesson;
   onClose: () => void;
-  onDelate: (id: number) => void;
-  onEdit: (lesson: Lesson) => void;
 };
 
 const LessonInfoModal = ({
   lesson: { startTime, endTime, teacher, subject, id, day },
   onClose,
-  onDelate,
-  onEdit,
 }: Params) => {
   const [showDelateConfrimer, setShowDelateConfrimer] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  
+  const dispatch = useDispatch();
 
   const delateLessonHandler = () => {
-    onDelate(id);
+    dispatch(lessonActions.delateLesson(id));
   };
 
   const showModalHandler = () => {
@@ -34,10 +34,6 @@ const LessonInfoModal = ({
 
   const hideModalHandler = () => {
     setShowDelateConfrimer(false);
-  };
-
-  const editLesonHandler = (lesson: Lesson) => {
-    onEdit(lesson);
   };
 
   let startTimeMinutesToDisplay: number | string = startTime.minute;
@@ -54,17 +50,19 @@ const LessonInfoModal = ({
   return (
     <>
       {showEditModal && (
-        <Modal onClose = {()=>{setShowEditModal(false)}}
-        isHigherOrder={true}
-        >
-        <AddLesonForm
+        <Modal
           onClose={() => {
             setShowEditModal(false);
           }}
-          onEditLesson={editLesonHandler}
-          isEditing={true}
-          lessonInfo={{ startTime, endTime, teacher, subject, id, day }}
-        />
+          isHigherOrder={true}
+        >
+          <AddLesonForm
+            onClose={() => {
+              setShowEditModal(false);
+            }}
+            isEditing={true}
+            lessonInfo={{ startTime, endTime, teacher, subject, id, day }}
+          />
         </Modal>
       )}
       {showDelateConfrimer && (
