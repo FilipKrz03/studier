@@ -4,18 +4,12 @@ import { errorActions } from "./error-slice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface eventsState {
-  isAddFormActive: boolean;
-  isEditFormActive: boolean;
-  isShowDelateConfrimerActive: boolean;
   events: Event[];
   changed: boolean;
 }
 
 const initialState = {
-  isAddFormActive: false,
-  isEditFormActive: false,
-  isShowDelateConfrimerActive: false,
-  events: [],
+  events:[] ,
   changed: false,
 } as eventsState;
 
@@ -39,15 +33,6 @@ const eventsSlice = createSlice({
         if (eventItem.id === action.payload.id) return action.payload;
         else return eventItem;
       });
-    },
-    changeNewEventFormDisplay(state, action: PayloadAction<boolean>) {
-      state.isAddFormActive = action.payload;
-    },
-    changeEditEventFormDisplay(state, action: PayloadAction<boolean>) {
-      state.isEditFormActive = action.payload;
-    },
-    changeDelateConfrimerDisplay(state, action: PayloadAction<boolean>) {
-      state.isShowDelateConfrimerActive = action.payload;
     },
     replaceData(state, action: PayloadAction<Event[]>) {
       state.events = action.payload || [];

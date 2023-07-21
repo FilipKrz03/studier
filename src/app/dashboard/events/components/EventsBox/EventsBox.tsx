@@ -1,5 +1,5 @@
 "use client";
-import { useEffect} from "react";
+import { useEffect, useState } from "react";
 import Button from "@/app/UI/Button/Button";
 import classes from "./EventsBox.module.scss";
 import Error from "@/app/UI/Error/Error";
@@ -10,7 +10,7 @@ import { eventActions } from "@/app/dashboard/redux-store/event-slice";
 import EventItem from "../EventItem/EventItem";
 import { useAuthContext } from "@/context/AuthContext";
 import { RootState } from "@/app/dashboard/redux-store";
-import { useSelector , useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { sendEventData } from "@/app/dashboard/redux-store/event-slice";
 import useUserData from "@/hooks/useUserData";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
@@ -18,17 +18,17 @@ import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
 const EventsBox = () => {
   const user: FirebaseUser | undefined = useAuthContext();
   const { userData, loading } = useUserData(user?.uid || "");
-  const showForm = useSelector(
-    (state: RootState) => state.events.isAddFormActive
-  );
+  const [showAddForm, setShowAddForm] = useState(false);
   const hasChanged = useSelector((state: RootState) => state.events.changed);
   const eventsData = useSelector((state: RootState) => state.events.events);
-  const isAddDataError = useSelector((state:RootState) => state.errors.addDataError);
+  const isAddDataError = useSelector(
+    (state: RootState) => state.errors.addDataError
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!loading) {
-      dispatch(eventActions.replaceData(userData!.events) || []);
+      dispatch(eventActions.replaceData(userData!.events || []));
     }
   }, [loading, dispatch, userData]);
 
@@ -44,15 +44,15 @@ const EventsBox = () => {
 
   return (
     <>
-      {showForm && (
+      {showAddForm && (
         <Modal
           onClose={() => {
-            dispatch(eventActions.changeNewEventFormDisplay(false));
+            setShowAddForm(false);
           }}
         >
           <EventForm
             onClose={() => {
-              dispatch(eventActions.changeNewEventFormDisplay(false));
+              setShowAddForm(false);
             }}
           />
         </Modal>
@@ -62,7 +62,7 @@ const EventsBox = () => {
         description="Add Event"
         isSubmit={false}
         clickFunction={() => {
-          dispatch(eventActions.changeNewEventFormDisplay(true));
+          setShowAddForm(true);
         }}
       />
       <div className={classes["events-box"]}>

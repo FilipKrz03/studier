@@ -7,38 +7,36 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DelateConfrimer from "@/app/UI/DelateConfrimer/DelateConfrimer";
 import EventForm from "../EventForm/EventForm";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { eventActions } from "@/app/dashboard/redux-store/event-slice";
-import { RootState } from "@/app/dashboard/redux-store";
+import { useState } from "react";
 
 type Props = {
   event: Event;
 };
 
 const EventItem = ({ event }: Props) => {
-
   const { color: backgroundColor } = pickColorAndWeightDependingOnCategory(
     event.category
   );
 
   const dispatch = useDispatch();
-  const showEditForm = useSelector((state: RootState) => state.events.isEditFormActive);
-  const showDelateConfrimer = useSelector((state:RootState) => state.events.isShowDelateConfrimerActive);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [showDelateConfrimer, setShowDelateConfrimer] = useState(false);
 
   return (
     <>
       {showEditForm && (
         <Modal
           onClose={() => {
-            dispatch(eventActions.changeEditEventFormDisplay(false));
+            setShowEditForm(false);
           }}
         >
           <EventForm
             isEditing={true}
             eventItem={event}
             onClose={() => {
-              dispatch(eventActions.changeEditEventFormDisplay(false));
+              setShowEditForm(false);
             }}
           />
         </Modal>
@@ -46,11 +44,11 @@ const EventItem = ({ event }: Props) => {
       {showDelateConfrimer && (
         <DelateConfrimer
           onRefuse={() => {
-            dispatch(eventActions.changeDelateConfrimerDisplay(false));
+            setShowDelateConfrimer(false);
           }}
           onConfirm={() => {
             dispatch(eventActions.delateEvent(event.id));
-            dispatch(eventActions.changeDelateConfrimerDisplay(false));
+            setShowDelateConfrimer(false);
           }}
           item="Event"
         />
@@ -59,13 +57,13 @@ const EventItem = ({ event }: Props) => {
         <DeleteIcon
           className={`${classes.icon} ${classes.delate}`}
           onClick={() => {
-            dispatch(eventActions.changeDelateConfrimerDisplay(true));
+            setShowDelateConfrimer(true);
           }}
         />
         <EditIcon
           className={`${classes.icon} ${classes.edit}`}
           onClick={() => {
-            dispatch(eventActions.changeEditEventFormDisplay(true));
+            setShowEditForm(true);
           }}
         />
         <p>{event.date}</p>
