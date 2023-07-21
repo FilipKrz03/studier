@@ -9,7 +9,8 @@ Webiste also provides small analytics bases on user grades
 |---------------|-------------------------------------|                                    
 |Typescript     |Stongly type language based on Js    |  
 |React          |Library for bulding user intefaces   |
-|Next           |React framework for routing and SSR  | 
+|Next           |React framework for routing and SSR  |
+|Redux          |Library for managing aplication state|
 |Firebase       |Used for Auth and database(firestore)|
 |SCSS           |CSS preprocesor                      |             
 |Material UI    |UI library                           |
