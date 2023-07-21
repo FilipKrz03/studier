@@ -10,6 +10,8 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
+import { useDispatch } from "react-redux/es/exports";
+import { eventActions } from "@/app/dashboard/redux-store/event-slice";
 import { categories } from "@/data/grades";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
@@ -22,19 +24,19 @@ import Alert from "@/app/UI/Alert/Alert";
 
 type Props = {
     onClose:() => void , 
-    onAdd?:(event:Event) => void , 
-    onEdit?:(event:Event) => void , 
     eventItem?:Event  
     isEditing?:boolean , 
 }
 
-const EventForm = ({onAdd , onClose , onEdit ,  eventItem ,  isEditing = false}:Props) => {
+const EventForm = ({ onClose ,  eventItem ,  isEditing = false}:Props) => {
+
   const [selectedDay, setSelectedDay] = useState<Dayjs | null>(dayjs(eventItem?.date || dayjs()));
   const [selectedSubject, setSelectedSubject] = useState(eventItem?.subject || '');
   const [selectedCategory, setSelectedCategory] = useState(eventItem?.category || "Test");
   const [descriptionValue, setDescriptionValue] = useState(eventItem?.description || "");
   const [subjectError, setSbujectError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
+  const dispatch = useDispatch();
 
   const subjectChangeHandler = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -72,8 +74,8 @@ const EventForm = ({onAdd , onClose , onEdit ,  eventItem ,  isEditing = false}:
       category: selectedCategory,
       description: descriptionValue,
     };
-   if (!isEditing) onAdd!(schoolEvent);
-   if (isEditing) onEdit!(schoolEvent);
+   if (!isEditing) dispatch(eventActions.addEvent(schoolEvent));
+   if (isEditing)  dispatch(eventActions.editEvent(schoolEvent));
     onClose(); 
   };
 

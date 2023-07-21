@@ -1,3 +1,4 @@
+"use client";
 import classes from "./DashboardHeroItem.module.scss";
 import { motion } from "framer-motion";
 import Link from "next/link";

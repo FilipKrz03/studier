@@ -1,11 +1,9 @@
+"use client";
 import Panel from "./components/Panel/Panel";
 import AuthChecker from "./components/AuthChecker";
+import { Provider } from "react-redux";
+import store from "./redux-store";
 import "./styles.scss";
-
-export const metadata = {
-  title: "Dashboard",
-  description: "Studier Aplication",
-};
 
 export default function DashboardLayout({
   children,
@@ -13,6 +11,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
+    <Provider store={store}>
     <AuthChecker>
     <div className="dashboard">
       <Panel />
@@ -21,5 +20,6 @@ export default function DashboardLayout({
       </div>
     </div>
     </AuthChecker>
+    </Provider>
   );
 }
