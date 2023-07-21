@@ -14,25 +14,19 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { grades, categories } from "@/data/grades";
 import { Grade } from "@/types/Grade";
 import Button from "@/app/UI/Button/Button";
+import { useDispatch } from "react-redux";
+import { gradesActions } from "@/app/dashboard/redux-store/grades-slice";
 import dayjs, { Dayjs } from "dayjs";
 import Alert from "@/app/UI/Alert/Alert";
 import classes from "./NewGradeForm.module.scss";
 
 type Props = {
   onClose: () => void;
-  onAdd?: (grade: Grade) => void;
-  onEdit?: (grade: Grade) => void;
   isEditing?: boolean;
   gradeInfo?: Grade;
 };
 
-const NewGradeForm = ({
-  onClose,
-  onAdd,
-  onEdit,
-  isEditing = false,
-  gradeInfo,
-}: Props) => {
+const NewGradeForm = ({ onClose, isEditing = false, gradeInfo }: Props) => {
   const [selectedDay, setSelectedDay] = useState<Dayjs | null>(
     dayjs(gradeInfo?.day) || dayjs()
   );
@@ -42,6 +36,8 @@ const NewGradeForm = ({
   );
   const [subjectName, setSubjectName] = useState(gradeInfo?.subject || "");
   const [subjectError, setSubjectError] = useState(false);
+
+  const dispatch = useDispatch();
 
   const gradeChangeHandler = (event: SelectChangeEvent) => {
     setSelectedGrade(event.target.value);
@@ -72,8 +68,8 @@ const NewGradeForm = ({
       grade: selectedGrade,
       category: selectedCategory,
     };
-    if (!isEditing) onAdd!(gradeItem);
-    if (isEditing) onEdit!(gradeItem);
+    if (!isEditing) dispatch(gradesActions.addGrade(gradeItem));
+    if (isEditing) dispatch(gradesActions.changeGrade(gradeItem));
     onClose();
   };
 

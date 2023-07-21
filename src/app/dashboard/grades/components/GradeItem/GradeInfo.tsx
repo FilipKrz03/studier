@@ -8,27 +8,25 @@ import DelateConfrimer from "@/app/UI/DelateConfrimer/DelateConfrimer";
 import Modal from "@/app/UI/Modal/Modal";
 import EditIcon from "@mui/icons-material/Edit";
 import NewGradeForm from "../NewGradeForm/NewGradeForm";
+import { useDispatch } from "react-redux";
+import { gradesActions } from "@/app/dashboard/redux-store/grades-slice";
 
 type Props = {
   gradeInfo: Grade;
   weight: number;
   onClose: () => void;
-  onDelate: () => void
-  onEdit:(grade:Grade) => void , 
 };
 
-const GradeInfo = ({ gradeInfo, weight, onClose, onDelate , onEdit }: Props) => {
+const GradeInfo = ({ gradeInfo, weight, onClose }: Props) => {
   const [showDelateConfrimer, setShowDelateConfrimer] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
+  const dispatch = useDispatch();
+
   const delateHandler = () => {
-    onDelate();
+    dispatch(gradesActions.removeGrade(gradeInfo.id));
     onClose();
   };
-
-  const editHandler = (grade:Grade) => {
-    onEdit(grade)
-  }
 
   return (
     <>
@@ -52,7 +50,6 @@ const GradeInfo = ({ gradeInfo, weight, onClose, onDelate , onEdit }: Props) => 
             onClose={() => {
               setShowEditModal(false);
             }}
-            onEdit={editHandler}
             gradeInfo={gradeInfo}
             isEditing={true}
           />

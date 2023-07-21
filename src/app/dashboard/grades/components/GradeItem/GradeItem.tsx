@@ -8,22 +8,13 @@ import { pickColorAndWeightDependingOnCategory } from "@/app/utils/pickColorAndW
 
 type Props = {
   gradeInfo: Grade;
-  onDelate: (id: number) => void;
-  onEdit: (grade: Grade) => void;
 };
 
-const GradeItem = ({ gradeInfo, onDelate, onEdit }: Props) => {
+const GradeItem = ({ gradeInfo }: Props) => {
   const [showInfoModal, setShowInfoModal] = useState(false);
-
-  const delateHandler = () => {
-    onDelate(gradeInfo.id);
-  };
-
-  const {color , gradeWeight} = pickColorAndWeightDependingOnCategory(gradeInfo.category);
-  
-  const editHandler = (grade: Grade) => {
-    onEdit(grade);
-  };
+  const { color, gradeWeight } = pickColorAndWeightDependingOnCategory(
+    gradeInfo.category
+  );
 
   return (
     <>
@@ -39,8 +30,6 @@ const GradeItem = ({ gradeInfo, onDelate, onEdit }: Props) => {
             }}
             gradeInfo={gradeInfo}
             weight={gradeWeight}
-            onDelate={delateHandler}
-            onEdit={editHandler}
           />
         </Modal>
       )}

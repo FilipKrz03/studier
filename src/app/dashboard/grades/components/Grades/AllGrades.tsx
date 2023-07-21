@@ -5,84 +5,38 @@ import classes from "./AllGrades.module.scss";
 import Modal from "@/app/UI/Modal/Modal";
 import SubjectItem from "../SubjectItem/SubjectItem";
 import NewGradeForm from "../NewGradeForm/NewGradeForm";
-import { Grade, Subject } from "@/types/Grade";
-import addData from "@/firebase/firestore/addData";
 import { User as FirebaseUser } from "firebase/auth";
 import { useAuthContext } from "@/context/AuthContext";
 import useUserData from "@/hooks/useUserData";
 import LoadingBody from "@/app/UI/LoadingBody/LoadingBody";
-
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/app/dashboard/redux-store";
+import {
+  gradesActions,
+  sendGradesData,
+} from "@/app/dashboard/redux-store/grades-slice";
 
 const AllGrades = () => {
-  const [showForm, setShowForm] = useState(false);
-  const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [showAddForm, setShowForm] = useState(false);
+
+  const subjects = useSelector((state: RootState) => state.grades.subjects);
+  const hasChanged = useSelector((state: RootState) => state.grades.changed);
+  const dispatch = useDispatch();
+
   const user: FirebaseUser | undefined = useAuthContext();
   const { userData, error, loading } = useUserData(user?.uid || "");
 
   useEffect(() => {
     if (!loading) {
-      setSubjects(userData!.subjects || []);
+      dispatch(gradesActions.replaceData(userData?.subjects || []));
     }
-  }, [loading, userData]);
+  }, [loading, dispatch, userData]);
 
-  const addGrade = async (grade: Grade) => {
-    let isSubjectExisting = false;
-    const subjectsArray = subjects;
-    subjectsArray.map((subject) => {
-      if (grade.subject === subject.subject) {
-        subject.grades.push(grade);
-        isSubjectExisting = true;
-        return;
-      }
-    });
-    if (!isSubjectExisting) {
-      subjectsArray.push({ subject: grade.subject, grades: [grade] });
+  useEffect(() => {
+    if (hasChanged) {
+      dispatch(sendGradesData(user!.uid, subjects) as any);
     }
-    setSubjects(subjectsArray);
-    const { error } = await addData("users", user!.uid, {
-      subjects: subjectsArray,
-    });
-    if (error) {
-      console.log(error);
-    }
-  };
-
-  const delateHandler = async (id: number) => {
-    const arrayWithoutGrade = subjects.map((subject) => {
-      const filteredGrades = subject.grades.filter((grade) => grade.id !== id);
-      return { subject: subject.subject, grades: filteredGrades };
-    });
-    const arrayWithoutEmptySubjects = arrayWithoutGrade.filter(
-      (subject) => subject.grades.length !== 0
-    );
-    setSubjects(arrayWithoutEmptySubjects);
-    const { error } = await addData("users", user!.uid, {
-      subjects: arrayWithoutEmptySubjects,
-    });
-    if (error) {
-      console.log(error);
-    }
-  };
-
-  const editHandler = async (grade: Grade) => {
-    const subjectsArray = subjects.map((subject) => {
-      const changedGrades = subject.grades.map((gradeItem) => {
-        if (gradeItem.id === grade.id && grade.subject === gradeItem.subject) {
-          return grade;
-        } else {
-          return gradeItem;
-        }
-      });
-      return { subject: subject.subject, grades: changedGrades };
-    });
-    setSubjects(subjectsArray);
-    const { error } = await addData("users", user!.uid, {
-      subjects: subjectsArray,
-    });
-    if (error) {
-      console.log(error);
-    }
-  };
+  }, [subjects, user, hasChanged, dispatch]);
 
   if (loading) {
     return <LoadingBody />;
@@ -90,14 +44,13 @@ const AllGrades = () => {
 
   return (
     <>
-      {showForm && (
+      {showAddForm && (
         <Modal
           onClose={() => {
             setShowForm(false);
           }}
         >
           <NewGradeForm
-            onAdd={addGrade}
             onClose={() => {
               setShowForm(false);
             }}
@@ -113,14 +66,7 @@ const AllGrades = () => {
           }}
         />
         {subjects.map((subject) => {
-          return (
-            <SubjectItem
-              key={subject.subject}
-              subjectData={subject}
-              onDelate={delateHandler}
-              onEdit={editHandler}
-            />
-          );
+          return <SubjectItem key={subject.subject} subjectData={subject} />;
         })}
       </div>
     </>

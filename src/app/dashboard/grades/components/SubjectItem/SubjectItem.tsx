@@ -5,19 +5,9 @@ import { calculateGradeAverage } from "@/app/utils/calculateGradeAverage";
 
 type Props = {
   subjectData: Subject;
-  onDelate: (id: number) => void;
-  onEdit: (grade: Grade) => void;
 };
 
-const SubjectItem = ({ subjectData, onDelate, onEdit }: Props) => {
-  const delateHandler = (id: number) => {
-    onDelate(id);
-  };
-
-  const editHandler = (grade: Grade) => {
-    onEdit(grade);
-  };
-
+const SubjectItem = ({ subjectData }: Props) => {
   const weightedAverage = calculateGradeAverage(subjectData);
 
   return (
@@ -25,17 +15,12 @@ const SubjectItem = ({ subjectData, onDelate, onEdit }: Props) => {
       <h3>{subjectData.subject}</h3>
       <div className={classes.grades}>
         {subjectData.grades.map((grade) => {
-          return (
-            <GradeItem
-              onEdit={editHandler}
-              key={Math.random()}
-              gradeInfo={grade}
-              onDelate={delateHandler}
-            />
-          );
+          return <GradeItem key={Math.random()} gradeInfo={grade} />;
         })}
       </div>
-      <div className={classes.average}>Average : {weightedAverage.toFixed(2)}</div>
+      <div className={classes.average}>
+        Average : {weightedAverage.toFixed(2)}
+      </div>
     </div>
   );
 };
