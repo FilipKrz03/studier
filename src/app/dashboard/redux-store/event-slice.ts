@@ -2,6 +2,7 @@ import { Event } from "@/types/Event";
 import addData from "@/firebase/firestore/addData";
 import { errorActions } from "./error-slice";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import dayjs from "dayjs";
 
 interface eventsState {
   events: Event[];
@@ -9,7 +10,7 @@ interface eventsState {
 }
 
 const initialState = {
-  events:[] ,
+  events: [],
   changed: false,
 } as eventsState;
 
@@ -35,11 +36,22 @@ const eventsSlice = createSlice({
       });
     },
     replaceData(state, action: PayloadAction<Event[]>) {
-      state.events = action.payload || [];
+      const updatedEventsArray = outdatedEventsDelater(action.payload || []);
+      state.events = updatedEventsArray;
       state.changed = false;
     },
   },
 });
+
+const outdatedEventsDelater = (eventsArray: Event[]) => {
+  const updatedEventsArray = eventsArray.filter((eventItem) => {
+    const isBefore =
+      dayjs().isBefore(dayjs(eventItem.date), "day") ||
+      dayjs().isSame(dayjs(eventItem.date), "day");
+    if (isBefore) return eventItem;
+  });
+  return updatedEventsArray;
+};
 
 export const sendEventData = (uid: string, data: Event[]) => {
   return async (dispatch: any) => {
