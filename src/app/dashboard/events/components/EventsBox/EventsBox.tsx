@@ -34,7 +34,7 @@ const EventsBox = () => {
 
   useEffect(() => {
     if (hasChanged) {
-      dispatch(sendEventData(user!.uid, eventsData) as any);
+      dispatch(sendEventData(user!.uid, eventsData) as any );
     }
   }, [eventsData, user, hasChanged, dispatch]);
 

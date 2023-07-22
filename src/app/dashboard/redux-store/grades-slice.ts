@@ -1,5 +1,5 @@
 import { Grade, Subject } from "@/types/Grade";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import addData from "@/firebase/firestore/addData";
 import { errorActions } from "./error-slice";
 
@@ -12,6 +12,11 @@ const initialState = {
   subjects: [],
   changed: false,
 } as gradesState;
+
+interface BAction {
+  payload: boolean;
+  type: "errors/changeAddDataError";
+}
 
 const gradesSlice = createSlice({
   name: "grades",
@@ -73,7 +78,7 @@ const gradesSlice = createSlice({
 });
 
 export const sendGradesData = (uid: string, subjectData: Subject[]) => {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch<BAction>) => {
     const { error } = await addData("users", uid, {
       subjects: subjectData,
     });

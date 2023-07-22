@@ -1,7 +1,7 @@
 import { Event } from "@/types/Event";
 import addData from "@/firebase/firestore/addData";
 import { errorActions } from "./error-slice";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
 interface eventsState {
@@ -13,6 +13,11 @@ const initialState = {
   events: [],
   changed: false,
 } as eventsState;
+
+interface IAction {
+  payload: boolean;
+  type: "errors/changeAddDataError";
+}
 
 const eventsSlice = createSlice({
   name: "events",
@@ -54,7 +59,7 @@ const outdatedEventsDelater = (eventsArray: Event[]) => {
 };
 
 export const sendEventData = (uid: string, data: Event[]) => {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch<IAction>) => {
     const { error } = await addData("users", uid, {
       events: data,
     });

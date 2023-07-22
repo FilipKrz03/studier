@@ -1,5 +1,5 @@
 import { Lesson } from "@/types/Lesson";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import addData from "@/firebase/firestore/addData";
 import { errorActions } from "./error-slice";
 
@@ -14,6 +14,11 @@ const initialState = {
   changed: false,
   showBadDataModal: false,
 } as lessonState;
+
+interface IAction {
+  payload: boolean;
+  type: "errors/changeAddDataError";
+}
 
 const lessonSlice = createSlice({
   name: "lesson",
@@ -81,7 +86,7 @@ const isHourAvaliableChecker = (lessonsArray: Lesson[], lessonItem: Lesson) => {
 };
 
 export const sendLessonData = (uid: string, lessons: Lesson[]) => {
-  return async (dispatch: any) => {
+  return async (dispatch: Dispatch<IAction>) => {
     const { error } = await addData("users", uid, {
       lessons: lessons,
     });
