@@ -14,8 +14,8 @@ const DashboardHeroItem = ({ children, gridArea, link, isWidther }: Props) => {
   return (
     <motion.div
       whileHover={{
-        scale: 1.1,
-        y: -10,
+        scale: 1.06,
+        y: -5,
         zIndex: 2,
       }}
       style={{ gridArea }}

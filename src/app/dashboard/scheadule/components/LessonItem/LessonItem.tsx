@@ -17,6 +17,7 @@ const LessonItem = ({
   lessons: { startTime, endTime, subject, teacher, day, id },
   distanceFromTopOfRange,
 }: Params) => {
+
   const windowWidth = useWindowWidth();
 
   const [infoModalActive, setInfoModalActive] = useState(false);
@@ -34,7 +35,7 @@ const LessonItem = ({
   if (windowWidth < 450) subjectLength = 3;
 
   const subjectNameToDisplay =
-    subject.length > 9 ? subject.slice(0, subjectLength) + "..." : subject;
+    (subject.length > 9 || windowWidth<500) ? subject.slice(0, subjectLength) + "..." : subject;
 
   const closeInfoModalHandler = () => {
     setInfoModalActive(false);
