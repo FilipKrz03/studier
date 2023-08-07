@@ -8,15 +8,15 @@ interface gradesState {
   changed: boolean;
 }
 
-const initialState = {
-  subjects: [],
-  changed: false,
-} as gradesState;
-
 interface BAction {
   payload: boolean;
   type: "errors/changeAddDataError";
 }
+
+const initialState = {
+  subjects: [],
+  changed: false,
+} as gradesState;
 
 const gradesSlice = createSlice({
   name: "grades",

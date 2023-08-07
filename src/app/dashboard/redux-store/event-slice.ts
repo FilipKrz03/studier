@@ -9,15 +9,15 @@ interface eventsState {
   changed: boolean;
 }
 
-const initialState = {
-  events: [],
-  changed: false,
-} as eventsState;
-
 interface IAction {
   payload: boolean;
   type: "errors/changeAddDataError";
 }
+
+const initialState = {
+  events: [],
+  changed: false,
+} as eventsState;
 
 const eventsSlice = createSlice({
   name: "events",
@@ -48,7 +48,7 @@ const eventsSlice = createSlice({
   },
 });
 
-const outdatedEventsDelater = (eventsArray: Event[]) => {
+export const outdatedEventsDelater = (eventsArray: Event[]) => {
   const updatedEventsArray = eventsArray.filter((eventItem) => {
     const isBefore =
       dayjs().isBefore(dayjs(eventItem.date), "day") ||

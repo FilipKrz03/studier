@@ -9,16 +9,16 @@ interface lessonState {
   showBadDataModal: boolean;
 }
 
+interface IAction {
+  payload: boolean;
+  type: "errors/changeAddDataError";
+}
+
 const initialState = {
   lessons: [],
   changed: false,
   showBadDataModal: false,
 } as lessonState;
-
-interface IAction {
-  payload: boolean;
-  type: "errors/changeAddDataError";
-}
 
 const lessonSlice = createSlice({
   name: "lesson",
@@ -63,7 +63,10 @@ const lessonSlice = createSlice({
   },
 });
 
-const isHourAvaliableChecker = (lessonsArray: Lesson[], lessonItem: Lesson) => {
+export const isHourAvaliableChecker = (
+  lessonsArray: Lesson[],
+  lessonItem: Lesson
+) => {
   let isHourAvaliable = true;
   const newLessonStartTimeInMinute =
     lessonItem.startTime.hour * 60 + lessonItem.startTime.minute;

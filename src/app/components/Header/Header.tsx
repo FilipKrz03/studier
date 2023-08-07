@@ -53,7 +53,7 @@ const Header = () => {
           />
         )}
       </div>
-      <nav className={classes["login-options"]}>
+      <nav data-testid='nav' className={classes["login-options"]}>
         {!user && <Link href="/login">Login</Link>}
         {!user && <Link href="/register">Sign Up</Link>}
         {user && <Link href="/">About</Link>}
