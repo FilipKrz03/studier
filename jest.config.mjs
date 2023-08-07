@@ -8,6 +8,7 @@ const customJestConfig = {
   testEnvironment: "jest-environment-jsdom",
   transformIgnorePatterns : [
     "node_modules\/(?!(@ngrx|deck.gl|ng-dynamic))"
-  ]
+  ] , 
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.js']
 };
 export default createJestConfig(customJestConfig);

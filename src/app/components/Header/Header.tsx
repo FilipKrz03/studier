@@ -53,11 +53,11 @@ const Header = () => {
           />
         )}
       </div>
-      <nav data-testid='nav' className={classes["login-options"]}>
-        {!user && <Link href="/login">Login</Link>}
-        {!user && <Link href="/register">Sign Up</Link>}
-        {user && <Link href="/">About</Link>}
-        {user && <Link href="/dashboard">Dashboard</Link>}
+      <nav  className={classes["login-options"]}>
+        {!user && <Link href="/login" data-testid='nav-link'>Login</Link>}
+        {!user && <Link href="/register" data-testid='nav-link'>Sign Up</Link>}
+        {user && <Link href="/" data-testid='nav-link'>About</Link>}
+        {user && <Link href="/dashboard" data-testid='nav-link'>Dashboard</Link>}
       </nav>
     </header>
   );

@@ -41,7 +41,7 @@ const Support = () => {
         height={600}
         alt="Support-pic"
       />
-      <div className={classes["support-info"]}>
+      <div className={classes["support-info"]} data-testid = 'support'>
         <h2>Our support ! </h2>
         <p>Our website works excelent in all kinds of devices</p>
         <div className={classes.devices} ref={devicesRef}>
