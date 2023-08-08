@@ -1,4 +1,4 @@
-import { render, screen, cleanup, getByText } from "@testing-library/react";
+import { render, screen, cleanup} from "@testing-library/react";
 import "intersection-observer";
 import Header from "@/app/components/Header/Header";
 import Features from "@/app/components/Features/Features";

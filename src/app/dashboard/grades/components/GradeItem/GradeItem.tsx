@@ -34,6 +34,7 @@ const GradeItem = ({ gradeInfo }: Props) => {
         </Modal>
       )}
       <div
+        data-testid="grade-item"
         className={classes.grade}
         style={{ backgroundColor: color }}
         onClick={() => {
