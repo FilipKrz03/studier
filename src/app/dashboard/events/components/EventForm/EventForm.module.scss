@@ -1,7 +1,8 @@
 @import "../../../../variables.scss";
 .form {
   padding: 1.5em;
-  .icon{
+  color: white !important;
+  .icon {
     position: absolute;
     top: -15px;
     right: -15px;
@@ -10,7 +11,8 @@
   position: relative;
   @include flexbox(column, center, center);
   gap: 20px;
-  .subject , .description {
+  .subject,
+  .description {
     width: 100%;
   }
   .date-picker {
@@ -18,3 +20,4 @@
     gap: 20px;
   }
 }
+

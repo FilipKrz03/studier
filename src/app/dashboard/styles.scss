@@ -19,8 +19,14 @@ li {
   list-style-type: none;
 }
 
-@include media-s{
-  .container{
+@include media-s {
+  .container {
     margin-bottom: 80px;
+  }
+}
+
+[data-theme="dark"] {
+  .MuiInputBase-root {
+    color: $primary-background;
   }
 }

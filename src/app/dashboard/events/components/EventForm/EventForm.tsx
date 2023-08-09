@@ -18,22 +18,28 @@ import dayjs from "dayjs";
 import { Dayjs } from "dayjs";
 import Button from "@/app/UI/Button/Button";
 import { Event } from "@/types/Event";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import Alert from "@/app/UI/Alert/Alert";
 
-
 type Props = {
-    onClose:() => void , 
-    eventItem?:Event  
-    isEditing?:boolean , 
-}
+  onClose: () => void;
+  eventItem?: Event;
+  isEditing?: boolean;
+};
 
-const EventForm = ({ onClose ,  eventItem ,  isEditing = false}:Props) => {
-
-  const [selectedDay, setSelectedDay] = useState<Dayjs | null>(dayjs(eventItem?.date || dayjs()));
-  const [selectedSubject, setSelectedSubject] = useState(eventItem?.subject || '');
-  const [selectedCategory, setSelectedCategory] = useState(eventItem?.category || "Test");
-  const [descriptionValue, setDescriptionValue] = useState(eventItem?.description || "");
+const EventForm = ({ onClose, eventItem, isEditing = false }: Props) => {
+  const [selectedDay, setSelectedDay] = useState<Dayjs | null>(
+    dayjs(eventItem?.date || dayjs())
+  );
+  const [selectedSubject, setSelectedSubject] = useState(
+    eventItem?.subject || ""
+  );
+  const [selectedCategory, setSelectedCategory] = useState(
+    eventItem?.category || "Test"
+  );
+  const [descriptionValue, setDescriptionValue] = useState(
+    eventItem?.description || ""
+  );
   const [subjectError, setSbujectError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const dispatch = useDispatch();
@@ -74,14 +80,20 @@ const EventForm = ({ onClose ,  eventItem ,  isEditing = false}:Props) => {
       category: selectedCategory,
       description: descriptionValue,
     };
-   if (!isEditing) dispatch(eventActions.addEvent(schoolEvent));
-   if (isEditing)  dispatch(eventActions.editEvent(schoolEvent));
-    onClose(); 
+    if (!isEditing) dispatch(eventActions.addEvent(schoolEvent));
+    if (isEditing) dispatch(eventActions.editEvent(schoolEvent));
+    onClose();
   };
 
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
-        <CloseIcon className={classes.icon} onClick={()=>{onClose()}} fontSize="large" />
+      <CloseIcon
+        className={classes.icon}
+        onClick={() => {
+          onClose();
+        }}
+        fontSize="large"
+      />
       <div className={classes["date-picker"]}>
         Pick Date
         <LocalizationProvider dateAdapter={AdapterDayjs}>

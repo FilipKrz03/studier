@@ -1,3 +1,5 @@
+@import "../../../../variables.scss";
+
 .info {
   padding: 1.5em;
   position: relative;
@@ -17,5 +19,11 @@
   .edit {
     top: -12px;
     left: 45%;
+  }
+}
+
+[data-theme="dark"] {
+  .info {
+    color: $primary-background;
   }
 }

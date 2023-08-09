@@ -48,3 +48,9 @@
     width: 300px;
   }
 }
+
+[data-theme = 'dark']{
+  .info-box{
+    color: $primary-background;
+  }
+}

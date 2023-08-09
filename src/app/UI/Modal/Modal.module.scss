@@ -6,7 +6,7 @@
   border-radius: $border-radius-s;
   position: fixed;
   transform: translate(-50%, -50%);
-  animation: appear .3s ease-in-out;
+  animation: appear 0.3s ease-in-out;
   top: 50%;
   left: 50%;
   z-index: 10;
@@ -24,6 +24,12 @@
   width: 120vw;
   height: 200vh;
   background-color: rgba(0, 0, 0, 0.75);
+}
+
+[data-theme="dark"] {
+  .modal {
+    background-color: $dark-theme-background;
+  }
 }
 
 @keyframes appear {
